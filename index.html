@@ -3,31 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_2109879_n5rh48x1j9l.css">
+    <style>
+        input{
+            appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .rate-content{
+            display: flex;
+            flex-flow: row-reverse;
+        }
+
+        input[name="rate"]{
+            font-family: "iconfont";
+            font-size: 30px;
+            padding-right: 10px;
+        }
+        
+        input[name="rate"]::after{
+            content: "\e646";
+            color: #999;
+        }
+
+        input[name="rate"]:checked::after{
+            content:"\e870";
+            color: #ffa822;
+        }
+
+        input[name="rate"]:hover::after{
+            content:"\e870";
+            color: #ffa822;  
+        }
+
+        input[name="rate"]:hover{
+            transform: scale(1.2);
+            transition: all 0.4s ease;
+        }
+
+        input[name="rate"]:checked ~ input[name="rate"]::after{
+            content:"\e870";
+            color: #ffa822;
+        }
+
+        input[name="rate"]:hover ~ input[name="rate"]::after{
+            content:"\e870";
+            color: #ffa822;
+        }
+    </style>
     <title>Document</title>
-    
 </head>
 <body>
-    <div class = "container">
-        <div class = "ball" id = "l-ball">
-            <div class = "face l-face">
-                <div class = "eye eye-l"></div>
-                <div class = "eye eye-r"></div>
-                <div class = "mouth"></div>
-            </div>
-        </div>
-        <div class = "ball" id = "r-ball">
-            <div class = "face r-face">
-                <div class = "eye eye-l eye-r-p"></div>
-                <div class = "eye eye-r eye-r-p" ></div>
-                <div class = "mouth mouth-r"></div>
-                <div class="kiss-m">
-                    <div class="kiss"></div>
-                    <div class="kiss"></div>
-                </div>
-            </div>
-        </div>
-        
-    </div>   
+    <div class="rate-content">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+    </div>
 </body>
 </html>
