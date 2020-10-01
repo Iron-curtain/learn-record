@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_2109879_n5rh48x1j9l.css">
+    <style>
+        input{
+            appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .rate-content{
+            display: flex;
+            flex-flow: row-reverse;
+        }
+
+        input[name="rate"]{
+            font-family: "iconfont";
+            font-size: 30px;
+            padding-right: 10px;
+        }
+        
+        input[name="rate"]::after{
+            content: "\e646";
+            color: #999;
+        }
+
+        input[name="rate"]:checked::after{
+            content:"\e870";
+            color: #ffa822;
+        }
+
+        input[name="rate"]:hover::after{
+            content:"\e870";
+            color: #ffa822;  
+        }
+
+        input[name="rate"]:hover{
+            transform: scale(1.2);
+            transition: all 0.4s ease;
+        }
+
+        input[name="rate"]:checked ~ input[name="rate"]::after{
+            content:"\e870";
+            color: #ffa822;
+        }
+
+        input[name="rate"]:hover ~ input[name="rate"]::after{
+            content:"\e870";
+            color: #ffa822;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="rate-content">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+    </div>
+</body>
+</html>
