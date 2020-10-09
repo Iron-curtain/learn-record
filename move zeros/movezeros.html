@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const movezeros = function(nums){
+            let temp = [];
+            let j = 0;
+            for(let i = 0; i < nums.length; i++){
+                if( nums[i] != 0){
+                    temp[j++] = nums[i];
+                }               
+            }
+            while(j < nums.length){
+                temp[j] = 0;
+                j++;
+            }
+            return temp;
+        }
+        console.log( movezeros( [0, 1, 0, 3, 12] ) );
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
