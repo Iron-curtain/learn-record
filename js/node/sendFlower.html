@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script type="text/javascript">
+
+        function Flower(name, number){
+            this.name = name;
+            this.number = number;
+        } 
+        
+        /*class Flower {
+
+        }*/
+
+
+        const lyb={
+            name:"Liu Yangbao",
+            sex: "male",
+            age: 18,
+            hometown: "GanZhou",
+            hobbies: ['旅游','游戏'],
+            sendFlower: function(receiver){
+                let flower = new Flower('红玫瑰', 520);
+                receiver.receiveFlower(flower);
+            }
+
+        };
+
+
+        const xh = {
+            name: "小红",
+            hometown: "赣州",
+            receiveFlower: function(recevier, flower){
+                if(sender.name == "me"){
+                    console.log("I love you always and forever!");
+                }
+                else{
+                    console.log("No1");
+                }
+            }
+        }
+
+
+        
+        const xm={
+            receiveFlower: function(flower){
+                console.log("I love you always and forever!");
+                console.log("花的类型为：" + flower.name);
+                console.log("花的数量为：" + flower.number);
+            }
+        }
+
+        
+        lyb.sendFlower(xm);
+
+
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

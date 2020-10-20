@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const movezeros = function(nums){
+            let k = 0;
+            let length = nums.length;
+            for(let i = 0; i < length; i++){
+                if(nums[i] != 0){
+                    if( k != i){
+                        nums[i] = nums[i] + nums[k];
+                        nums[k] = nums[i] - nums[k];
+                        nums[i] = nums[i] - nums[k];
+                        k++;
+                    }
+                    else
+                        k++;
+                }
+            }
+            return nums;
+        }
+        console.log( movezeros( [0, 1, 0, 3, 12] ) );
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
