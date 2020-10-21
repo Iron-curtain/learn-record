@@ -22,6 +22,7 @@ Page({
     return Array.from({length: 3}, (v, i) => `数据${1+i+length}`)
   },
 
+
   /**
    * 生命周期函数--监听页面加载a
    */

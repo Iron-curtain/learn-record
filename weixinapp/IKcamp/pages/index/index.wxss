@@ -1,0 +1,17 @@
+/* pages/index/index.wxss */
+.group-content-item{
+    width: 670rpx;
+    height: 195rpx;
+    margin: 15rpx 40rpx;
+}
+.group-content-item-desc{
+    display: inline-block;
+    width: 360rpx;
+    margin-left: 0;
+    vertical-align: top;
+}
+.group-content-item-image{
+    float: right;
+    width: 260rpx;
+    height: 100%;   
+}

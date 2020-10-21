@@ -1,5 +1,5 @@
 <!--pages/list/list.wxml-->
-<view class="coontainer">
+<view class="container">
 	<block wx:for="{{arrList}}" wx:key="{{index}}">
 		<view class="item">
 			<text>{{item}}</text>
@@ -7,7 +7,7 @@
 	</block>
 	<block wx:if="{{arrList.length == 0}}">
 		<view class="item">
-			<text >加载更多...</text>
+			<text>加载更多...</text>
 		</view>
 	</block>
 </view>
