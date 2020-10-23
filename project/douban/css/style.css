@@ -1,8 +1,33 @@
 body {
   margin: 0;
   padding: 0;
-  font-size: 12px;
+  font: 12px Helvetica, Arial, sans-serif;
   line-height: 1.62;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+blockquote {
+  margin: 0;
+  padding: 0;
 }
 .gray-mode {
   margin-top: 30px;
@@ -73,7 +98,6 @@ body {
 .gray-mode #anony-nav .anony-nav-links {
   float: right;
   margin-top: 6px;
-  vertical-align: middle;
 }
 .gray-mode #anony-nav .anony-nav-links ul {
   list-style: none;
@@ -81,9 +105,44 @@ body {
 .gray-mode #anony-nav .anony-nav-links ul li {
   display: inline-block;
   margin: 0 14px 0 0;
-  height: 20px;
 }
 .gray-mode #anony-nav .anony-nav-links ul li a {
   display: inline-block;
   width: 40px;
+  height: 20px;
+  overflow: hidden;
+  line-height: 20em;
+  outline: none;
+  background: url("https://img3.doubanio.com/f/sns/8536084688879cb1137e8efdff30e59614ff2f86/pics/sns/anony_home/anony_nav_logo.png") no-repeat 100% 100%;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-book {
+  background-position: 0;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .link-movie {
+  background-position: -60px 0;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-music {
+  background-position: -120px 0;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-evnets {
+  background-position: -299px 0;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-group {
+  background-position: -180px 0;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-read {
+  background: url("https://img3.doubanio.com/f/sns/f3ba00ef46f185989b70ac6841d9f4d67b6e3a25/pics/sns/anony_home/ic_read_home_nav.png") no-repeat 100% 100%;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-fm {
+  background-position: -241px 0;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-shijian {
+  background: url("https://img3.doubanio.com/f/sns/b474dd402e4293943146a4789de3dae88ec96636/pics/sns/anony_home/ic_shijian_home_nav.png") no-repeat 100% 100%;
+  margin-bottom: 1px;
+}
+.gray-mode #anony-nav .anony-nav-links ul li .lnk-market {
+  background-position: -421px 0;
+}
+.gray-mode #annoy-reg-new {
+  background-image: url("https://img9.doubanio.com/view/puppy_image/raw/public/16ad990ec23uwn790d4.jpg");
 }
