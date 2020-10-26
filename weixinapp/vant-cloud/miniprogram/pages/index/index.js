@@ -57,7 +57,7 @@ Page({
           wx.switchTab({
             url: '/pages/group/group'
           })
-        },1500)
+        },500)
       },
       fail(err){
         console.log('错误', err);
