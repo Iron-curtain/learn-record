@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .drag{
+            position: absolute;
+            cursor: pointer;
+            /* border: 1px;
+            width: 44px;
+            height: 20px;
+            background-color: red; */
+            /* line-height: 1;
+            margin: 0;
+            padding: 0; */
+        }
+    </style>
+</head>
+<body>
+    <div class="drag">drag</div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+
+        const li = document.querySelectorAll("li")
+        li.reverse()
+        
+
+
+
+        const drag = document.querySelector(".drag")
+        var flag = false
+        var w = drag.offsetWidth / 2
+        var h = drag.offsetHeight / 2
+        // var w = drag.offsetWidth
+        // var h = drag.offsetHeight
+        // console.log(h);
+        drag.addEventListener('mousedown', () => {
+            flag = true
+        })
+        document.addEventListener('mousemove', (event) => {
+            if(flag){
+                let x = event.clientX - w
+                let y = event.clientY - h
+                // drag.style.transform = `translate3d(${x}px, ${y}px, 0)`
+                drag.style.left = x + 'px'
+                drag.style.top = y + 'px'
+                // console.log(event);
+                // console.log({w: w, h:h, eX: event.clientX, eY: event.clientY, x: x, y:y});
+            }
+        })
+        document.addEventListener('mouseup', () => {
+            flag = false
+        })
+    </script>
+</body>
+</html>
