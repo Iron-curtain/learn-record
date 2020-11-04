@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中心原点</title>
+    <style>
+    .box{
+        width:100px;height: 160px;
+        border:2px solid #faa;
+        margin: 50px 150px;
+        /*padding:30px;*/
+        box-shadow: 5px 5px 5px #ddd;
+    }
+    .bo{
+        width:100px;height:160px;
+        background-color:rgba(0,22,255,0.3);
+        border:2px solid red; 
+        margin:auto;
+        transform:rotate(45deg);
+    }
+    .box12{
+        /*transform-origin:0 0;*/
+        transform-origin:top left;
+    }
+    .box22{
+        transform-origin:50% 0;
+        /*transform-origin:top;*/
+    }
+    .box32{
+        transform-origin:0 50% ;
+        /*transform-origin:left;*/
+    }
+    .box42{
+        transform-origin:100% 50% ;
+        /*transform-origin:right;*/
+    }
+    .box52{
+        transform-origin:50% 100%;
+        /*transform-origin:bottom;*/
+    }
+    .box62{
+        /*transform-origin:50% 50%;*/
+        transform-origin:center;
+    }
+    .box72{
+        transform-origin:100% 0;
+        /*transform-origin:top right;*/
+    }
+    .box82{
+        transform-origin:0 100% ;
+        /*transform-origin:bottom left;*/
+    }
+    .box92{
+        transform-origin:100% 100%;
+        /*transform-origin:bottom right;*/
+    }
+    </style>
+</head>
+<body>
+1
+    <div class="box">
+        <div class="box12 bo">测试目标1（左上角顶点）</div>
+    </div>
+    2
+    <div class="box">
+        <div class="box22 bo">测试目标2（顶边中点）</div>
+    </div>
+    3
+    <div class="box">
+        <div class="box32 bo">测试目标3（左边中点）</div>
+    </div>
+    4
+    <div class="box">
+        <div class="box42 bo">测试目标4（右边中点）</div>
+    </div>
+    5
+    <div class="box">
+        <div class="box52 bo">测试目标5（底边中点）</div>
+    </div>
+    6
+    <div class="box">
+        <div class="box62 bo">测试目标6（中心点）</div>
+    </div>
+    7
+    <div class="box">
+        <div class="box72 bo">测试目标7（右上角顶点）</div>
+    </div>
+    8
+    <div class="box">
+        <div class="box92 bo">测试目标9（右下角顶点）</div>
+    </div>
+    9
+    <div class="box">
+        <div class="box82 bo">测试目标8（左下角顶点）</div>
+    </div>
+</body>
+</html>
