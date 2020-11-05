@@ -1,0 +1,3 @@
+function myPerson(name, age){
+
+}
