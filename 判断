@@ -1,0 +1,12 @@
+// --- before ---
+    // if 判断
+    if (toggle) {
+        toggle = 0;
+    } else {
+        toggle = 1;
+    }
+    // 三目运算符
+    togle = toggle ? 0 : 1;
+
+    // --- after ---
+    toggle ^= 1;
