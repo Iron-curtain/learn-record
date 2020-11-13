@@ -14,7 +14,12 @@ App({
         traceUser: true,
       })
     }
-
+    wx.getUserInfo({
+      success(res){
+        console.log(res);
+        
+      }
+    })
     this.globalData = {}
   }
 })
