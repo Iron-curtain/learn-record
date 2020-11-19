@@ -117,7 +117,9 @@ Page({
           if(data[0].bookUrl !== url){
             const id = data[0]._id || ''
             db.collection('book').doc(id).update({
-              bookUrl: url
+              data: {
+                bookUrl: url
+              }
             }).then(res => {
               console.log(res);
             })

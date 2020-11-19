@@ -1,5 +1,5 @@
 {
-  "name": "bookContent",
+  "name": "getContent",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wx-server-sdk": "~2.3.2"
+    "wx-server-sdk": "~2.3.2",
+    "cheerio": "^1.0.0-rc.3",
+    "superagent": "^6.1.0",
+    "superagent-charset": "^1.2.0"
   }
 }
