@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <title>Document</title>
+    <style>
+        body {
+            background: #307ac6;
+            text-align: center;
+            color: aliceblue;
+            margin: 10% 10%;
+        }
+        input {
+            margin-top: 5vh;
+            width: 200px;
+            height: 48px;
+            border: 1px solid #ffffff;
+            border-radius: 4px;
+            color: #000000;
+            padding-left: 20px;
+        }
+        button {
+            border-radius: 4px;
+            color: #000000;
+            padding-left: 20px;
+            height: 48px;
+            width: 100px;
+        }
+        #infos {
+            width: 400px;
+            height: 500px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to lm</h1>
+    <div id="infos">
+
+    </div>
+    <input type="text" id="send_info" value="" placeholder="请输入你想说的话">
+    <button type="button" id="btn">发送</button>
+    <script>
+        var socket = io()
+        // document.getElementById('btn').onclick = function() {
+        //     socket.emit('link_to_server', document.getElementById('send_info').value)
+        // }
+        // socket.emit('link_to_server', '请问蜗牛帅吗')
+        socket.on('link_to_client', (msg) => {
+            document.getElementById('infos').append(`${msg}`)
+        })
+    </script>
+</body>
+</html>
