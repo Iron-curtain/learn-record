@@ -11,9 +11,11 @@
     </div>
     <script>
         let btn = document.getElementById("btn")
-        btn.addEventListener('click', debounce(show, 1000))
+        let debounce2 = debounce(show, 1000)
+        btn.addEventListener('click', debounce2)
 
         function debounce(fn, delay){
+            console.log(this);
             let context = this
             let timer = null
             return function(){

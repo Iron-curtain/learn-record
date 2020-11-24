@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button id="btn">click</button>
+    </div>
+    <script>
+        let btn = document.getElementById("btn")
+        let context = this
+        let timer = null
+        btn.addEventListener('click', function debounce(fn, delay = 1000){
+            fn = show
+            let arg = arguments
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                fn.apply(context, arg)
+            }, delay)
+            // console.log('hello111');
+        })
+
+        function show() {
+            console.log("Hello");
+        }
+    </script>
+</body>
+</html>
