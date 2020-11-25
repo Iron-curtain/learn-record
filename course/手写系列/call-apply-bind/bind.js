@@ -11,7 +11,7 @@ Function.prototype.mybind = function(thisArg) {
   if (typeof this !== 'function') {
     throw new TypeError('Error')
   }
-  console.log(thisArg);
+  // console.log(thisArg);
   const args = [...arguments].slice(1) // [4, 5] 
   const self = this
   const nop = function() {}
@@ -29,7 +29,7 @@ Function.prototype.mybind = function(thisArg) {
     nop.prototype = this.prototype
   }
   bound.prototype = new nop()
-  console.log(bound.prototype, '-----');
+  // console.log(bound.prototype, '-----');
   
   return bound
 }
