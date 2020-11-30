@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let html = `
+      <div>
+        {{name}}
+        <p>
+          {{age}}
+        </p>
+      </div>
+    `
+    let obj = {
+      name: '小米',
+      age: 19
+    }
+    function compiler(str, obj) {
+      let reg = /{{([a-z]*)}}/g
+      let info = reg.exec(str)
+      while (info) {
+        console.log(info, reg.lastIndex);
+        let k = info[1] // {{}} 里面
+        let v = obj[k];
+        str = str.replace(info[0], v)
+        info = reg.exec(str)
+      }
+      return str
+    }
+    
+    console.log(compiler(html, obj));
+  </script>
+</body>
+</html>
