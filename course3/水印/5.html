@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <span>
+      <h2></h2>
+    </span>
+    <h2></h2>
+  </div>
+  <h2></h2>
+  <script>
+    const app = document.getElementById('app')
+    function findH(parent) {
+      if(parent.tagName === 'H2')
+        console.log(parent.tagName);
+      if (parent.childNodes) {
+        for (let child of parent.childNodes){
+          findH(child)
+        }
+      }
+    }
+    findH(app)
+  </script>
+</body>
+</html>
