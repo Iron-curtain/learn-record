@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <span>
+      <h2></h2>
+    </span>
+    <h2></h2>
+  </div>
+  <h2></h2>
+  <script>
+    const app = document.getElementById('app')
+    function walk(node) {
+      console.log(node);
+      if (node.childNodes) {
+        for (let child of node.childNodes) {
+          walk(child)
+        }
+      }
+    }
+    walk(app)
+  </script>
+</body>
+</html>
