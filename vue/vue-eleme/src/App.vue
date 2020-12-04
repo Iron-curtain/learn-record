@@ -49,13 +49,16 @@ export default {
   &-wrapper
     flex: 1;
     text-align center
-    padding 10px 0
+    padding 8px 0
+    padding-bottom: 0;
     .router-link-exact-active 
       color $color-red
+      padding-bottom: 8px;
       border-bottom 2px solid $color-red
     a
       width: 100%;
       display inline-block
       text-decoration none
       color #666
+      line-height 1
 </style>
