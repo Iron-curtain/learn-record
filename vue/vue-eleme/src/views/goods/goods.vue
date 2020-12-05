@@ -34,6 +34,7 @@
                     <span class="now">￥{{food.price}}</span>
                     <div class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</div>
                   </div>
+                  <div class="cartcontrol-wrapper"><CartControl :food="food"></CartControl></div>
                 </div>
               </li>
             </ul>
@@ -41,7 +42,7 @@
         </ul>
       </div>
     </div>
-    <div style="z-index: 10">{{currentIndex}}</div>
+    <ShopCart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></ShopCart>
   </div>
 </template>
 
@@ -49,7 +50,14 @@
 import { getGoods } from '@/api'
 import BScroll from 'better-scroll'
 import SupportIco from '@/components/support-ico/Support-ico'
+import ShopCart from '@/components/shop-cart/shop-cart'
+import CartControl from '@/components/cart-control/cart-control'
 export default {
+  props: {
+    seller: {
+      type: Object
+    }
+  },
   data() {
     return {
       goods: [],
@@ -69,6 +77,19 @@ export default {
         }
       }
       return 0
+    },
+    selectFoods() {
+      let foods = []
+      for(let good of this.goods) {
+        if(good.foods) {
+          for(let food of good.foods) {
+            if(food.count){
+              foods.push(food)
+            }
+          }
+        }
+      }
+      return foods
     }
   },
   methods: {
@@ -101,7 +122,8 @@ export default {
         this.listHeight.push(height)
       }
       // console.log(this.listHeight);
-    }
+    },
+    
   },
   created() {
     getGoods().then(res => {
@@ -113,7 +135,7 @@ export default {
       })
     })
   },
-  components: { SupportIco }
+  components: { SupportIco, ShopCart, CartControl }
 }
 </script>
 
@@ -157,6 +179,7 @@ export default {
       display flex
       margin: 18px;
       padding-bottom: 18px;
+      position: relative;
       &:last-child
         margin-bottom: 0;
       .icon
@@ -193,4 +216,8 @@ export default {
             text-decoration line-through
             font-size 10px
             color rgb(147, 153, 159)
+        .cartcontrol-wrapper
+          position: absolute;
+          right: 0;
+          bottom: 12px;
 </style>
