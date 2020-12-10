@@ -24,13 +24,14 @@
           </ul>
         </div>
       </div>
-      <span class="next_item button_style" @click="nextItem"></span>
+      <span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetail.length"></span>
+      <span class="submit_item button_style" v-else @click="submitAnswer"></span>
     </div>
   </section>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -50,6 +51,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['addNum']),
     chooseType(type) {
       switch (type) {
         case 0: return 'A'
@@ -71,7 +73,17 @@ export default {
     },
     nextItem() {
       if (this.choosedNum !== null) {
-
+        this.choosedNum = null
+        this.addNum(this.choosedId)
+      } else {
+        alert("你还没有选择答案！")
+      }
+    },
+    submitAnswer() {
+      // 到达最后一题交卷
+      if (this.choosedNum !== null) {
+        this.addNum(this.choosedId)
+        this.$router.push('/score')
       } else {
         alert("你还没有选择答案！")
       }
