@@ -6,10 +6,12 @@ import axios from 'axios'
 import 'amfe-flexible'
 import util from './assets/js/util'
 
-import { Swipe, SwipeItem, Toast } from 'vant';
+
+
+import { Swipe, SwipeItem, Toast, Icon, Field, Uploader, ActionSheet } from 'vant';
 import 'vant/lib/index.css';
 
-Vue.use(Swipe).use(SwipeItem).use(Toast).use(axios)
+Vue.use(Swipe).use(SwipeItem).use(Toast).use(Icon).use(Field).use(Uploader).use(ActionSheet)
 
 Vue.config.productionTip = false
 

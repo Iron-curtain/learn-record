@@ -11,6 +11,46 @@ const routes = [
     meta: {
       title: '登录'
     }
+  },
+  {
+    path: '/starRegister',
+    name: 'starRegister',
+    component: () => import('@/views/register/index'),
+    meta: {
+      title: '注册'
+    }
+  },
+  {
+    path: '/noteclass',
+    name: 'noteclass',
+    component: () => import('@/views/noteclass/index'),
+    meta: {
+      title: '笔记分类'
+    }
+  },
+  {
+    path: '/noteList',
+    name: 'noteList',
+    component: () => import('@/views/noteList/index'),
+    meta: {
+      title: '笔记分类'
+    }
+  },
+  {
+    path: '/noteDetail',
+    name: 'noteDetail',
+    component: () => import('@/views/noteDetail/index'),
+    meta: {
+      title: '笔记详情'
+    }
+  },
+  {
+    path: '/noteEdit',
+    name: 'noteEdit',
+    component: () => import('@/views/noteEdit/index'),
+    meta: {
+      title: '笔记编辑'
+    }
   }
 ]
 
