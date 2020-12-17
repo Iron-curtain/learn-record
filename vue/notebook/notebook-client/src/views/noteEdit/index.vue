@@ -13,7 +13,7 @@
       </div>
       <div class="note-title">
         <h2>上传图片</h2>
-        <van-uploader multiple :max-size="500 * 1024" :after-read="onRead"/>
+        <van-uploader multiple :max-size="500 * 1024" preview-image :after-read="afterRead" v-model="fileList"/>
       </div>
       <div class="note-title">
         <h2>请选择分类</h2>
@@ -74,12 +74,13 @@ export default {
       ],
       show: false,
       preimg: '',
-      selectCon: ''
+      selectCon: '',
+      fileList: []
     }
   },
   methods: {
-    onRead(file) {
-      // console.log(file);
+    afterRead(file) {
+      let image = {'url': file.content}
       this.preimg = file.content
     },
     selectType() {
@@ -89,7 +90,7 @@ export default {
       this.show = false
     },
     onSelect(item) {
-      console.log(item);
+      // console.log(item);
       this.selectCon = item.subname
     },
     publish() {
@@ -98,7 +99,7 @@ export default {
 
       this.$http({
         method: 'post',
-        url: this.$util.baseUrl + 'user/insertNote',
+        url: this.$util.baseUrl + 'users/insertNote',
         data: {
           note_content: this.content,
           head_img: this.preimg,
@@ -110,6 +111,7 @@ export default {
       }).then(res => {
         if(res.data.code === '80000') {
           this.$toast(res.data.mess)
+          this.$router.push('/noteclass')
         }
       })
     }

@@ -1,5 +1,6 @@
 const router = require('koa-router')()
 const userService = require('../controllers/mySqlConfig')
+const util = require('../util/getTime')
 
 router.prefix('/users')
 
@@ -9,6 +10,36 @@ router.get('/', function (ctx, next) {
 
 router.get('/bar', function (ctx, next) {
   ctx.body = 'this is a users/bar response'
+})
+
+router.post('/insertNote', async(ctx, next) => {
+  let _head_img = ctx.request.body.head_img
+  let _title = ctx.request.body.title
+  let _note_content = ctx.request.body.note_content
+  let _note_type = ctx.request.body.note_type
+  let _userId = ctx.request.body.userId
+  let _nickname = ctx.request.body.nickname
+  let _c_time = util.getDate()
+  let _m_time = util.getDate()
+  console.log(_c_time);
+  await userService.insertNote([_userId, _title, _note_type, _note_content, _c_time, _m_time, _head_img, _nickname]).then(res => {
+    let r = ''
+    if (res.affectedRows != 0) {
+      r = 'ok'
+      ctx.body = {
+        code: '80000',
+        data: r,
+        mess: '发布成功'
+      }
+    } else {
+      r = 'error'
+      ctx.body = {
+        code: '80004',
+        data: r,
+        mess: '发布失败'
+      }
+    }
+  })
 })
 
 router.post('/getNoteDetailByType', async(ctx, next) => {
@@ -30,7 +61,7 @@ router.post('/getNoteDetailByType', async(ctx, next) => {
         mess: '查询失败'
       }
     }
-  }).then(err => {
+  }).catch(err => {
     console.log(err);
   })
 })
