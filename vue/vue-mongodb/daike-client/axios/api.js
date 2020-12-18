@@ -1,8 +1,9 @@
 import axios from 'axios'
 import config from './config.js'
-import qs from 'qs'    // 序列化请求数据，服务端操作
-import { Toast } from 'vant';
+import qs from 'qs' // 序列化请求数据，服务端要求
 import router from 'vue-router'
+
+import { Toast } from 'vant';
 
 export default function $axios(options) {
   return new Promise((resolve, reject) => {
@@ -13,21 +14,20 @@ export default function $axios(options) {
     // 请求拦截
     instance.interceptors.request.use(
       config => {
-        if (config.method.toLocaleUpperCase() === 'POST' || config.method.toLocaleUpperCase() === 'PUT' || 
-            config.method.toLocaleUpperCase() === 'GET') {
-              config.data = qs.stringify(config.data)
+        if (config.method.toLocaleUpperCase() === 'POST' || config.method.toLocaleUpperCase() === 'PUT' || config.method.toLocaleUpperCase() === 'DELETE') {
+          config.data = qs.stringify(config.data)
         }
         return config
       },
       error => {
         // 1. 请求超时
         if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
-          Toast.fail('请求超时')
+          Toast.fail('请求超时');
         }
-        // 2. 重定向到错误页面
+        // 2. 需要重定向到错误页面
         const errorInfo = error.response
         if (errorInfo) {
-          const errorStatus = errorInfo.status
+          const errorStatus = errorInfo.status  // 404 403 500 ...
           router.push({
             path: `/error/${errorStatus}`
           })
@@ -43,7 +43,7 @@ export default function $axios(options) {
           data = response.data
         }
 
-        data = JSON.parse(data)
+        // data = JSON.parse(data);
         const message = data.msg || 'Error'
         switch (data.code) {
           case 0:
@@ -109,6 +109,7 @@ export default function $axios(options) {
         return Promise.reject(err) // 返回接口返回的错误信息
       }
     )
+
 
     // 请求处理
     instance(options)
