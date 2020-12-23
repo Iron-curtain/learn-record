@@ -128,7 +128,9 @@ export default {
   methods: {
     togglelist() {
       if(this.selectFoods.length === 0) return
-      this.fold = !fold
+      console.log(this.fold);
+      this.fold = !this.fold
+      
       
     },
     empty() {
