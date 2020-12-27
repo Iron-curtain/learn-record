@@ -16,6 +16,7 @@ function Archiver() {
   }
 }
 
+
 let arc = new Archiver()
 arc.num // get
 arc.num = 11 
