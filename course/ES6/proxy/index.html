@@ -20,11 +20,12 @@
         Object.defineProperty(data, '_text_', {
             get () {
                 // console.log('获取数据');
-                return data._text_
+                return this.value
             },
             set (newVal) {
                 // console.log(newVal);
                 // text = newVal
+                this.value = newVal
                 span.innerHTML = newVal
             }
         })
