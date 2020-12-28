@@ -3,9 +3,9 @@
 
 class watcher {
   constructor (opts) {
+    this.$data = this.getBaseType(opts.data) === 'Object' ? opts.data : {}
+    this.$watch = this.getBaseType(opts.watch) === 'Object' ? opts.watch : {}
     for (let key in opts.data) {
-      this.$data = this.getBaseType(opts.data) === 'Object' ? opts.data : {}
-      this.$watch = this.getBaseType(opts.watch) === 'Object' ? opts.watch : {}
       this.setData(key)
     }
   }
