@@ -1,0 +1,16 @@
+<script>
+  function Parent(name) {
+    this.name = name
+    this.colors = ['red', 'blue', 'green']
+  }
+
+  function Child(name, age) {
+    Parent.call(this, age)
+    this.age = age
+  }
+
+  Child.prototype = new Parent()
+
+  let child1 = new Child('jiushen', 18)
+  child1.colors.push('yellow')
+</script>

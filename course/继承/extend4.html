@@ -1,0 +1,25 @@
+<script>
+  // 原型式继承
+  function createObj(o) {
+    function F() {}
+    F.prototype = o
+    return new F()
+  }
+
+  let person = {
+    name: 'jiushen',
+    friend: ['ceo', 'cong']
+  }
+
+  let person1 = createObj(person)
+  let person2 = createObj(person)
+
+  person1.name = 'zhou'
+  console.log(person2.name);
+
+  person1.friend.push('yao')
+  console.log(person2.friend);
+
+  // person1.friend = ['zzz']
+  // console.log(person1.friend);
+</script>

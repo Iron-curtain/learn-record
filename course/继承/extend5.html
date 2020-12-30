@@ -1,0 +1,10 @@
+<script>
+  // 寄生式继承 (创建一个封装继承过程的函数)
+  function createObj(o) {
+    let clone = Object.create(o)
+    clone.sayName = function() {
+      console.log('hi');
+    }
+    return clone
+  }
+</script>
