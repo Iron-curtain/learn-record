@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div ref="list" class="infinite-list-container" id="app" @scroll="scrollEvent($event)" :style="{height: listHeight + 'px'}">
+    <div class="infinite-list-phantom" :style="{height: listHeight + 'px'}">
+      <div class="infinite-list" v-for="item in visibleData" :key="item.id" :style="{height: itemSize + 'px'}">{{item.value}}</div>
+    </div>
+  </div>
+  <!-- <script src="./list.js"></script> -->
+  <script>
+    // let listData = [], itemSize = 200
+    let listData = []
+    for (let i = 0; i < 1000; i++) {
+      listData.push({id: i, value: i})
+    }
+    new Vue ({
+      el: '#app',
+      data () {
+        return {
+          listData: listData,
+          itemSize: 200,
+          screenHeight: 0,
+          startOffset: 0,
+          start: 0,
+          end: null
+        }
+      },
+      mounted() {
+        this.screenHeight = 700
+        console.log(this.screenHeight);
+        this.end = this.start + this.visibleCount
+      },
+      computed: {
+        visibleCount() {  // 可显示的列表项数
+          return Math.ceil(this.screenHeight / this.itemSize)
+        },
+        listHeight() {
+          return this.listData.length * this.itemSize
+        },
+        visibleData() {
+          return this.listData.slice(0, this.end)
+        }
+      },
+      methods: {
+        scrollEvent(event) {
+          console.log(111);
+          let scrollTop = this.$refs.list.scrollTop
+          this.start += Math.floor(scrollTop / this.itemSize)
+          this.end = this.start + this.visibleCount
+          console.log(111);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
