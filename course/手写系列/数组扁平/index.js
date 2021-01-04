@@ -37,7 +37,7 @@ let arr = [1, [2, [3, 4]]]
 // reduce
 // function flatten(arr) {
 //   return arr.reduce(function(pre, next) {
-//     return pre.concat(Array.isArray(next)) ? flatten(next) : next
+//     return pre.concat(Array.isArray(next) ? flatten(next) : next) 
 //   } , [])
 // }
 
