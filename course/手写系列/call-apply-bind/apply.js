@@ -11,7 +11,7 @@ Function.prototype.myapply = function(thisArg) {
     throw new TypeError('Error')
   }
   const args = arguments[1]
-  console.log(args);
+  // console.log(args);
 
   const fn = Symbol('fn')
   thisArg[fn] = this

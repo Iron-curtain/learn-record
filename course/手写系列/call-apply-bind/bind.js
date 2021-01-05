@@ -19,7 +19,7 @@ Function.prototype.mybind = function(thisArg) {
   // 绑定函数
   const bound = function() {
     // console.log(arguments);
-    console.log('this is ' + this);
+    // console.log('this is ' + this);
     return self.apply(  // this.sex = 'boy'
       this instanceof nop ? this : thisArg,
       args
