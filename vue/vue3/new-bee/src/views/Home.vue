@@ -36,6 +36,7 @@ import { onMounted, reactive, toRefs, nextTick } from 'vue';
 import { getHome } from '@/service/home'
 import { Toast } from 'vant'
 import GoodsList from '../components/GoodsList.vue'
+import { getLocal } from '@/utils/utils.js'
 export default {
   name: 'home',
   components: {
@@ -92,10 +93,16 @@ export default {
       newGoodses: [],
       hotGoodses: [],
       recommendGoodses: [],
-      headerScroll: false
+      headerScroll: false,
+      isLogin: false
     })
 
     onMounted(async () => {
+      const token = getLocal('token')
+      if (token) {
+        state.isLogin = true
+        // console.log(state.isLogin);
+      }
       Toast.loading({
         message: '加载中',
         forbidClick: true
@@ -132,7 +139,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped >
+<style lang="less" scoped > 
 @import '../common/style/mixin';
 .home-header {
     position: fixed;

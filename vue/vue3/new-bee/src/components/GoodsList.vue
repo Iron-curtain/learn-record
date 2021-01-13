@@ -2,7 +2,7 @@
   <div class="good">
     <header class="good-header">{{title}}</header>
     <div class="good-box">
-      <div class="good-item" v-for="item in goods" :key="item.id">
+      <div class="good-item" v-for="item in goods" :key="item.id" @click="goToDetail(item)">
         <img :src="$filters.prefix(item.goodsCoverImg)" alt="">
         <div class="good-desc">
           <div class="title">{{item.goodsIntro}}</div>
@@ -15,6 +15,7 @@
 
 <script>
 import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   props: {
     title: {
@@ -29,11 +30,16 @@ export default {
     }
   },
   setup(props) {
+    const router = useRouter()
     const title = ref(props.title)
     const goodsList = reactive(props.goods)
+    const goToDetail = (item) => {
+      router.push({path: `/product/${item.goodsId}`})
+    }
     return {
       title,
-      goodsList
+      goodsList,
+      goToDetail
     }
   }
 }

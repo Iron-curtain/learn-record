@@ -11,7 +11,7 @@
       <van-form @submit="onSubmit">
         <van-field
           v-model="state.username"
-          name="用户名"
+          name="username"
           label="用户名"
           placeholder="用户名"
           :rules="[{ required: true, message: '请填写用户名' }]"
@@ -19,14 +19,13 @@
         <van-field
           v-model="state.password"
           type="password"
-          name="密码"
+          name="password"
           label="密码"
           placeholder="密码"
           :rules="[{ required: true, message: '请填写密码' }]"
         />
         <van-field
-          v-model="verify"
-          name="验证码"
+          v-model="state.verify"
           label="验证码"
           placeholder="验证码"
         >
@@ -45,23 +44,22 @@
     <div class="login-body login register" v-else>
       <van-form @submit="onSubmit">
         <van-field
-          v-model="state.username"
-          name="用户名"
+          v-model="state.username1"
+          name="username1"
           label="用户名"
           placeholder="用户名"
           :rules="[{ required: true, message: '请填写用户名' }]"
         />
         <van-field
-          v-model="state.password"
+          v-model="state.password1"
           type="password"
-          name="密码"
+          name="password1"
           label="密码"
           placeholder="密码"
           :rules="[{ required: true, message: '请填写密码' }]"
         />
         <van-field
-          v-model="verify"
-          name="验证码"
+          v-model="state.verify"
           label="验证码"
           placeholder="验证码"
         >
@@ -84,12 +82,18 @@
 import sHeader from "@/components/SimpleHeader";
 import { reactive, ref } from 'vue';
 import vueImgVerify from '@/components/VueImgVerify'
+import { Toast } from 'vant';
+import { register, login } from '@/service/user.js'
+import md5 from 'js-md5'
+import { setLocal } from '@/utils/utils.js'
+import { useRouter } from 'vue-router'
 export default {
   components: {
     sHeader,
     vueImgVerify
   },
   setup() {
+    const router = new useRouter()
     const verifyRef = ref(null)
     const state = reactive({
       username: '',
@@ -99,17 +103,37 @@ export default {
       verify: '',
       type: 'login'
     });
-    const onSubmit = (values) => {
-      console.log('submit', values);
-    };
 
     const toggle = (v) => {
       state.type = v
       state.verify = ''
     }
     // 登录 注册
-    const onSubmit = function() {
-      
+    const onSubmit = async(values) => {
+      // console.log(verifyRef.value.imgCode); // 通过ref.value可以取到组件内setup函数的返回值
+      state.imgCode = verifyRef.value.imgCode || ''
+      if (state.verify.toLowerCase() !== state.imgCode.toLowerCase()) {
+        Toast.fail('验证码有误')
+        return
+      }
+      if (state.type == 'login') { //登录
+        let res = await login({
+          'loginName': values.username,
+          'passwordMd5': md5(values.password)
+        })
+        // token (data) 保存在本地
+        setLocal('token', res.data)
+        router.push('/home')
+      } else { //注册
+        // console.log(values);
+        await register({
+          'loginName': values.username1,
+          'password': values.password1
+        })
+        Toast.success('注册成功')
+        state.type = 'login'
+        state.verify = ''
+      }
     }
 
     return {
