@@ -118,7 +118,7 @@ export default {
       window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         scrollTop > 100 ? state.headerScroll = true : state.headerScroll = false
-        console.log(111);
+        // console.log(111);
       })
     })
 

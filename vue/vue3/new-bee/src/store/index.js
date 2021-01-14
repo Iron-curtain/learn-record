@@ -13,7 +13,7 @@ export default createStore({
   actions: {
     async updateCart (ctx) {
       const { data } = await getCart()
-      console.log(data);
+      // console.log(data);
       ctx.commit('addCart', {
         count: data.length || 0
       })

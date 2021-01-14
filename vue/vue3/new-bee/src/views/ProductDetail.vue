@@ -38,9 +38,9 @@
     <!-- footer -->
     <van-action-bar>
       <van-action-bar-icon icon="chat-o" text="客服" dot />
-      <van-action-bar-icon icon="cart-o" text="购物车" :badge="count ? count : ''" />
+      <van-action-bar-icon icon="cart-o" text="购物车" :badge="count ? count : ''" @click="goTo" />
       <van-action-bar-button type="warning" text="加入购物车" @click="handleAddCart" />
-      <van-action-bar-button type="danger" text="立即购买" />
+      <van-action-bar-button type="danger" text="立即购买" @click="goToCart"/>
     </van-action-bar>
   </div>
 </template>
@@ -48,7 +48,7 @@
 <script>
 import sHeader from "@/components/SimpleHeader";
 import { computed, onMounted, reactive, toRefs } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { getDetail } from "@/service/goods.js";
 import { addCart, getCart } from '@/service/cart.js';
 import { Toast } from 'vant'
@@ -60,7 +60,7 @@ export default {
   setup() {
     const route = useRoute();
     const store = useStore()
-    
+    const router = useRouter()
     const state = reactive({
       detail: {},
     });
@@ -70,7 +70,7 @@ export default {
       // console.log(data);
       state.detail = data;
       store.dispatch('updateCart')
-      console.log(store.state.cartCount);
+      // console.log(store.state.cartCount);
     });
     // 加入购物车
     const handleAddCart = async () => {
@@ -80,15 +80,27 @@ export default {
       }
       store.dispatch('updateCart')
     }
-
+    // 角标
     const count = computed(() => {
       return store.state.cartCount
     })
 
+    const goToCart = async () => {
+      await addCart({goodsCount: 1, goodsId: state.detail.goodsId})
+      store.dispatch('updateCart')
+      router.push({ path: '/cart' })
+    }
+
+    const goTo = () => {
+      router.push({ path: '/cart' })
+    }
+
     return {
       ...toRefs(state),
       handleAddCart,
-      count
+      count,
+      goToCart,
+      goTo
     };
   },
 };
