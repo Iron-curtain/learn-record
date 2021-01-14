@@ -44,12 +44,15 @@ import NavBar from '@/components/NavBar.vue'
 import { computed, onMounted, reactive, toRefs } from 'vue'
 import { Toast } from 'vant'
 import { getCart, modifyCart, deleteCart } from '@/service/cart.js'
+import { useRouter } from 'vue-router'
 export default {
   components: {
     sHeader,
     NavBar
   },
   setup() {
+    const router = useRouter()
+
     const state = reactive({
       result: [],
       list: [],
@@ -66,7 +69,7 @@ export default {
         forbidClick: true
       })
       const { data } = await getCart({ pageNumber: 1 })
-      console.log(data);
+      // console.log(data);
       state.list = data
       state.result = data.map(item => item.cartItemId)
       // console.log(state.result);
@@ -123,12 +126,31 @@ export default {
     }
 
     const deleteGood = async (cartItemId) => {
-      await deleteCart(cartItemId)
-      let index = state.list.findIndex(item => item.cartItemId == cartItemId)
-      console.log(index);
-      state.list.splice(index, 1)
-      console.log(state.list);
+      const { resultCode } = await deleteCart(cartItemId)
+      if (resultCode === 200) {
+        let index = state.list.findIndex(item => item.cartItemId == cartItemId)
+        state.list.splice(index, 1)
+      } else {
+        Toast.loading({
+          message: '删除失败',
+          forbidClick: true
+        })
+      }
     } 
+
+    const goTo = () => {
+      router.push('/home')
+    }
+
+    // 结算
+    const onSubmit = () => {
+      if (!state.result.length) {
+        Toast.fail('请选择商品进行结算')
+      } else {
+        const params = JSON.stringify(state.result)
+        router.push({ path: '/create-order', query: { cartItemId: params }})
+      }
+    }
 
     return {
       ...toRefs(state),
@@ -136,7 +158,9 @@ export default {
       total,
       groupChange,
       numChange,
-      deleteGood
+      deleteGood,
+      goTo,
+      onSubmit
     }
   }
 }

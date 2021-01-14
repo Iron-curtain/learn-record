@@ -16,3 +16,7 @@ export function modifyCart(params) {
 export function deleteCart(id) {
   return axios.delete(`/shop-cart/${id}`)
 }
+
+export function getByCartItemIds(params) {
+return axios.get('/shop-cart/settle', { params })
+}
