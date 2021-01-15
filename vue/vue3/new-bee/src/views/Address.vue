@@ -26,11 +26,15 @@
 <script>
 import sHeader from '@/components/SimpleHeader.vue'
 import { onMounted, reactive, toRefs } from 'vue'
+import { getAddressList } from '@/service/address.js'
+import { useRouter, useRoute } from 'vue-router'
 export default {
   components: {
     sHeader
   },
   setup() {
+    const router = useRouter()
+    const route = useRoute()
     const state = reactive({
       list: [
         {
@@ -46,16 +50,41 @@ export default {
         tel: '1310000000',
         address: '浙江省杭州市拱墅区莫干山路 50 号',
       },
-      ]
+      ],
+      from: route.query.from
+    })
+    onMounted(async () => {
+      // 请求所有的地址列表
+      const { data } = await getAddressList()
+      if (!data) {
+        state.list = []
+        return
+      }
+      state.list = data.map(item => {
+        return {
+          id: item.addressId,
+          name: item.userName,
+          tel: item.userPhone,
+          address: `${item.provinceName} ${item.cityName} ${item.regionName} ${item.detailAddress}`,
+          isDefault: Boolean(item.defaultFlag)
+        }
+      })
     })
 
-    // 请求所有的地址列表
-    onMounted(() => {
-      
-    })
+    const onAdd = () => {
+      router.push({ path: '/address-edit', query: { type: 'add', from: state.from}})
+    }
+
+    // 选中地址
+    const select = (item) => {
+      console.log(item);
+      router.push({ path: '/create-order', query: { addressId: item.id, from: state.from}})
+    }
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      onAdd,
+      select
     }
   }
 }

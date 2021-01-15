@@ -4,10 +4,8 @@
     <!-- 地址 -->
     <div class="address-wrap">
       <div class="name" @click="goTo">
-        <!-- <span>{{ address.userName }} </span>
-        <span>{{ address.userPhone }}</span> -->
-        <span>111111111 </span>
-        <span>111111111</span>
+        <span>{{ address.userName }} </span>
+        <span>{{ address.userPhone }}</span>
       </div>
       <div class="address">
         {{ address.provinceName }} {{ address.cityName }} {{ address.regionName }} {{ address.detailAddress }}
@@ -29,26 +27,35 @@
         </div>
       </div>
     </div>
+    <!-- 生成订单 -->
+    <div class="pay-wrap">
+      <div class="price">
+        <span>商品金额</span>
+        <span>{{total}}</span>
+      </div>
+      <van-button @click="handleCreateOrder" class="pay-btn" color="#1baeae" type="primary">生成订单</van-button>
+    </div>
   </div>
 </template>
 
 <script>
 import sHeader from '@/components/SimpleHeader.vue'
-import { onMounted, reactive, toRefs } from 'vue'
+import { computed, onMounted, reactive, toRefs } from 'vue'
 import { Toast } from 'vant'
 import { getByCartItemIds } from '@/service/cart.js'
 import { useRoute, useRouter } from 'vue-router'
 import { getAddressDetail, getDefaultAddress } from '@/service/address.js'
+import { setLocal, getLocal } from '@/utils/utils.js'
 export default {
   components: {
     sHeader
   },
   setup() {
-    const address = {}
     const route = useRoute()
     const router = useRouter()
     const state = reactive({
-      cartList: []
+      address: {},
+      cartList: [],
     })
 
     onMounted(() => {
@@ -58,23 +65,50 @@ export default {
     const init = async () => {
       Toast.loading({ message: '加载中...', forbidClick: true})
       const { cartItemId, addressId } = route.query
-      const _cartItemIds = JSON.parse(cartItemId)
+      let _cartItemIds
+      if (cartItemId) {
+        _cartItemIds = JSON.parse(cartItemId)
+        setLocal('cartItemId', _cartItemIds)
+      } else {
+        _cartItemIds = getLocal('cartItemId').split(',')
+      }
+      // console.log(_cartItemIds);
       // 请求用户地址
-      const address = addressId ? await getAddressDetail(addressId) : await getDefaultAddress()
-      // console.log(address);
+      const { data: address } = addressId ? await getAddressDetail(addressId) : await getDefaultAddress()
       if (!address) {
         router.push({ path: '/address'})
         return
       }
+      // console.log(address);
+      state.address = address
       // 请求要购买的商品的数据
       const { data: list } = await getByCartItemIds({ cartItemIds: _cartItemIds.join(',') })
       state.cartList = list
       Toast.clear()
     }
 
+    const goTo = () => {
+      router.push({path: '/address', from: 'create-order'})
+    }
+
+    // 合计
+    const total = computed(() => {
+      let sum = 0
+      state.cartList.forEach(item => {
+        sum += item.goodsCount * item.sellingPrice
+      })
+      return sum
+    })
+
+    // 生成订单
+    const handleCreateOrder = () => {
+      
+    }
+
     return {
       ...toRefs(state),
-      address
+      goTo,
+      total
     }
   }
 }
@@ -116,6 +150,7 @@ export default {
   }
   .good {
     margin-bottom: 120px;
+    padding-bottom: 106px;
   }
   .good-item {
     padding: 10px;
