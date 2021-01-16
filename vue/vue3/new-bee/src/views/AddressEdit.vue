@@ -1,7 +1,8 @@
 <template>
   <div class="address-edit-box">
-    <s-header :name="'新增地址'"></s-header>
+    <s-header :name="type === 'add' ? '新增地址': '修改地址'"></s-header>
     <van-address-edit
+      :address-info="AddressInfo"
       :area-list="areaList"
       show-delete
       show-set-default
@@ -21,12 +22,14 @@ import { onMounted, reactive, toRefs } from 'vue'
 import { tdist } from '@/utils/utils.js'
 import { addAddress, editAddress } from '@/service/address.js'
 import { Toast } from 'vant'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { getAddressDetail } from '@/service/address.js'
 export default {
   components: {
     sHeader
   },
   setup() {
+    const route = useRoute()
     const router = useRouter()
     const state = reactive({
       areaList: {
@@ -34,11 +37,22 @@ export default {
         city_list: {},
         county_list: {}
       },
-      type: 'add'
+      type: 'add',
+      AddressInfo: {}
     })
 
     onMounted(async () => {
       // 省市区列表构建
+      let addressId = route.query.addressId
+      if (addressId) {
+        let { data } = await getAddressDetail(addressId)
+        let {userName: name, userPhone: tel, provinceName: province, cityName: city, 
+                             regionName: county, detailAddress: addressDetail, defaultFlag: isDefault} = data
+        state.AddressInfo = {name, tel, province, city, county, addressDetail, isDefault}
+        state.AddressInfo.isDefault = Boolean(state.AddressInfo.isDefault)
+      }
+
+      // 生成省市区选择列表
       let _provice_list = {}
       let _city_list = {}
       let _county_list = {}

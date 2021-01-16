@@ -34,6 +34,19 @@
         <span>{{total}}</span>
       </div>
       <van-button @click="handleCreateOrder" class="pay-btn" color="#1baeae" type="primary">生成订单</van-button>
+      <van-popup
+        closeable
+        :close-on-click-overlay="false"
+        v-model:show="showPay"
+        position="bottom"
+        :style="{ height: '30%' }"
+        @close="close"
+      >
+        <div :style="{ width: '90%', margin: '0 auto', padding: '50px 0' }">
+          <van-button :style="{ marginBottom: '10px' }" color="#1989fa" block @click="handlePayOrder(1)">支付宝支付</van-button>
+          <van-button color="#4fc08d" block @click="handlePayOrder(2)">微信支付</van-button>
+        </div>
+      </van-popup>
     </div>
   </div>
 </template>
@@ -46,6 +59,7 @@ import { getByCartItemIds } from '@/service/cart.js'
 import { useRoute, useRouter } from 'vue-router'
 import { getAddressDetail, getDefaultAddress } from '@/service/address.js'
 import { setLocal, getLocal } from '@/utils/utils.js'
+import { createOrder, payOrder } from '@/service/order.js'
 export default {
   components: {
     sHeader
@@ -56,6 +70,8 @@ export default {
     const state = reactive({
       address: {},
       cartList: [],
+      showPay: false,
+      orderNo: ''
     })
 
     onMounted(() => {
@@ -101,14 +117,34 @@ export default {
     })
 
     // 生成订单
-    const handleCreateOrder = () => {
-      
+    const handleCreateOrder = async () => {
+      const params = {
+        addressId: state.address.addressId,
+        cartItemIds: state.cartList.map(item => item.cartItemId)
+      }
+      // 调用接口
+      const { data }  = await createOrder(params)
+      setLocal('cartItemId', '')
+      // console.log(data);
+      state.orderNo = data
+      state.showPay = true
+      state.cartList = []
+    }
+
+    const handlePayOrder = async (type) => {
+      await payOrder({ orderNo: state.orderNo, payType: type})
+      Toast.success('支付成功')
+      setTimeout(() => {
+        router.push({ path: '/order'})
+      }, 1000)
     }
 
     return {
       ...toRefs(state),
       goTo,
-      total
+      total,
+      handleCreateOrder,
+      handlePayOrder
     }
   }
 }
