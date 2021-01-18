@@ -60,7 +60,6 @@ export default {
       state.areaList.county_list = _county_list
 
 
-      // 省市区列表构建
       let addressId = route.query.addressId
       state.addressId = addressId
       let type = route.query.type
