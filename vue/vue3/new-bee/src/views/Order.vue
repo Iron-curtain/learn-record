@@ -1,6 +1,6 @@
 <template>
   <div class="order-box">
-    <s-header :name="'我的订单'"></s-header>
+    <s-header :name="'我的订单'" :backUrl="'/user'"></s-header>
     <van-tabs v-model:active="status" :color="'#1baeae'" class="order-tab" @click="onChangeTab">
       <van-tab title="全部" name=""></van-tab>
       <van-tab title="待付款" name="0"></van-tab>
@@ -18,19 +18,23 @@
           :offset="300"
           finished-text="没有更多了"
         >
+        <div class="order-item-box" v-for="(item, index) in list" :key="index">
           <div class="order-item-box">
             <div class="order-item-header">
-              <span>订单时间：2021-1-17</span>
+              <span>订单时间：{{item.createTime}}</span>
               <span>已支付</span>
             </div>
             <van-card
-              num="2"
-              price="2.00"
-              desc="描述信息"
-              title="商品标题"
-              thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+              v-for="good in item.newBeeMallOrderItemVOS"
+              :key="good.goodsId"
+              :num="good.goodsCount"
+              :price="good.sellingPrice"
+              desc="全场包邮"
+              :title="good.goodsName"
+              :thumb="$filters.prefix(good.goodsCoverImg)"
             />
           </div>
+        </div>
         </van-list>
       </van-pull-refresh>
     </div>
