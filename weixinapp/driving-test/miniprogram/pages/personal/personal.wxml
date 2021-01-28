@@ -1,0 +1,49 @@
+<!--pages/personal/personal.wxml-->
+<view class="personal-container">
+  <view class="user-info">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" />
+    <view class="info">
+      <text class="nickName">{{userInfo.nickName}}</text>
+      <text class="sex"></text>
+    </view>
+  </view>
+  <view class="select">
+    <view  class="select-button">
+      <view class="select-subject">
+        <view class="subject">科一</view>
+        <view class="subject">科四</view>
+      </view>
+      <view class="select-class">
+        <text>切换题库：</text>
+        <text style="color: #2a82e4">客车</text>
+        <text class="">></text>
+      </view>
+    </view>
+  </view>
+  <view class="record">
+    <view class="record-num">
+      <view class="num">0</view>
+      <view class="title">累计答题数</view>
+      <view class="count">正确率 <text class="score">0%</text></view>
+    </view>
+    <view class="record-socre">
+      <view class="num">0</view>
+      <view class="title">累计答题数</view>
+      <view class="count">正确率 <text class="score">0%</text></view>
+    </view>
+  </view>
+  <view class="menu">
+    <view class="menu-item">
+      <view class="icon">
+        <image src="../../images/history.png" />
+      </view>
+      <view class="desc">历史成绩</view>
+    </view>
+    <view class="menu-item">
+      <view class="icon">
+        <image src="../../images/rank.png" />
+      </view>
+      <view class="desc">我的排名</view>
+    </view>
+  </view>
+</view>

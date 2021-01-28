@@ -1,0 +1,85 @@
+/* pages/personal/personal.wxss */
+.personal-container {
+  padding: 50rpx 50rpx;
+}
+.avatar {
+  display: inline-block;
+  width: 120rpx;
+  height: 120rpx;
+}
+.info {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 30rpx;
+  line-height: 120rpx;
+}
+.info .nickName {
+  font-size: 40rpx;
+}
+.select {
+  margin-top: 80rpx;
+}
+.select .select-button {
+  display: flex;
+  justify-content: space-between;
+}
+.select .select-button .select-subject {
+  width: 300rpx;
+  height: 60rpx; 
+  margin-top: -1px;
+  margin-left: -1px;
+  border: 1px solid #2a82e4;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.select .select-button .select-subject .subject {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  background-color: #2a82e4;
+  text-align: center;
+  color: white;
+  line-height: 60rpx;
+}
+.select-class {
+  line-height: 60rpx;
+}
+.record {
+  display: flex;
+  margin-top: 30rpx;
+  justify-content: space-around;
+  text-align: center;
+  border: 1px solid #2a82e4;
+}
+.record .num {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.record .title {
+  font-size: 28rpx;
+  margin: 10rpx 0;
+}
+.record .count {
+  font-size: 24rpx;
+}
+.record .score {
+  color: #2a82e4;
+}
+.menu {
+  width: 100%;
+  display: flex;
+  margin-top: 80rpx;
+  justify-content: space-around;
+  border: 1px solid #2a82e4;
+}
+.menu .menu-item {
+  width: 80rpx;
+} 
+.menu .menu-item image {
+  width: 80rpx;
+  height: 80rpx;
+}
+.menu .menu-item .desc {
+  margin: 16rpx 0;
+  font-size: 20rpx;
+}

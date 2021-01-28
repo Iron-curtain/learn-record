@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function (options) {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -13,6 +13,36 @@ App({
         traceUser: true,
       })
     }
+
+    // 查看是否获得用户授权
+    const self = this
+    console.log(options);
+    wx.getSetting({
+      success(settingRes){
+        if(settingRes.authSetting['scope.userInfo']){
+          wx.getUserInfo({    //获取用户信息
+            success(infoRes){
+              self.globalData.userInfo = infoRes.userInfo
+              console.log(self.globalData.userInfo);
+              // wx.cloud.callFunction({
+              //   name: 'createUser',
+              //   data: {
+              //     avatarUrl: infoRes.userInfo.avatarUrl,
+              //     name: '',
+              //     nickName: infoRes.userInfo.nickName,
+              //     sex: infoRes.userInfo.gender
+              //   }
+              // })
+            }
+          })
+        }
+        else{
+          wx.redirectTo({
+            url: `pages/login/login?back=${options.path.split('/')[1]}`
+          })
+        }
+      }
+    })
 
     this.globalData = {}
   }
