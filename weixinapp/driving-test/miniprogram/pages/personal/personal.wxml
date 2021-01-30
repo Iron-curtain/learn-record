@@ -13,7 +13,7 @@
         <view class="subject">科一</view>
         <view class="subject">科四</view>
       </view>
-      <view class="select-class">
+      <view class="select-class" bindtap="toSelect">
         <text>切换题库：</text>
         <text style="color: #2a82e4">客车</text>
         <text class="">></text>

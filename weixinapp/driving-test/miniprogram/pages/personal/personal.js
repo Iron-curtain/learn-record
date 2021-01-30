@@ -9,6 +9,20 @@ Page({
     userInfo: {}
   },
 
+  toSelect() {
+    wx.navigateTo({
+      // url: `../bookSection/bookSection?url=${url}`
+      url: '../select'
+    })
+  },
+
+
+
+
+
+
+
+
   /**
    * 生命周期函数--监听页面加载
    */
