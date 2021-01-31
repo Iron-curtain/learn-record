@@ -1,34 +1,18 @@
-// pages/personal/personal.js
-const app =  getApp();
+// pages/select/select.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+
   },
-
-  toSelect() {
-    wx.navigateTo({
-      url: '../select/select'
-    })
-  },
-
-
-
-
-
-
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
+
   },
 
   /**
