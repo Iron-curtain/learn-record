@@ -17,10 +17,10 @@
     "selectedColor": "#2a82e4",
     "list": [
       {
-      "pagePath": "pages/index/index",
-      "text": "考试",
-      "iconPath": "./images/index.png",
-      "selectedIconPath": "./images/index-selected.png"
+        "pagePath": "pages/index/index",
+        "text": "考试",
+        "iconPath": "./images/index.png",
+        "selectedIconPath": "./images/index-selected.png"
       },
       {
         "pagePath": "pages/personal/personal",

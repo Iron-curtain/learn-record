@@ -1,1 +1,19 @@
 /* pages/index/index.wxss */
+text {
+  text-align: center;
+  font-size: 40rpx;
+  color: #2a82e4;
+  line-height: 80rpx;
+  margin: 0 300rpx;
+}
+.menu {
+  margin: 20rpx 70rpx;
+  margin-top: 100rpx;
+  width: 610rpx;
+  height: 100rpx;
+  background-color: #2a82e4;
+  text-align: center;
+  line-height: 100rpx;
+  color: white;
+  border-radius: 20rpx;
+}

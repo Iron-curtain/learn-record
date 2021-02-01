@@ -1,2 +1,17 @@
 <!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+<van-tabs color="#2a82e4" bind:click="onClick">
+  <van-tab title="科目一">
+    <text>科目一</text>
+    <view class="menu">顺序练习</view>
+    <view class="menu">随机练习</view>
+    <view class="menu">收藏</view>
+    <view class="menu">错题本</view>
+  </van-tab>
+  <van-tab title="科目四">
+    <text>科目四</text>
+    <view class="menu">顺序练习</view>
+    <view class="menu">随机练习</view>
+    <view class="menu">收藏</view>
+    <view class="menu">错题本</view>
+  </van-tab>
+</van-tabs>
