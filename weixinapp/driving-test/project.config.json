@@ -19,7 +19,7 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
     "babelSetting": {
       "ignore": [],
@@ -30,6 +30,7 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": true,
     "packNpmRelationList": [
       {
@@ -37,7 +38,9 @@
         "miniprogramNpmDistDir": "./miniprogram/"
       }
     ],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "bundle": false,
+    "useApiHostProcess": false
   },
   "appid": "wx051784d32c65e381",
   "projectname": "%E9%A9%BE%E8%80%83%E9%A2%98%E5%BA%93",

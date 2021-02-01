@@ -1,2 +1,44 @@
 <!--pages/select/select.wxml-->
-<text>pages/select/select.wxml</text>
+<view class="select-subject">
+  <view class="subject-title">学车阶段</view>
+  <view class="subject">
+    <view class="subject-item">科目一</view>
+    <view class="subject-item">科目四</view>
+  </view>
+</view>
+
+<view class="select-type">
+  <view class="type-title">
+    <text>驾驶证</text>
+    <text>当前类型：客车</text>
+  </view>
+  <view class="vehicle-types">
+    <view class="type-item">
+      <view class="icon">
+        <image src="../../images/car.png" />
+      </view>
+      <view class="name">小车</view>
+      <view class="code">C1/C2/C3</view>
+    </view>
+    <view class="type-item">
+      <view class="icon">
+        <image src="../../images/truck.png" />
+      </view>
+      <view class="desc">
+        <view class="name">货车</view>
+        <view class="code">A2/B2</view>
+      </view>
+    </view>
+    <view class="type-item">
+      <view class="icon">
+        <image src="../../images/bus.png" />
+      </view>
+      <view class="desc">
+        <view class="name">客车</view>
+        <view class="code">A1/A3/B1</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="submit">确定</view>

@@ -1,1 +1,59 @@
-/* pages/select/select.wxss */
+.select-subject {
+  padding: 50rpx 50rpx;
+}
+.select-subject .subject-title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.select-subject .subject {
+  display: flex;
+  justify-content: space-around;
+  padding: 50rpx 50rpx;
+}
+.select-subject .subject .subject-item {
+  width: 160rpx;
+  height: 60rpx;
+  border: 1px solid #2a82e4;
+  border-radius: 10%;
+  line-height: 60rpx;
+  text-align: center;
+  color: #2a82e4;
+}
+.select-type {
+  padding: 40rpx 50rpx;
+  background-color: #c0d4eb;
+}
+.select-type .type-title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.select-type .vehicle-types {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+}
+.select-type .vehicle-types .type-item {
+  width: 100rpx;
+  text-align: center;
+}
+.select-type .vehicle-types .type-item image {
+  width: 80rpx;
+  height: 60rpx;
+}
+.select-type .vehicle-types .type-item .name {
+  font-size: 28rpx;
+}
+.select-type .vehicle-types .type-item .code {
+  font-size: 22rpx;
+}
+.submit {
+  margin: 20rpx 70rpx;
+  margin-top: 100rpx;
+  width: 610rpx;
+  height: 80rpx;
+  background-color: #2a82e4;
+  text-align: center;
+  line-height: 80rpx;
+  color: white;
+  border-radius: 20rpx;
+}
