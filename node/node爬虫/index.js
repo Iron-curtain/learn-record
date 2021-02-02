@@ -23,8 +23,12 @@ https.get('https://movie.douban.com/top250', (res) => {
             const rate = $('.rating_num', this).text()
             allFilms.push({pic, title, rate})
         })
-
-        fs.writeFile('./files.json', JSON.stringify(allFilms), (err) => {
+        let res = ''
+        allFilms.forEach((item) => {
+            res += JSON.stringify(item)
+        })
+        // console.log(res);
+        fs.writeFile('./files2.json', res, (err) => {
             if(!err){
                 console.log('文件写入完成！')
             }
