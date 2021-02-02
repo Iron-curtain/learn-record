@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+    userInfo: {},
+    sexStyle: ''
   },
 
   toSelect() {
@@ -17,17 +18,22 @@ Page({
 
 
 
-
-
-
-
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let userInfo = app.globalData.userInfo
+    if (userInfo.gender === 1) {
+      this.setData({
+        sexStyle: 'sex iconfont icon-nan'
+      })
+    } else if (userInfo.gender === 2) {
+      this.setData({
+        sexStyle: 'sex iconfont icon-nv'
+      })
+    }
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: userInfo
     })
   },
 

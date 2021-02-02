@@ -1,4 +1,5 @@
 /* pages/personal/personal.wxss */
+@import "../../style/iconfont.wxss";
 .personal-container {
   padding: 50rpx 50rpx;
 }
@@ -12,9 +13,23 @@
   vertical-align: top;
   margin-left: 30rpx;
   line-height: 120rpx;
+  /* display: inline-flex;
+  justify-content: space-between;
+  align-content: center; */
 }
 .info .nickName {
+  display: inline-block;
+  width: 400rpx;
   font-size: 40rpx;
+}
+.info .sex {
+  display: inline-block;
+}
+.info .icon-nan{
+  color: blue;
+}
+.info .icon-nv{
+  color: red;
 }
 .select {
   margin-top: 80rpx;

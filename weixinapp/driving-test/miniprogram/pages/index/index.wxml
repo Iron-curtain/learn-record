@@ -1,5 +1,5 @@
 <!--pages/index/index.wxml-->
-<van-tabs color="#2a82e4" bind:click="onClick">
+<van-tabs color="#2a82e4" title-active-color="#2a82e4" bind:click="onClick">
   <van-tab title="科目一">
     <text>科目一</text>
     <view class="menu">顺序练习</view>

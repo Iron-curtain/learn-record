@@ -4,7 +4,7 @@
     <image class="avatar" src="{{userInfo.avatarUrl}}" />
     <view class="info">
       <text class="nickName">{{userInfo.nickName}}</text>
-      <text class="sex"></text>
+      <text class="{{sexStyle}}"></text>
     </view>
   </view>
   <view class="select">
