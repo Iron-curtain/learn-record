@@ -1,17 +1,72 @@
 // pages/select/select.js
+const app =  getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    model: 1,
+    subject: 1,
+    subjectStyle1: '',
+    subjectStyle2: ''
+  },
 
+  selectSubject1() {
+    this.setData({
+      subject: 1,
+      subjectStyle1: 'background-color: #2a82e4; color: white',
+      subjectStyle2: ''
+    })
+  },
+  selectSubject4() {
+    this.setData({
+      subject: 4,
+      subjectStyle1: '',
+      subjectStyle2: 'background-color: #2a82e4; color: white'
+    })
+  },
+  selectModel1() {
+    this.setData({
+      model: 1
+    })
+  },
+  selectModel2() {
+    this.setData({
+      model: 2
+    })
+  },
+  selectModel3() {
+    this.setData({
+      model: 3
+    })
+  },
+
+  submit() {
+    app.globalData.select.model = this.data.model
+    app.globalData.select.subject = this.data.subject
+    console.log(app.globalData.select);
+    wx.navigateBack ({
+      url: '../personal/personal'
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let select = app.globalData.select
+    if (select.subject === 1) {
+      this.setData({
+        subjectStyle1: 'background-color: #2a82e4; color: white',
+        subjectStyle2: ''
+      })
+    } else {
+      this.setData({
+        subjectStyle1: '',
+        subjectStyle2: 'background-color: #2a82e4; color: white'
+      })
+    }
 
   },
 

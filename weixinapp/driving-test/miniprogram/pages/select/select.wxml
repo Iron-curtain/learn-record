@@ -2,8 +2,8 @@
 <view class="select-subject">
   <view class="subject-title">学车阶段</view>
   <view class="subject">
-    <view class="subject-item">科目一</view>
-    <view class="subject-item">科目四</view>
+    <view class="subject-item" style="{{subjectStyle1}}" bindtap="selectSubject1">科目一</view>
+    <view class="subject-item" style="{{subjectStyle2}}" bindtap="selectSubject4">科目四</view>
   </view>
 </view>
 
@@ -13,14 +13,16 @@
     <text>当前类型：客车</text>
   </view>
   <view class="vehicle-types">
-    <view class="type-item">
+    <view class="type-item" style="{{model === 1 && 'background-color: #5d9be0'}}" bindtap="selectModel1">
+      <view class="select iconfont {{model === 1 && 'icon-gou1'}}"></view>
       <view class="icon">
         <image src="../../images/car.png" />
       </view>
       <view class="name">小车</view>
       <view class="code">C1/C2/C3</view>
     </view>
-    <view class="type-item">
+    <view class="type-item" style="{{model === 2 && 'background-color: #5d9be0'}}" bindtap="selectModel2">
+      <view class="select iconfont {{model === 2 && 'icon-gou1'}}"></view>
       <view class="icon">
         <image src="../../images/truck.png" />
       </view>
@@ -29,7 +31,8 @@
         <view class="code">A2/B2</view>
       </view>
     </view>
-    <view class="type-item">
+    <view class="type-item" style="{{model === 3 && 'background-color: #5d9be0'}}" bindtap="selectModel3">
+      <view class="select iconfont {{model === 3 && 'icon-gou1'}}"></view>
       <view class="icon">
         <image src="../../images/bus.png" />
       </view>
@@ -41,4 +44,4 @@
   </view>
 </view>
 
-<view class="submit">确定</view>
+<view class="submit" bindtap="submit">确定</view>

@@ -44,6 +44,11 @@ App({
       }
     })
 
-    this.globalData = {}
+    this.globalData = {
+      select: {
+        model: 1,
+        subject: 1
+      }
+    }
   }
 })
