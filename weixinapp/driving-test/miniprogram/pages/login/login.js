@@ -36,6 +36,20 @@ Page({
       console.log("用户的信息如下：");
       // console.log(e.detail.userInfo);
       app.globalData.userInfo = e.detail.userInfo
+      wx.getUserInfo({    //获取用户信息
+        success(infoRes){
+          self.globalData.userInfo = infoRes.userInfo
+          console.log(self.globalData.userInfo);
+          wx.cloud.callFunction({
+            name: 'createDriver',
+            data: {
+              avatarUrl: infoRes.userInfo.avatarUrl,
+              nickName: infoRes.userInfo.nickName,
+              sex: infoRes.userInfo.gender
+            }
+          })
+        }
+      })
       wx.redirectTo({
         url: "pages/personal/personal"
       })
