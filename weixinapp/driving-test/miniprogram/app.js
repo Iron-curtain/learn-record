@@ -25,11 +25,15 @@ App({
               self.globalData.userInfo = infoRes.userInfo
               console.log(self.globalData.userInfo);
               wx.cloud.callFunction({
-                name: 'createDriver',
-                data: {
-                  avatarUrl: infoRes.userInfo.avatarUrl,
-                  nickName: infoRes.userInfo.nickName,
-                  sex: infoRes.userInfo.gender
+                name: 'getChoice',
+                // data: {
+                //   model: 1,
+                //   select: 1
+                // },
+                success: res => {
+                  let result = res.result.choice.data
+                  console.log(res);
+                  console.log(result)
                 }
               })
             }
@@ -49,11 +53,5 @@ App({
         subject: 1
       }
     }
-    wx.cloud.callFunction({
-      name: 'getInfo',
-      complete: res => {
-        console.log(res);
-      }
-    })
   }
 })
