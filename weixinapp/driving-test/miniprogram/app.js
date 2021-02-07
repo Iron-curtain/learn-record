@@ -26,14 +26,31 @@ App({
               console.log(self.globalData.userInfo);
               wx.cloud.callFunction({
                 name: 'getChoice',
-                // data: {
-                //   model: 1,
-                //   select: 1
-                // },
                 success: res => {
-                  let result = res.result.choice.data
+                  let result = res.result.choice.data[0]
                   console.log(res);
                   console.log(result)
+                  if (result.length === 0) {
+                    wx.cloud.callFunction({
+                      name: 'choose',
+                      data: {
+                        model: 1,
+                        subject: 1
+                      },
+                      success: message => {
+                        console.log("insert success!");
+                        self.globalData.choice = {
+                          model: 1,
+                          subject: 1
+                        }
+                      }
+                    })
+                  } else {
+                    self.globalData.choice = {
+                      model: result.model,
+                      subject: result.subject
+                    }
+                  }
                 }
               })
             }
@@ -48,9 +65,7 @@ App({
     })
 
     this.globalData = {
-      select: {
-        model: 1,
-        subject: 1
+      choice: {
       }
     }
   }

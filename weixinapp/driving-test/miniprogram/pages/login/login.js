@@ -33,19 +33,39 @@ Page({
       //用户按了允许授权按钮
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
-      console.log("用户的信息如下：");
+      // console.log("用户的信息如下：");
       // console.log(e.detail.userInfo);
-      app.globalData.userInfo = e.detail.userInfo
+      
       wx.getUserInfo({    //获取用户信息
         success(infoRes){
           self.globalData.userInfo = infoRes.userInfo
-          console.log(self.globalData.userInfo);
           wx.cloud.callFunction({
-            name: 'createDriver',
-            data: {
-              avatarUrl: infoRes.userInfo.avatarUrl,
-              nickName: infoRes.userInfo.nickName,
-              sex: infoRes.userInfo.gender
+            name: 'getChoice',
+            success: res => {
+              let result = res.result.choice.data[0]
+              // console.log(res);
+              console.log(result)
+              if (result.length === 0) {
+                wx.cloud.callFunction({
+                  name: 'choose',
+                  data: {
+                    model: 1,
+                    subject: 1
+                  },
+                  success: message => {
+                    console.log("insert success!");
+                    app.globalData.choice = {
+                      model: 1,
+                      subject: 1
+                    }
+                  }
+                })
+              } else {
+                app.globalData.choice = {
+                  model: result.model,
+                  subject: result.subject
+                }
+              }
             }
           })
         }

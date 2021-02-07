@@ -2,6 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init()
+const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -17,7 +18,7 @@ exports.main = async (event, context) => {
   }).get()
   // 已经存在该用户
   if(choice.data.length > 0) {
-    await db.collection('choice').doc(choice.data[0]._id)
+    const updateResult =  await db.collection('choice').doc(choice.data[0]._id)
       .update({
         data: {
           model: model,
@@ -26,12 +27,17 @@ exports.main = async (event, context) => {
       })
   }
   else{
-    await db.collection('choice').add({
+    const insertResult = await db.collection('choice').add({
       data: { 
         openId: openId,
         model: model,
         subject: subject
       }
     })
+  }
+  return {
+    
+    updataResult,
+    insertResult
   }
 }

@@ -43,9 +43,20 @@ Page({
   },
 
   submit() {
-    app.globalData.select.model = this.data.model
-    app.globalData.select.subject = this.data.subject
-    console.log(app.globalData.select);
+    app.globalData.choice.model = this.data.model
+    app.globalData.choice.subject = this.data.subject
+    console.log(app.globalData.choice);
+    const that = this
+    wx.cloud.callFunction({
+      name: 'choose',
+      data: {
+        model: that.data.model,
+        subject: that.data.subject
+      },
+      success: () => {
+        console.log("update success!");
+      }
+    })
     wx.navigateBack ({
       url: '../personal/personal'
     })
@@ -55,7 +66,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let select = app.globalData.select
+    let select = app.globalData.choice
+    this.setData({
+      model: select.model,
+      subject: select.subject
+    })
+    // console.log(select);
     if (select.subject === 1) {
       this.setData({
         subjectStyle1: 'background-color: #2a82e4; color: white',
@@ -67,6 +83,8 @@ Page({
         subjectStyle2: 'background-color: #2a82e4; color: white'
       })
     }
+
+    
 
   },
 
