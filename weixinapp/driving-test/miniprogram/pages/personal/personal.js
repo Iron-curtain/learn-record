@@ -7,7 +7,9 @@ Page({
    */
   data: {
     userInfo: {},
-    sexStyle: ''
+    sexStyle: '',
+    subject: 1,
+    modelName: '' 
   },
 
   toSelect() {
@@ -16,13 +18,34 @@ Page({
     })
   },
 
-
+  getModelName(model) {
+    switch (model) {
+      case 1: 
+        this.setData({
+          modelName: '小车'
+        })
+        break;
+      case 2:
+        this.setData({
+          modelName: '货车'
+        })
+        break;
+      case 3:
+        this.setData({
+          modelName: '客车'
+        })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let userInfo = app.globalData.userInfo
+    let choice = app.globalData.choice
+    let subject = choice.subject
+    let model = choice.model
+    this.getModelName(model)
     if (userInfo.gender === 1) {
       this.setData({
         sexStyle: 'sex iconfont icon-nan'

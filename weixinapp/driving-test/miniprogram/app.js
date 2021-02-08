@@ -53,6 +53,9 @@ App({
                   }
                 }
               })
+              if (self.userInfoReadyCallback) {
+                self.userInfoReadyCallback(res)
+              }
             }
           })
         }

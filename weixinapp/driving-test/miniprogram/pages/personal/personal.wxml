@@ -15,8 +15,8 @@
       </view>
       <view class="select-class" bindtap="toSelect">
         <text>切换题库：</text>
-        <text style="color: #2a82e4">客车</text>
-        <text class="">></text>
+        <text style="color: #2a82e4">{{modelName}}</text>
+        <text class="iconfont icon-qianjin"></text>
       </view>
     </view>
   </view>

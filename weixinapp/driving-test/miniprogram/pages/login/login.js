@@ -38,7 +38,7 @@ Page({
       
       wx.getUserInfo({    //获取用户信息
         success(infoRes){
-          self.globalData.userInfo = infoRes.userInfo
+          app.globalData.userInfo = infoRes.userInfo
           wx.cloud.callFunction({
             name: 'getChoice',
             success: res => {
