@@ -9,7 +9,9 @@ Page({
     userInfo: {},
     sexStyle: '',
     subject: 1,
-    modelName: '' 
+    modelName: '',
+    subjectStyle1: '',
+    subjectStyle4: ''
   },
 
   toSelect() {
@@ -42,10 +44,6 @@ Page({
    */
   onLoad: function (options) {
     let userInfo = app.globalData.userInfo
-    let choice = app.globalData.choice
-    let subject = choice.subject
-    let model = choice.model
-    this.getModelName(model)
     if (userInfo.gender === 1) {
       this.setData({
         sexStyle: 'sex iconfont icon-nan'
@@ -71,7 +69,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let choice = app.globalData.choice
+    let subject = choice.subject
+    let model = choice.model
+    this.getModelName(model)
+    if (subject === 1) {
+      this.setData({
+        subjectStyle1: 'color: white; background-color: #2a82e4',
+        subjectStyle4: ''
+      })
+    } else if (subject === 4) {
+      this.setData({
+        subjectStyle4: 'color: white; background-color: #2a82e4',
+        subjectStyle1: ''
+      })
+    }
   },
 
   /**

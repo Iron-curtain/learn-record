@@ -51,9 +51,9 @@
   display: inline-block;
   width: 50%;
   height: 100%;
-  background-color: #2a82e4;
+  background-color: white;
   text-align: center;
-  color: white;
+  color: #2a82e4;
   line-height: 60rpx;
 }
 .select-class {

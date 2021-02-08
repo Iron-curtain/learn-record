@@ -10,8 +10,8 @@
   <view class="select">
     <view  class="select-button">
       <view class="select-subject">
-        <view class="subject">科一</view>
-        <view class="subject">科四</view>
+        <view class="subject" style="{{subjectStyle1}}">科一</view>
+        <view class="subject" style="{{subjectStyle4}}">科四</view>
       </view>
       <view class="select-class" bindtap="toSelect">
         <text>切换题库：</text>
