@@ -24,6 +24,7 @@ App({
             success(infoRes){
               self.globalData.userInfo = infoRes.userInfo
               console.log(self.globalData.userInfo);
+              // 获取题库选择
               wx.cloud.callFunction({
                 name: 'getChoice',
                 success: res => {
