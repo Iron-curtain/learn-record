@@ -28,7 +28,7 @@ App({
                 name: 'getChoice',
                 success: res => {
                   let result = res.result.choice.data[0]
-                  console.log(res);
+                  // console.log(res);
                   console.log(result)
                   if (result.length === 0) {
                     wx.cloud.callFunction({
@@ -43,6 +43,10 @@ App({
                           model: 1,
                           subject: 1
                         }
+                        if (self.userInfoReadyCallback(self.globalData)) {
+                          self.userInfoReadyCallback()
+                        }
+                        console.log('onLaunch finished!');
                       }
                     })
                   } else {
@@ -50,12 +54,13 @@ App({
                       model: result.model,
                       subject: result.subject
                     }
+                    if (self.userInfoReadyCallback) {
+                      self.userInfoReadyCallback()
+                    }
+                    console.log('onLaunch finished!');
                   }
                 }
               })
-              if (self.userInfoReadyCallback) {
-                self.userInfoReadyCallback(res)
-              }
             }
           })
         }
@@ -63,13 +68,11 @@ App({
           wx.redirectTo({
             url: `pages/login/login?back=${options.path.split('/')[1]}`
           })
-        }
+        } 
       }
     })
 
     this.globalData = {
-      choice: {
-      }
-    }
+    }  
   }
 })
