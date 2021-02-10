@@ -44,6 +44,9 @@ App({
               if (that.userChoiceCallback) {
                 that.userChoiceCallback(that.globalData)
               }
+              if (that.userChoiceCallback2) {
+                that.userChoiceCallback2(that.globalData)
+              }
               console.log('onLaunch finished!');
             }
           })
@@ -52,9 +55,11 @@ App({
             model: result.model,
             subject: result.subject
           }
-          
           if (that.userChoiceCallback) {
             that.userChoiceCallback(that.globalData)
+          }
+          if (that.userChoiceCallback2) {
+            that.userChoiceCallback2(that.globalData)
           }
           console.log('onLaunch finished!');
         }

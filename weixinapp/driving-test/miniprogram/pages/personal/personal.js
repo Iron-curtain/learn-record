@@ -62,9 +62,7 @@ Page({
     })
   },
 
-
-
-
+  
   // 获取驾照类型名称
   getModelName() {
     switch (this.data.choice.model) {

@@ -1,13 +1,13 @@
 <!--pages/index/index.wxml-->
 <van-tabs active="{{subject}}" color="#2a82e4" title-active-color="#2a82e4" bind:click="onClick">
-  <van-tab title="科目一" name="subject1">
+  <van-tab title="科目一" name="1">
     <text>科目一</text>
     <view class="menu">顺序练习</view>
     <view class="menu">随机练习</view>
     <view class="menu">收藏</view>
     <view class="menu">错题本</view>
   </van-tab>
-  <van-tab title="科目四" name="subject4">
+  <van-tab title="科目四" name="4">
     <text>科目四</text>
     <view class="menu">顺序练习</view>
     <view class="menu">随机练习</view>

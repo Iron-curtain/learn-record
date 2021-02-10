@@ -1,4 +1,5 @@
 // pages/index/index.js
+const app =  getApp();
 Page({
 
   /**
@@ -10,7 +11,21 @@ Page({
 
   // 科目切换
   onClick(event) {
-
+    let subject = Number(event.detail.name)
+    app.globalData.choice.subject = subject
+    this.setData({
+      subject: event.detail.name
+    })
+    console.log(app.globalData.choice.subject);
+    wx.cloud.callFunction({
+      name: 'choose',
+      data: {
+        subject
+      },
+      success: () => {
+        console.log("update success!");
+      }
+    })
   },
 
 
@@ -19,13 +34,13 @@ Page({
 
 
 
-
-
-
-
-
-
-
+  // 初始化用户科目选择
+  initSubjectSelect(choice) {
+    let subject = choice.subject.toString()
+    this.setData({
+      subject
+    })
+  },
 
 
 
@@ -33,7 +48,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
   },
 
   /**
@@ -47,7 +61,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!app.globalData.choice) {
+      app.userChoiceCallback2 = (data) => {
+        this.initSubjectSelect(data.choice)
+      }
+    } else {
+      this.initSubjectSelect(app.globalData.choice)
+    }
+    
   },
 
   /**
