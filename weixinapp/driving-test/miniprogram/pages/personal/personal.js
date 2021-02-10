@@ -66,8 +66,8 @@ Page({
 
 
   // 获取驾照类型名称
-  getModelName(model) {
-    switch (model) {
+  getModelName() {
+    switch (this.data.choice.model) {
       case 1: 
         this.setData({
           modelName: '小车'
@@ -82,6 +82,22 @@ Page({
         this.setData({
           modelName: '客车'
         })
+    }
+  },
+
+  // 渲染科目选择图标
+  renderSubjectChoice() {
+    if (this.data.choice.subject === 1) {
+      this.setData({
+        subjectStyle1: 'color: white; background-color: #2a82e4',
+        subjectStyle4: ''
+      })
+      
+    } else if (this.data.choice.subject === 4) {
+      this.setData({
+        subjectStyle4: 'color: white; background-color: #2a82e4',
+        subjectStyle1: ''
+      })
     }
   },
 
@@ -113,22 +129,21 @@ Page({
   onLoad: function (options) {
     // 先判断app.globalData是否含有数据
     // 如果没有数据，则说明onlaunch还没执行完，onload就开始执行了，此时调用回调函数
-    if (!app.globalData.choice) {
+    if (!app.globalData.userInfo) {
       app.userInfoReadyCallback = (data) => {
         this.setData({
           userInfo: data.userInfo,
-          choice: data.choice
+          
         })
         this.loadInfo()
       }
     } else {
       this.setData({
         userInfo: app.globalData.userInfo,
-        choice: app.globalData.choice
+        
       })
       this.loadInfo()
     }
-    console.log('onLoad finished');
   },
 
   /**
@@ -142,25 +157,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let choice = app.globalData.choice
-    // if (choice.subject === undefined) choice = 
-    let subject = choice.subject
-    let model = choice.model
-    this.getModelName(model)
-    if (subject === 1) {
+    if (!app.globalData.choice) {
+      app.userChoiceCallback = (data) => {
+        this.setData({
+          choice: data.choice
+        })
+        this.getModelName()
+        this.renderSubjectChoice()
+      }
+    } else {
       this.setData({
-        subjectStyle1: 'color: white; background-color: #2a82e4',
-        subjectStyle4: ''
+        choice: app.globalData.choice
       })
-      
-    } else if (subject === 4) {
-      this.setData({
-        subjectStyle4: 'color: white; background-color: #2a82e4',
-        subjectStyle1: ''
-      })
+      this.getModelName()
+      this.renderSubjectChoice()
     }
-    console.log(this.data);
-    console.log(app.globalData);
   },
 
   /**

@@ -1,5 +1,69 @@
 //app.js
 App({
+
+
+  // 获取用户信息
+  getUserInfo() {
+    let that = this
+    wx.getUserInfo({    //获取用户信息
+      success(infoRes){
+        that.globalData.userInfo = infoRes.userInfo
+        console.log(that.globalData.userInfo);
+        if (that.userInfoReadyCallback) {
+          that.userInfoReadyCallback(that.globalData)
+        }
+        // 获取题库选择
+        that.getUserChoice()
+      }
+    })
+  },
+
+  // 获取用户选择
+  getUserChoice() {
+    const that = this
+    wx.cloud.callFunction({
+      name: 'getChoice',
+      success: res => {
+        let result = res.result.choice.data[0]
+        // console.log(res);
+        console.log(result)
+        if (result.length === 0) {
+          wx.cloud.callFunction({
+            name: 'choose',
+            data: {
+              model: 1,
+              subject: 1
+            },
+            success: message => {
+              console.log("insert success!");
+              that.globalData.choice = {
+                model: 1,
+                subject: 1
+              }
+              
+              if (that.userChoiceCallback) {
+                that.userChoiceCallback(that.globalData)
+              }
+              console.log('onLaunch finished!');
+            }
+          })
+        } else {
+          that.globalData.choice = {
+            model: result.model,
+            subject: result.subject
+          }
+          
+          if (that.userChoiceCallback) {
+            that.userChoiceCallback(that.globalData)
+          }
+          console.log('onLaunch finished!');
+        }
+      }
+    })
+  },
+
+
+
   onLaunch: function (options) {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -14,56 +78,13 @@ App({
       })
     }
 
+
     // 查看是否获得用户授权
-    const self = this
-    // console.log(options);
+    const that = this
     wx.getSetting({
       success(settingRes){
         if(settingRes.authSetting['scope.userInfo']){
-          wx.getUserInfo({    //获取用户信息
-            success(infoRes){
-              self.globalData.userInfo = infoRes.userInfo
-              console.log(self.globalData.userInfo);
-              // 获取题库选择
-              wx.cloud.callFunction({
-                name: 'getChoice',
-                success: res => {
-                  let result = res.result.choice.data[0]
-                  // console.log(res);
-                  console.log(result)
-                  if (result.length === 0) {
-                    wx.cloud.callFunction({
-                      name: 'choose',
-                      data: {
-                        model: 1,
-                        subject: 1
-                      },
-                      success: message => {
-                        console.log("insert success!");
-                        self.globalData.choice = {
-                          model: 1,
-                          subject: 1
-                        }
-                        if (self.userInfoReadyCallback(self.globalData)) {
-                          self.userInfoReadyCallback()
-                        }
-                        console.log('onLaunch finished!');
-                      }
-                    })
-                  } else {
-                    self.globalData.choice = {
-                      model: result.model,
-                      subject: result.subject
-                    }
-                    if (self.userInfoReadyCallback) {
-                      self.userInfoReadyCallback()
-                    }
-                    console.log('onLaunch finished!');
-                  }
-                }
-              })
-            }
-          })
+          that.getUserInfo()
         }
         else{
           wx.redirectTo({
@@ -72,6 +93,7 @@ App({
         } 
       }
     })
+
 
     this.globalData = {
     }  

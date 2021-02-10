@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    subject
+    subject: 1
   },
 
   // 科目切换
