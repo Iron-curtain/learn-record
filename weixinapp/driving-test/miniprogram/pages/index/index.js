@@ -16,7 +16,6 @@ Page({
     this.setData({
       subject: event.detail.name
     })
-    console.log(app.globalData.choice.subject);
     wx.cloud.callFunction({
       name: 'choose',
       data: {
@@ -24,6 +23,9 @@ Page({
       },
       success: () => {
         console.log("update success!");
+      },
+      fail: (err) => {
+        console.log(err);
       }
     })
   },

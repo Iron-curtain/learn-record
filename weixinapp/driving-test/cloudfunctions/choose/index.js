@@ -13,12 +13,18 @@ exports.main = async (event, context) => {
   const model = event.model
   const subject = event.subject
 
+  // 定义返回的查询结果
+  let updateResult, insertResult
+
+
+
+
   const choice = await db.collection('choice').where({
     openId: openId
   }).get()
   // 已经存在该用户
   if(choice.data.length > 0) {
-    const updateResult =  await db.collection('choice').doc(choice.data[0]._id)
+    updateResult =  await db.collection('choice').doc(choice.data[0]._id)
       .update({
         data: {
           model: model,
@@ -27,7 +33,7 @@ exports.main = async (event, context) => {
       })
   }
   else{
-    const insertResult = await db.collection('choice').add({
+    insertResult = await db.collection('choice').add({
       data: { 
         openId: openId,
         model: model,
@@ -36,8 +42,7 @@ exports.main = async (event, context) => {
     })
   }
   return {
-    
-    updataResult,
+    updateResult,
     insertResult
   }
 }

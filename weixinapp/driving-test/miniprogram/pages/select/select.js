@@ -55,6 +55,9 @@ Page({
       },
       success: () => {
         console.log("update success!");
+      },
+      fail: (err) => {
+        console.log(err);
       }
     })
     wx.navigateBack ({
