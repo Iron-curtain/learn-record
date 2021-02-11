@@ -31,7 +31,12 @@ Page({
   },
 
 
-
+  // 顺序练习
+  orderPractice() {
+    wx.navigateTo({
+      url: '../orderPractice/orderPractice'
+    })
+  },
 
 
 
