@@ -10,3 +10,16 @@
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
+
+
+------------
+记录题库信息
+用户openid
+题库type
+题目状态数组
+题目总数
+错误题目序号
+收藏题目序号
+
+2-13
+写完刷题功能
