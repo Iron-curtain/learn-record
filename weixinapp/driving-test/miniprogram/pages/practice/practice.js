@@ -1,48 +1,18 @@
-// pages/orderPractice/orderPractice.js
-const app = getApp();
-const getQuestionType = require('../../util/getQuestionType')
+// pages/practice/practice.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+
   },
-
-
-  toPractice() {
-    wx.redirectTo({
-      url: '../'
-    })
-  },
-
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
-    let questionType = getQuestionType()
-    console.log(questionType);
-    wx.cloud.callFunction({
-      name: 'practiceInfo',
-      data: {
-        questionType
-      },
-      success: (res) => {
-        console.log(res);
-        let practiceInfo = res.result.practiceInfo.data[0]
-        app.globalData.practiceInfo = practiceInfo
-        
-      },
-      fail: (err) => {
-        console.log(err);
-      }
-    })
+
   },
 
   /**

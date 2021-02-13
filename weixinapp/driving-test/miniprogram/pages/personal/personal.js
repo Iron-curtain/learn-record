@@ -46,7 +46,7 @@ Page({
   },
 
 
-  // 选择科目一
+  // 选择科目四
   selectSubject4() {
     app.globalData.choice.subject = 4
     this.data.choice.subject = 4

@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/login/login",
     "pages/select/select",
-    "pages/orderPractice/orderPractice"
+    "pages/orderPractice/orderPractice",
+    "pages/practice/practice"
   ],
   "window": {
     "backgroundColor": "#F4F4F4",
