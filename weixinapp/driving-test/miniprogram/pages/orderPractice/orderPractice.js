@@ -13,7 +13,7 @@ Page({
 
   toPractice() {
     wx.redirectTo({
-      url: '../'
+      url: '../practice/practice'
     })
   },
 
@@ -27,6 +27,7 @@ Page({
       userInfo: app.globalData.userInfo
     })
     let questionType = getQuestionType()
+    app.globalData.questionType = questionType
     console.log(questionType);
     wx.cloud.callFunction({
       name: 'practiceInfo',
