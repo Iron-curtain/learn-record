@@ -7,19 +7,19 @@
   <image mode="aspectFit" src="{{question.url}}" />
 </view>
 <view class="options">
-  <view class="option" bindtap="select('a')">
+  <view class="option" bindtap="select('A')">
     <view class="option-icon">A</view>
     <text class="option-content">{{question.item1 || '正确'}}</text>
   </view>
-  <view class="option" bindtap="select('b')">
+  <view class="option" bindtap="select('B')">
     <view class="option-icon">B</view>
     <text class="option-content">{{question.item2 || '错误'}}</text>
   </view>
-  <view class="option" wx:if="{{question.item3}}" bindtap="select('c')">
+  <view class="option" wx:if="{{question.item3}}" bindtap="select('C')">
     <view class="option-icon">C</view>
     <text class="option-content">{{question.item3}}</text>
   </view>
-  <view class="option" wx:if="{{question.item4}}" bindtap="select('d')">
+  <view class="option" wx:if="{{question.item4}}" bindtap="select('D')">
     <view class="option-icon">D</view>
     <text class="option-content">{{question.item4}}</text>
   </view>

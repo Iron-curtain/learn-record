@@ -23,7 +23,9 @@ Component({
     // 0 单选   1 多选  2 判断
     question: {},
     questionType: 0,
-    questionTypeName: ''
+    questionTypeName: '',
+    singleAswer: '',
+    doubleAswer: ''
   },
 
   /**
