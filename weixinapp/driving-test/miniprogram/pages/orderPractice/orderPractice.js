@@ -37,6 +37,10 @@ Page({
       success: (res) => {
         console.log(res);
         let practiceInfo = res.result.practiceInfo.data[0]
+        practiceInfo.practiceState = JSON.parse(practiceInfo.practiceState)
+        practiceInfo.questionWrong = JSON.parse(practiceInfo.questionWrong)
+        practiceInfo.questionStar = JSON.parse(practiceInfo.questionStar)
+        console.log(practiceInfo);
         app.globalData.practiceInfo = practiceInfo
         
       },

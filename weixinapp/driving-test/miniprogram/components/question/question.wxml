@@ -1,0 +1,15 @@
+<!--components/question/question.wxml-->
+<view class="question">
+  <text class="icon"></text>
+  <text class="desc"></text>
+</view>
+<View class="image">
+  <image src="{{question.url}}" />
+</View>
+<view class="options">
+  <view class="options">{{question.item1}}</view>
+  <view class="options">{{question.item2}}</view>
+  <view class="options">{{question.item3}}</view>
+  <view class="options">{{question.item4}}</view>
+</view>
+<view class="explain"></view>

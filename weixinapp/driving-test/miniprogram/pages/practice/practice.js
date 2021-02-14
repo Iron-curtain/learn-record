@@ -1,18 +1,53 @@
 // pages/practice/practice.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    question: {},
+    questionType: '',
+    totalCount: 0,
+    practiceState: [],
+    questionStar: [],
+    questionWrong: [],
+    stateIndex: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let practiceInfo = app.globalData.practiceInfo
+    let {questionType, totalCount, practiceState, questionStar, questionWrong, stateIndex} = practiceInfo
+    this.setData({
+      questionType,
+      totalCount,
+      practiceState,
+      questionStar,
+      questionWrong,
+      stateIndex
+    })
+    console.log(this.data);
+    wx.cloud.callFunction({
+      name: 'getQuestion',
+      data: {
+        questionType,
+        id: stateIndex + 1
+      },
+      success: (res) => {
+        console.log(res);
+        let question = res.result.question.data[0]
+        this.setData({
+          question
+        })
+        console.log(this.data.question);
+      },
+      fail: (err) => {
+        console.log(err);
+      }
+    })
   },
 
   /**

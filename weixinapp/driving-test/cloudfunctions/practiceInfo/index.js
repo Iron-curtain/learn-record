@@ -17,6 +17,9 @@ exports.main = async (event, context) => {
   const practiceState = event.practiceState
   const questionWrong = event.questionWrong
   const questionStar = event.questionStar
+  const stateIndex = event.stateIndex
+  const wrongIndex = event.wrongIndex
+  const starIndex = event.stateIndex
 
   // 查询是否有相关的练习记录信息
   const practiceInfo = await db.collection('practice-info').where({
@@ -41,7 +44,10 @@ exports.main = async (event, context) => {
         totalCount: count,
         practiceState: JSON.stringify(practiceState),
         questionWrong: JSON.stringify(questionWrong),
-        questionStar: JSON.stringify(questionStar)
+        questionStar: JSON.stringify(questionStar),
+        stateIndex: 0,
+        wrongIndex: 0,
+        starIndex: 0,
       }
     })
     return {
@@ -55,7 +61,10 @@ exports.main = async (event, context) => {
           subject: subject,
           practiceState: JSON.stringify(practiceState),
           questionWrong: JSON.stringify(questionWrong),
-          questionStar: JSON.stringify(questionStar)
+          questionStar: JSON.stringify(questionStar),
+          stateIndex,
+          wrongIndex,
+          starIndex
         }
       })
     return {
