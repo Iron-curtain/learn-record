@@ -8,7 +8,7 @@ App({
     wx.getUserInfo({    //获取用户信息
       success(infoRes){
         that.globalData.userInfo = infoRes.userInfo
-        console.log(that.globalData.userInfo);
+        // console.log(that.globalData.userInfo);
         if (that.userInfoReadyCallback) {
           that.userInfoReadyCallback(that.globalData)
         }
@@ -26,7 +26,7 @@ App({
       success: res => {
         let result = res.result.choice.data[0]
         // console.log(res);
-        console.log(result)
+        // console.log(result)
         if (result.length === 0) {
           wx.cloud.callFunction({
             name: 'choose',

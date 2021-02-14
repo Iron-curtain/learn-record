@@ -1,15 +1,31 @@
 <!--components/question/question.wxml-->
 <view class="question">
-  <text class="icon"></text>
-  <text class="desc"></text>
+  <view class="icon">{{questionTypeName}}</view>
+  <text class="desc">{{question.question}}</text>
 </view>
-<View class="image">
-  <image src="{{question.url}}" />
-</View>
+<view class="image">
+  <image mode="aspectFit" src="{{question.url}}" />
+</view>
 <view class="options">
-  <view class="options">{{question.item1}}</view>
-  <view class="options">{{question.item2}}</view>
-  <view class="options">{{question.item3}}</view>
-  <view class="options">{{question.item4}}</view>
+  <view class="option" bindtap="select('a')">
+    <view class="option-icon">A</view>
+    <text class="option-content">{{question.item1 || '正确'}}</text>
+  </view>
+  <view class="option" bindtap="select('b')">
+    <view class="option-icon">B</view>
+    <text class="option-content">{{question.item2 || '错误'}}</text>
+  </view>
+  <view class="option" wx:if="{{question.item3}}" bindtap="select('c')">
+    <view class="option-icon">C</view>
+    <text class="option-content">{{question.item3}}</text>
+  </view>
+  <view class="option" wx:if="{{question.item4}}" bindtap="select('d')">
+    <view class="option-icon">D</view>
+    <text class="option-content">{{question.item4}}</text>
+  </view>
 </view>
-<view class="explain"></view>
+<view class="submit">确定</view>
+<view class="explain">
+  <text class="title">题解：</text>
+  <text class="explain-content">{{question.explains}}</text>
+</view>

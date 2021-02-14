@@ -29,7 +29,7 @@ Page({
       questionWrong,
       stateIndex
     })
-    console.log(this.data);
+    // console.log(this.data);
     wx.cloud.callFunction({
       name: 'getQuestion',
       data: {
@@ -37,12 +37,12 @@ Page({
         id: stateIndex + 1
       },
       success: (res) => {
-        console.log(res);
+        // console.log(res);
         let question = res.result.question.data[0]
         this.setData({
           question
         })
-        console.log(this.data.question);
+        // console.log(this.data.question);
       },
       fail: (err) => {
         console.log(err);

@@ -1,7 +1,7 @@
 <!--pages/practice/practice.wxml-->
 <van-tabs type="card" color="#2a82e4">
   <van-tab title="答题">
-    <question-card  question="{{question}}" />
+    <question-card class="question"  question="{{question}}" />
   </van-tab>
   <van-tab title="背题">
 

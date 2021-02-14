@@ -28,19 +28,19 @@ Page({
     })
     let questionType = getQuestionType()
     app.globalData.questionType = questionType
-    console.log(questionType);
+    // console.log(questionType);
     wx.cloud.callFunction({
       name: 'practiceInfo',
       data: {
         questionType
       },
       success: (res) => {
-        console.log(res);
+        // console.log(res);
         let practiceInfo = res.result.practiceInfo.data[0]
         practiceInfo.practiceState = JSON.parse(practiceInfo.practiceState)
         practiceInfo.questionWrong = JSON.parse(practiceInfo.questionWrong)
         practiceInfo.questionStar = JSON.parse(practiceInfo.questionStar)
-        console.log(practiceInfo);
+        // console.log(practiceInfo);
         app.globalData.practiceInfo = practiceInfo
         
       },
