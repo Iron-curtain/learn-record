@@ -40,3 +40,4 @@
 跳转到下一题：初始化传入组件的数据， 切换效果？动画？
 
 2-15  has do nothing
+2-16  has do nothing
