@@ -24,8 +24,8 @@ Component({
     question: {},
     questionType: 0,
     questionTypeName: '',
-    singleAswer: '',
-    doubleAswer: ''
+    singleAnswer: '',
+    doubleAnswer: ''
   },
 
   /**

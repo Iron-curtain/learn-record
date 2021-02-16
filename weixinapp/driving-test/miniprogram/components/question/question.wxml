@@ -24,7 +24,7 @@
     <text class="option-content">{{question.item4}}</text>
   </view>
 </view>
-<view class="submit">确定</view>
+<view class="submit" wx:if="{{questionType === 1}}">确定</view>
 <view class="explain">
   <text class="title">题解：</text>
   <text class="explain-content">{{question.explains}}</text>

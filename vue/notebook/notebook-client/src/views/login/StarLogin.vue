@@ -2,7 +2,7 @@
   <div class="star-login">
     <h1>登录</h1>
     <div class="login-wrapper">
-      <div class="avatar" :style="`background-image: url(${avatar}`"></div>
+      <div class="avatar" :style="`background-image: url(${avatar})`"></div>
       <div class="input-group">
         <label for="username">账号</label>
         <input type="text" id="username" v-model="username">
