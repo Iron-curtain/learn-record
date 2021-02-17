@@ -1,4 +1,21 @@
 // components/question/question.js
+let result = {
+  "1":"A",
+  "2":"B",
+  "3":"C",
+  "4":"D",
+  "7":"AB",
+  "8":"AC",
+  "9":"AD",
+  "10":"BC",
+  "11":"BD",
+  "12":"CD",
+  "13":"ABC",
+  "14":"ABD",
+  "15":"ACD",
+  "16":"BCD",
+  "17":"ABCD"
+}
 Component({
   /**
    * 组件的属性列表
@@ -25,7 +42,14 @@ Component({
     questionType: 0,
     questionTypeName: '',
     singleAnswer: '',
-    doubleAnswer: ''
+    mulAnswer: {A: false, B: false, C: false, D: false},
+    style: {
+      A: '',
+      B: '',
+      C: '',
+      D: ''
+    },
+    styleB: ''
   },
 
   /**
@@ -36,9 +60,6 @@ Component({
     updateQuestion(newVal) {
       console.log(newVal);
       this.getQuestionType(newVal)
-      this.setData({
-        question: newVal
-      })
       console.log(this.data);
     },
     // 获取题目类型
@@ -64,18 +85,81 @@ Component({
       }
     },
     // 选择答案
-    select(optionId) {
-      if (questionType === 1) {
-
-      } else {
-        let answer = question.answer
-        if (optionId === answer) {
-          
+    select(e) {
+      let optionId = e.currentTarget.dataset.option
+      if (this.data.questionType === 1) {
+        let style = this.data.style
+        this.data.mulAnswer[optionId] = !this.data.mulAnswer[optionId]
+        if (this.data.mulAnswer[optionId]) {
+          style[optionId] = 'color: white; background: #2a82e4'
         } else {
+          style[optionId] = ''
+        }
+        this.setData({
+          style
+        })
+      } else {
+        let answerNum = this.data.question.answer
+        let answer = result[answerNum]
+        let style = {}
+        style[answer] = 'color: white; background: #2a82e4'
+        if (optionId === answer) {
+          this.triggerEvent('choose', {istrue: true})
+        } else {
+          style[optionId] = 'color: white; background: red'
+          this.triggerEvent('choose', {istrue: false, myAnswer: optionId})
+        }
+        this.setData({
+          singleAnswer: optionId
+        })
+        this.setData({
+          style
+        })
+      }
+      console.log(this.data.style);
+    },
 
+
+    // 多选题提交答案
+    submit() {
+      let style = this.data.style
+      let myAnswer = ''
+      let answer = result[this.data.question.answer]
+      for (let option in mulAnswer) {
+        if (mulAnswer.hasOwnProperty(option) && mulAnswer[option]) {
+          myAnswer = myAnswer + option
+          if (answer.indexOf(option) === -1) {
+            style[option] = 'color: white; background: red'
+          }
         }
       }
-    }
+      for (let option of answer) {
+        if (myAnswer.indexOf(option) === -1) {
+          style[option] = 'color: white; background: #2a82e4'
+        }
+      }
+      this.setData({
+        style
+      })
+      console.log(style);
+      if (myAnswer === answer) {
+        this.triggerEvent('choose', {istrue: true})
+      } else {
+        this.triggerEvent('choose', {istrue: false, myAnswer})
+      }
+    },
+
+    // 选择答案时样式变化
+    // optionStyle(optionId) {
+    //   if (questionType === 1 && mulAnswer[optionId]) {
+    //     return 'color: white, background: #2a82e4'
+    //   } else {
+    //     console.log('66666666666666');
+    //     if (optionId === question.answer) {
+    //       return 'color: white, background: #2a82e4'
+    //     }
+    //   }
+    // }
   },
 
   // 组件的生命周期

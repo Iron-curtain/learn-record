@@ -7,24 +7,24 @@
   <image mode="aspectFit" src="{{question.url}}" />
 </view>
 <view class="options">
-  <view class="option" bindtap="select('A')">
-    <view class="option-icon">A</view>
+  <view class="option" bindtap="select" data-option="A">
+    <view class="option-icon" style="{{style.A}}">A</view>
     <text class="option-content">{{question.item1 || '正确'}}</text>
   </view>
-  <view class="option" bindtap="select('B')">
-    <view class="option-icon">B</view>
+  <view class="option" bindtap="select" data-option="B">
+    <view class="option-icon" style="{{style.B}}">B</view>
     <text class="option-content">{{question.item2 || '错误'}}</text>
   </view>
-  <view class="option" wx:if="{{question.item3}}" bindtap="select('C')">
-    <view class="option-icon">C</view>
+  <view class="option" wx:if="{{question.item3}}" bindtap="select" data-option="C">
+    <view class="option-icon" style="{{style.C}}">C</view>
     <text class="option-content">{{question.item3}}</text>
   </view>
-  <view class="option" wx:if="{{question.item4}}" bindtap="select('D')">
-    <view class="option-icon">D</view>
+  <view class="option" wx:if="{{question.item4}}" bindtap="select" data-option="D">
+    <view class="option-icon" style="{{style.D}}">D</view>
     <text class="option-content">{{question.item4}}</text>
   </view>
 </view>
-<view class="submit" wx:if="{{questionType === 1}}">确定</view>
+<view class="submit" wx:if="{{questionType === 1}}" bindtap="submit">确定</view>
 <view class="explain">
   <text class="title">题解：</text>
   <text class="explain-content">{{question.explains}}</text>
