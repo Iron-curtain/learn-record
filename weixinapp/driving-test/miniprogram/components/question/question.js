@@ -49,7 +49,7 @@ Component({
       C: '',
       D: ''
     },
-    styleB: ''
+    explainShow: false
   },
 
   /**
@@ -58,29 +58,74 @@ Component({
   methods: {
     // 监听题目的变化，并且更新数据
     updateQuestion(newVal) {
-      console.log(newVal);
+      // console.log(newVal);
+      // this.initData()
       this.getQuestionType(newVal)
-      console.log(this.data);
+      // console.log(this.data);
     },
-    // 获取题目类型
+
+    // 初始化数据
+    initData() {
+      this.setData({
+        question: {},
+        questionType: 0,
+        questionTypeName: '',
+        singleAnswer: '',
+        mulAnswer: {A: false, B: false, C: false, D: false},
+        style: {
+          A: '',
+          B: '',
+          C: '',
+          D: ''
+        },
+        explainShow: false
+      })
+    },
+
+    // 获取题目类型并且初始化数据
     getQuestionType(question) {
       if (question.answer <= 4) {
         this.setData({
           question,
           questionType: 0,
-          questionTypeName: '单选'
+          questionTypeName: '单选',
+          singleAnswer: '',
+          mulAnswer: {A: false, B: false, C: false, D: false},
+          style: {
+            A: '',
+            B: '',
+            C: '',
+            D: ''
+          },
+          explainShow: false
         })
       } else if (question.answer > 4) {
         this.setData({
           question,
           questionType: 1,
-          questionTypeName: '多选'
+          questionTypeName: '多选',
+          mulAnswer: {A: false, B: false, C: false, D: false},
+          style: {
+            A: '',
+            B: '',
+            C: '',
+            D: ''
+          },
+          explainShow: false
         })
       } else if (question.item3 === '') {
         this.setData({
           question,
           questionType: 2,
-          questionTypeName: '判断'
+          questionTypeName: '判断',
+          mulAnswer: {A: false, B: false, C: false, D: false},
+          style: {
+            A: '',
+            B: '',
+            C: '',
+            D: ''
+          },
+          explainShow: false
         })
       }
     },
@@ -108,6 +153,9 @@ Component({
         } else {
           style[optionId] = 'color: white; background: red'
           this.triggerEvent('choose', {istrue: false, myAnswer: optionId})
+          this.setData({
+            explainShow: true
+          })
         }
         this.setData({
           singleAnswer: optionId
@@ -116,7 +164,6 @@ Component({
           style
         })
       }
-      console.log(this.data.style);
     },
 
 
@@ -146,20 +193,11 @@ Component({
         this.triggerEvent('choose', {istrue: true})
       } else {
         this.triggerEvent('choose', {istrue: false, myAnswer})
+        this.setData({
+          explainShow: true
+        })
       }
-    },
-
-    // 选择答案时样式变化
-    // optionStyle(optionId) {
-    //   if (questionType === 1 && mulAnswer[optionId]) {
-    //     return 'color: white, background: #2a82e4'
-    //   } else {
-    //     console.log('66666666666666');
-    //     if (optionId === question.answer) {
-    //       return 'color: white, background: #2a82e4'
-    //     }
-    //   }
-    // }
+    }
   },
 
   // 组件的生命周期

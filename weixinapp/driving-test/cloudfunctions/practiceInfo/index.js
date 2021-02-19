@@ -19,14 +19,13 @@ exports.main = async (event, context) => {
   const questionStar = event.questionStar
   const stateIndex = event.stateIndex
   const wrongIndex = event.wrongIndex
-  const starIndex = event.stateIndex
+  const starIndex = event.starIndex
 
   // 查询是否有相关的练习记录信息
   const practiceInfo = await db.collection('practice-info').where({
     openId: openId,
     questionType: questionType
   }).get()
-
 
   // 如果没有，并且允许创建，则创建记录
   if (practiceInfo.data.length === 0 && isCreate === true) {
@@ -54,11 +53,9 @@ exports.main = async (event, context) => {
       insertResult
     }
   } else if (isUpdate) {  // 更新相关记录
-    const updateResult =  await db.collection('practice-info').doc(choice.data[0]._id)
+    const updateResult =  await db.collection('practice-info').doc(practiceInfo.data[0]._id)
       .update({
         data: {
-          model: model,
-          subject: subject,
           practiceState: JSON.stringify(practiceState),
           questionWrong: JSON.stringify(questionWrong),
           questionStar: JSON.stringify(questionStar),
