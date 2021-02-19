@@ -50,7 +50,7 @@ Page({
   },
 
   // 更新至下一题
-  nextQuestion(param) {
+  nextQuestion() {
     let questionType = this.data.questionType
     let stateIndex = this.data.stateIndex + 1
     console.log(questionType, stateIndex);

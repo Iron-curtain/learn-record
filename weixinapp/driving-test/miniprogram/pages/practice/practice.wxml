@@ -2,6 +2,9 @@
 <van-tabs type="card" color="#2a82e4">
   <van-tab title="答题">
     <question-card class="question"  question="{{question}}" bindchoose="result" />
+    <view class="menu">
+      
+    </view>
   </van-tab>
   <van-tab title="背题">
 
