@@ -15,25 +15,45 @@ Page({
     stateIndex: 0
   },
 
+  // 防止stateIndex越界
+  standardStateIndex(stateIndex) {
+    // if (stateIndex < 0) return 0
+    // else if (stateIndex > ) 
+  },
+
+  // 下一题按钮的响应事件
+  nextQuestion() {
+    let stateIndex = this.data.stateIndex + 1
+    this.setData({
+      stateIndex
+    })
+    this.updateQuestion(stateIndex)
+    this.updataPracticeInfo({stateIndex})
+  },
+
+  // 上一题按钮的响应事件
+  preQuestion() {
+    let stateIndex = this.data.stateIndex - 1
+    this.setData({
+      stateIndex
+    })
+    this.updateQuestion(stateIndex)
+    this.updataPracticeInfo({stateIndex})
+  },
+
   result(event) {
-    console.log(event);
     let isTrue = event.detail.istrue
     if (isTrue) { // 选择正确
       let practiceState = this.data.practiceState
       let stateIndex = this.data.stateIndex
-      
       practiceState[stateIndex] = 1
       stateIndex += 1
-      console.log(practiceState, stateIndex);
       this.setData({
         practiceState,
         stateIndex
       })
-      
-      console.log(practiceState, stateIndex);
       this.updataPracticeInfo({practiceState, stateIndex})
-      this.nextQuestion()
-      console.log(this.data.question);
+      this.updateQuestion(stateIndex)
     } else { // 选择错误
       let practiceState = this.data.practiceState
       let stateIndex = this.data.stateIndex
@@ -50,9 +70,8 @@ Page({
   },
 
   // 更新至下一题
-  nextQuestion() {
+  updateQuestion(stateIndex) {
     let questionType = this.data.questionType
-    let stateIndex = this.data.stateIndex + 1
     console.log(questionType, stateIndex);
     this.getQuestion(questionType, stateIndex)
   },
@@ -60,7 +79,7 @@ Page({
   // 更新练习状态信息
   updataPracticeInfo(params) {
     let questionType = this.data.questionType
-    let practiceState = params.practiceState
+    let practiceState = params.practiceState || this.data.practiceState
     let stateIndex = params.stateIndex || this.data.stateIndex
     let questionWrong = params.questionWrong || this.data.questionWrong
     wx.cloud.callFunction({

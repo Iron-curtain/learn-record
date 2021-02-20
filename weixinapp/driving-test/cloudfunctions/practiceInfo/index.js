@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
   const practiceState = event.practiceState
   const questionWrong = event.questionWrong
   const questionStar = event.questionStar
-  const stateIndex = event.stateIndex
+  const stateIndex = event.stateIndex >= 0 ? event.stateIndex : 0
   const wrongIndex = event.wrongIndex
   const starIndex = event.starIndex
 
