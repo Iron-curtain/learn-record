@@ -16,7 +16,8 @@ class Eat extends Component {
     // console.log(e.target.value);
     // this.state.inputValue = e.target.value
     this.setState({
-      inputValue: e.target.value
+      // inputValue: e.target.value
+      inputValue: this.input.value
     })
   }
 
@@ -27,7 +28,7 @@ class Eat extends Component {
   }
 
   deleteItem(index) {
-    console.log(index);
+    // console.log(index);
     let list = this.state.list
     list.splice(index, 1)
     this.setState({
@@ -35,12 +36,23 @@ class Eat extends Component {
     })
   }
 
+  componentDidMount() {
+    axios.get('https://web-api.juejin.im/v3/web/wbbr/bgeda')
+         .then(res => {
+           console.log(res);
+         })
+  }
+
   render() {
     return (
       <Fragment>
         <div>
           {/* <label>加菜：</label> */}
-          <input className="input" value={this.state.inputValue} onChange={this.inputChange.bind(this)} />
+          <input className="input" 
+          value={this.state.inputValue} 
+          onChange={this.inputChange.bind(this)}  
+          ref={(input) => {this.input = input}}
+          />
           <button onClick={this.addList.bind(this)}>下单</button>
         </div>
         <ul>
@@ -54,7 +66,6 @@ class Eat extends Component {
               )
             })
           }
-          <EatItem/>
         </ul>
       </Fragment>
     )
