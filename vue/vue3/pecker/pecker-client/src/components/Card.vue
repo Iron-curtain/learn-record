@@ -2,13 +2,12 @@
   <div class="card">
     <div class="publish-info">
       <div class="avatar">
-        <img src="https://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E5%A4%B4%E5%83%8F&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=undefined&latest=undefined&copyright=undefined&cs=3065335715,4197701299&os=2881999140,2042603032&simid=4139949256,547552291&pn=13&rn=1&di=117260&ln=3832&fr=&fmq=1614004056372_R&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%253A%252F%252Fdiy.qqjay.com%252Fu%252Ffiles%252F2012%252F0217%252Fb693a3b6d232ffe861da22287c888729.jpg%26refer%3Dhttp%253A%252F%252Fdiy.qqjay.com%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1616596057%26t%3D588471529d6626335ba1ae03fa99d382&rpstart=0&rpnum=0&adpicid=0&force=undefined" alt="">
       </div>
       <div class="info">
         <div class="nickname">Somerice</div>
-        <div class="publis-time">一小时前</div>
+        <div class="publish-time">1小时前</div>
       </div>
-      <div class="menu"></div>
+      <div class="menu iconfont icon-xiala1"></div>
     </div>
     <div class="content">
       <span class="topic-name">#我在这里看春天#</span>
@@ -17,9 +16,9 @@
     </div>
     <div class="picture"></div>
     <div class="about">
-      <span class="like"></span>
-      <span class="comment"></span>
-      <span class="share"></span>
+      <span class="like iconfont icon-zanpress"></span>
+      <span class="comment iconfont icon-pinglun"></span>
+      <span class="share iconfont icon-share"></span>
     </div>
   </div>
 </template>
@@ -39,5 +38,33 @@ export default {
 @import '../common/style/mixin';
 .card {
   padding: 8px;
+  .publish-info {
+    height: 50px;
+    .avatar {
+      display: inline-block;
+      .wh(50px, 50px);
+      .bis("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3520910162,3063201140&fm=26&gp=0.jpg");
+      .borderRadius(50%);
+    }
+    .info {
+      display: inline-block;
+      overflow: hidden;
+      margin-left: 10px;
+      height: 50px;
+      .nickname {
+        margin-top: 10px;
+      }
+      .publish-time {
+        line-height: 20px;
+        .sc(12px, #bdbdbd)
+      }
+    }
+    .menu {
+      display: inline-block;
+      margin-top: 0;
+      margin-right: 0;
+      
+    }
+  }
 }
 </style>

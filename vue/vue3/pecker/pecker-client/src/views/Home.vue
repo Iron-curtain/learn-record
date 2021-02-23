@@ -27,7 +27,7 @@ export default {
 @import '../common/style/mixin';
 .content-wrap {
   background-color: @bc1;
-  .wh(100%, 535px);
+  .wh(100%, 500px);
   .boxSizing();
   margin: 50px 0;
   padding: 7px 10px;
