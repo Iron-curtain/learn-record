@@ -7,7 +7,7 @@
       </router-link>
       <router-link tag="li" class="nav-list-item" to="topic">
         <i class="iconfont icon-huati"></i>
-        <span>分类</span>
+        <span>话题</span>
       </router-link>
       <router-link tag="li" class="nav-list-item" to="user">
         <i class="iconfont icon-wode"></i>

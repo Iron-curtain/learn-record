@@ -3,11 +3,9 @@
   <div class="content-wrap">
     <van-tabs  v-model:active="active" animated background="#7B68EE" color="#ffffff" 
       title-active-color="#ffffff" title-inactive-color="rgba(255,255,255,0.5)">
-      <van-tab title="广场">
-        <card class="post"></card>
+      <van-tab title="我的话题">
       </van-tab>
-      <van-tab title="我的关注">
-        <card class="post"></card>
+      <van-tab title="热门话题">
       </van-tab>
     </van-tabs>
   </div>
@@ -17,13 +15,11 @@
 <script>
 import Header from '@/components/Header.vue'
 import NavBar from '../components/NavBar.vue'
-import Card from '../components/Card.vue'
 export default {
-  name: 'home',
+  name: 'topic',
   components: {
     Header,
     NavBar,
-    Card
   },
   setup() {
 
@@ -38,10 +34,6 @@ export default {
   .wh(100%, 100%);
   .boxSizing();
   padding: 50px 10px;
-  .post {
-    .borderRadius(10px);
-    background: #fff;
-  }
   .van-tabs__wrap {
     .wh(400px, 30px);
     margin-left: -10px;
