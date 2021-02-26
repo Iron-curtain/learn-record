@@ -117,9 +117,10 @@ export default {
             'passwordMd5': md5(values.password)
           })
           console.log(res);
-          // token (data) 保存在本地
-          // setLocal('token', res.data)
-          // router.push('/home')
+          Toast.success(res.message)
+          let token = res.data.token
+          localStorage.setItem('token', token)
+          router.push('/home')
         } catch (err) {
           Toast.fail(err.message)
         }
