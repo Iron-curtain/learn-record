@@ -1,12 +1,13 @@
 const router = require('koa-router')()
 const userService = require('../controllers/mysqlConfig')
-const jwtConstructor = require('../utils/jwt')
-const jwt = new jwtConstructor()
+const { generateToken } = require('../utils/jwt')
+const test = require('../test/test')
 
 router.prefix('/users')
 
 router.get('/', function (ctx, next) {
   ctx.body = 'this is a users response!'
+  test()
 })
 
 router.get('/bar', function (ctx, next) {
@@ -65,7 +66,7 @@ router.post('/login', async function (ctx, next) {
     console.log(res);
     if(res.length) {
       r = 'ok';
-      let token = jwt.generateToken(username)
+      let token = generateToken(username)
       ctx.body = {
         code: 200,
         data: {
@@ -75,7 +76,7 @@ router.post('/login', async function (ctx, next) {
       }
     } else {
       ctx.body = {
-        code: 80004,
+        code: 10004,
         data: {},
         message: '账号或密码错误'
       }
