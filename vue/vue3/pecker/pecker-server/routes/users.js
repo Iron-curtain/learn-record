@@ -52,6 +52,9 @@ router.post('/register', async function (ctx, next) {
           }
         }
       })
+      await userService.insertUserInfo(username).then(undefined, err => {
+        console.log(err);
+      })
     }
   })
 })

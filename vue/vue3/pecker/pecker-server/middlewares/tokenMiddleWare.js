@@ -1,8 +1,7 @@
 const { verifyToken } = require('../utils/jwt')
 //验证token的方法
-let tokenMiddlWare = (ctx, next) => {
-  console.log('token拦截器', ctx.req.body)
-  let token = ctx.req.body.token
+let tokenMiddlWare = async (ctx, next) => {
+  let token = ctx.request.header.token
   //验证用户有没有传token
   if (!token) {
     ctx.body = {
@@ -13,9 +12,10 @@ let tokenMiddlWare = (ctx, next) => {
   }
   //获取验证token的状态
   let tokenState = verifyToken(token)
-  console.log(tokenState)
+  // console.log(token)
   if (tokenState) {
-    ctx.req.body.username = tokenState.data
+    ctx.request.body.username = tokenState
+    await next()
   } else {
     res.send({
       code: 10005,

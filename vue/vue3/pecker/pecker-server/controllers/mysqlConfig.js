@@ -48,7 +48,17 @@ let findUser = function(username) {
   return allServices.query(_sql)
 }
 
+// 新建用户信息表
+let insertUserInfo = function(username) {
+  let _sql = `insert into user_info set user_id="${username}";`
+  return allServices.query(_sql)
+}
 
+// 修改用户信息
+let updateUserInfo = function(key, value, username) {
+  let _sql = `update user_info set ${key}="${value}" where user_id="${username}";`
+  return allServices.query(_sql)
+}
 
 
 
@@ -56,4 +66,6 @@ module.exports = {
   userLogin,
   findUser,
   insertUser,
+  insertUserInfo,
+  updateUserInfo
 }
