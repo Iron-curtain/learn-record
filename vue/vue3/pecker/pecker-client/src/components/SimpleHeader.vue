@@ -54,10 +54,12 @@ export default {
   line-height: 44px;
   padding: 0 10px;
   .boxSizing();
-  color: #252525;
-  background: #fff;
+  color: #fff;
+  background: @primary;
   border-bottom: 1px solid #dcdcdc;
   font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   .van-icon{
     line-height: 44px;
   }

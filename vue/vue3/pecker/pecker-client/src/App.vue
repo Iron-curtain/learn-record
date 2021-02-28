@@ -9,12 +9,19 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, onBeforeMount } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 export default {
   setup() {
+    const router = new useRouter() 
+    const route = new useRoute()
     const state = reactive({
       transitionName: 'slide-left'
     })
+    onBeforeMount(() => {
+      console.log(router);
+      console.log(route);
+    }) 
     return {
       ...toRefs(state)
     }

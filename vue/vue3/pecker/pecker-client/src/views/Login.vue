@@ -117,10 +117,17 @@ export default {
             'passwordMd5': md5(values.password)
           })
           console.log(res);
-          Toast.success(res.message)
           let token = res.data.token
+          console.log(token);
           localStorage.setItem('token', token)
-          router.push('/home')
+          Toast({
+            type: 'success',
+            message: res.message,
+            duration: 500,
+            onClose: () => {
+              router.push('/home')
+            }
+          })
         } catch (err) {
           Toast.fail(err.message)
         }
@@ -161,6 +168,7 @@ export default {
   .header {
     background: url('../assets/login-background.jpeg');
     border: 0;
+    color: @primary;
   }
   .login-body {
     background-color: rgba(255,255,255,0.5);

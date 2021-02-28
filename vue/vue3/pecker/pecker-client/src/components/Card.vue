@@ -49,6 +49,7 @@ export default {
 <style lang="less" scoped>
 @import '../common/style/mixin';
 .card {
+  background-color: #fff;
   margin-top: 7px;
   padding: 8px 16px;
   .publish-info {

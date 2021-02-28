@@ -7,6 +7,7 @@ const routes = [
   },
   {
     path: '/home',
+    name: 'home',
     component: () => import('@/views/Home.vue')
   },
   {
@@ -24,6 +25,18 @@ const routes = [
   {
     path: '/homepage',
     component: () => import('@/views/HomePage.vue')
+  },
+  {
+    path: '/changeinfo',
+    component: () => import('@/views/InfoChange.vue')
+  },
+  {
+    path: '/changeavatar',
+    component: () => import('@/views/AvatarChange.vue')
+  },
+  {
+    path: '/changebackground',
+    component: () => import('@/views/BackgroundChange.vue')
   }
 ]
 
