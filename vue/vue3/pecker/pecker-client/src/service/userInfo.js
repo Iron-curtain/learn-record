@@ -7,3 +7,7 @@ export function changeAvatar(params) {
 export function changeBackground(params) {
   return axios.post('/userInfo/changeBackground', params)
 }
+
+export function changeInfo(key, value) {
+  return axios.post('/userInfo/updateInfo', {[key] : value })
+}
