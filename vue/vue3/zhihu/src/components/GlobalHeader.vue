@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <router-link to="/" tag="div" class="navbar-brand">logo</router-link>
+    <router-link to="/" tag="div" class="navbar-brand">
+      <img src="../assets/logo.png" alt="">
+    </router-link>
     <div class="end-btn-wrapper">
       <div class="sign no-sign" v-if="!user.isLogin">
         <router-link :to="'/login'">
@@ -10,7 +12,7 @@
           <a-button ghost>注册</a-button>
         </router-link>
       </div>
-      <div class="sign is-sign" else>
+      <div class="sign is-sign" v-else>
         <a-dropdown>
           <a class="ant-dropdown-link" @click.prevent>
             Hello, {{user.nickName}}
@@ -19,13 +21,13 @@
           <template #overlay>
             <a-menu>
               <a-menu-item>
-                <a href="javascript:;">1st menu item</a>
+                <a href="javascript:;">新建文章</a>
               </a-menu-item>
               <a-menu-item>
-                <a href="javascript:;">2nd menu item</a>
+                <a href="javascript:;">编辑</a>
               </a-menu-item>
               <a-menu-item>
-                <a href="javascript:;">3rd menu item</a>
+                <a href="javascript:;">退出</a>
               </a-menu-item>
             </a-menu>
           </template>
@@ -60,6 +62,9 @@ export default defineComponent({
     background-color: #0d6efd;
     display: flex;
     justify-content: space-between;
+  }
+  .header img {
+    height: 100%;
   }
   .navbar-brand{
     line-height: 70px;
