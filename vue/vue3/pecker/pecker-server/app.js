@@ -8,6 +8,7 @@ const logger = require('koa-logger')
 const cors = require('koa2-cors') // 解决跨域
 const koaBody = require('koa-body'); // 修改服务器配置，解决文件上传大小限制
 const tokenMiddlWare = require('./middlewares/tokenMiddleWare')
+const imgMiddleWare = require('./middlewares/imgMiddleWare')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -43,6 +44,8 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+app.use(imgMiddleWare)
 
 // routes
 app.use(index.routes(), index.allowedMethods())

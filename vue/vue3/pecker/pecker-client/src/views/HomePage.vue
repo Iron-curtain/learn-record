@@ -35,6 +35,7 @@ export default {
   components: { SimpleHeader, Card },
   setup() {
     const router = new useRouter()
+    
 
     const changeInfo = () => {
       router.push('/changeinfo')
@@ -132,7 +133,7 @@ export default {
   }
 }
 .content-warp {
-  position: absolute;
+  margin-top: -20px;
   padding: 10px 10px;
   width: 100%;
   top: 280px;
@@ -142,7 +143,6 @@ export default {
   .boxSizing();
   .borderRadius(15px);
   .card {
-    
     .borderRadius(10px);
   }
 }

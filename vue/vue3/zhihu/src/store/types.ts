@@ -11,10 +11,10 @@ export interface GlobalErrorProps {
   message?: string
 }
 
-export interface ColumnProps {
+export interface ColunmProps {
   _id: string,
   title: string,
-  avatar?: ImagePropsType,
+  avatar?: ImageProps,
   description: string
 }
 
@@ -23,22 +23,30 @@ export interface PostProps {
   title: string,
   excerpt?: string,
   content?: string,
-  image?: ImagePropsType,
+  image?: ImageProps,
   createdAt: string,
   column: string
 }
 
-interface ImagePropsType {
+interface ImageProps {
   _id?: string,
   url?: string,
   createdAt?: string
+}
+
+interface ListProps<P> {
+  [id: string]: P;
 }
 
 export interface GlobalDataProps {
   error: GlobalErrorProps,
   token: string,
   isLoading: boolean,
-  columns: ColumnProps[],
+  columns: {
+    data: ListProps<ColunmProps>,
+    currentPage: number,
+    total: number
+  },
   posts: PostProps[],
   user: UserProps
 }

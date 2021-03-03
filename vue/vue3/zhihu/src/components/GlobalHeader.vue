@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { UserProps } from '../store/index'
+import { UserProps } from '../store/types'
 import { DownOutlined } from '@ant-design/icons-vue'
 export default defineComponent({
   name: 'GlobalHeader',
@@ -63,7 +63,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
   }
-  .header img {
+  img{
     height: 100%;
   }
   .navbar-brand{

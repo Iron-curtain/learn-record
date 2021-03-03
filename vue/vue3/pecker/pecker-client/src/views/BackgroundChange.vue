@@ -14,6 +14,7 @@ import SimpleHeader from '../components/SimpleHeader.vue'
 import { Toast } from 'vant';
 import { changeBackground } from '../service/userInfo'
 import { useRouter } from 'vue-router'
+import updateLocalUserInfo from '../utils/localUserInfo'
 export default {
   components: { SimpleHeader },
   setup() {
@@ -33,12 +34,14 @@ export default {
     };
 
     const onRead = async (file) => {
-      console.log(file);
       const img = {
         imgData: file.content.replace(/^data:image\/\w+;base64,/, ""), //分解base64代码
         imgName: file.file.name.split(".")[0], //取出文件名
       }
       let res = await changeBackground(img)
+      let imgName = img.imgName
+      let imgUrl = `http://localhost:3000/img/${imgName}.png`
+      updateLocalUserInfo('avatar', imgUrl)
       Toast({
         type: 'success',
         duration: 500,

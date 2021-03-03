@@ -1,8 +1,8 @@
 <template>
   <div class="header-wrap">
     <router-link class="avatar iconfont icon-admin-user" tag="span" to="./login" v-if="!isLogin"></router-link>
-    <router-link class="avatar" tag="span" to="./user" v-else>
-      <!-- 显示头像 -->
+    <router-link class="avatar" tag="span" to="./homepage" v-else>
+      <img :src="userInfo.avatar" alt="">
     </router-link>
     <div class="header-search">
       <span class="iconfont icon-fangdajing"></span>
@@ -13,8 +13,26 @@
 </template>
 
 <script>
+import { reactive, toRefs } from 'vue'
 export default {
-
+  name: 'header',
+  setup () {
+    const state = reactive({
+      isLogin: false,
+      userInfo: null
+    })
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    console.log(userInfo);
+    if (!userInfo) {
+      state.isLogin = false
+    } else {
+      state.isLogin = true
+      state.userInfo = userInfo
+    }
+    return {
+      ...toRefs(state)
+    }
+  }
 }
 </script>
 
@@ -35,7 +53,13 @@ export default {
   background: @primary;
   align-items: center;
   .avatar {
-    .sc(24px, #fff)
+    .sc(24px, #fff);
+    img {
+      margin-top: 12px;
+      width: 26px;
+      height: 26px;
+      .borderRadius(50%);
+    }
   }
   .header-search {
     .wh(250px, 26px);

@@ -6,11 +6,11 @@
   <div class="infomation">
     <div class="user-info" @click.stop="toHomePage()">
       <div class="avatar">
-        <img src="../assets/avator.jpg" alt="">
+        <img :src="userInfo.avatar" alt="">
       </div>
       <div class="info">
-        <div class="nickName">梦乘着风去远航</div>
-        <div class="sign">暂无个性签名</div>
+        <div class="nickName">{{userInfo.nickname}}</div>
+        <div class="sign">{{userInfo.sign || '暂无个性签名'}}</div>
       </div>
       <div class="more iconfont icon-qianjin"></div>
     </div>
@@ -38,6 +38,7 @@
 <script>
 import NavBar from '../components/NavBar.vue'
 import { useRouter } from 'vue-router'
+import { reactive, toRefs } from 'vue'
 export default {
   name: 'home',
   components: {
@@ -45,11 +46,25 @@ export default {
   },
   setup() {
     const router = new useRouter()
+
+    const state = reactive({
+      userInfo: null
+    })
+
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    console.log(userInfo);
+    if (!userInfo) {
+      router.push('/login')
+    } else {
+      state.userInfo = userInfo
+    }
+
     const toHomePage = () => {
       router.push('/homepage')
     }
     return {
-      toHomePage
+      toHomePage,
+      ...toRefs(state)
     }
   }
 }
@@ -97,6 +112,10 @@ export default {
       }
     }
     .more {
+      margin-right: 10px;
+      text-align: right;
+      color: #fff;
+      line-height: 50px;
       width: 50px;
     }
   }

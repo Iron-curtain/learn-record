@@ -14,6 +14,7 @@ import SimpleHeader from '../components/SimpleHeader.vue'
 import { Toast } from 'vant';
 import { changeAvatar } from '../service/userInfo'
 import { useRouter } from 'vue-router'
+import updateLocalUserInfo from '../utils/localUserInfo'
 export default {
   components: { SimpleHeader },
   setup() {
@@ -39,7 +40,10 @@ export default {
         imgName: file.file.name.split(".")[0], //取出文件名
       }
       console.log(img);
+      let imgName = img.imgName
       let res = await changeAvatar(img)
+      let imgUrl = `http://localhost:3000/img/${imgName}.png`
+      updateLocalUserInfo('avatar', imgUrl)
       console.log(res);
       Toast({
         type: 'success',

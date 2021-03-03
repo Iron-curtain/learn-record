@@ -105,7 +105,9 @@ class Animal {
 // console.log(Direction.Up);
 // console.log(Direction[0]);
 
-// 泛型，指在定义函数，接口或类的时候，不预先指定具体的类型，而在使用的时候再指定的类型
+
+
+// 泛型，指在定义函数，接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型
 // function echo(arg) {
 //   return arg
 // }
@@ -113,4 +115,10 @@ class Animal {
 
 function echo<T>(arg: T):T {
   return arg
+}
+const result = echo(123)
+
+
+function swap<T, U>(tuple: [T, U]):[U, T] {
+  return [tuple[1], tuple[0]]
 }

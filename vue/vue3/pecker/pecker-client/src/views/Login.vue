@@ -81,6 +81,7 @@ import { register, login } from '@/service/user.js'
 import md5 from 'js-md5'
 import { Toast } from 'vant';
 import { useRouter } from 'vue-router'
+import { getUserInfo } from '../service/userInfo';
 export default {
   components: {
     sHeader,
@@ -120,6 +121,8 @@ export default {
           let token = res.data.token
           console.log(token);
           localStorage.setItem('token', token)
+          let { data: userInfo } = await getUserInfo()
+          localStorage.setItem('userInfo', JSON.stringify(userInfo))
           Toast({
             type: 'success',
             message: res.message,

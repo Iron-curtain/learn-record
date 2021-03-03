@@ -12,7 +12,7 @@ router.post('/changeAvatar', async function (ctx, next) {
   const imgName = req.imgName;
   var dataBuffer = Buffer.from(imgData, 'base64');
   let imgPath = './img/' + imgName + '.png'
-  console.log(imgPath);
+  // console.log(imgPath);
   let writePromise = new Promise((resolve, reject) => {
     fs.writeFile(imgPath, dataBuffer, function (err) {
       if (err) {
@@ -27,6 +27,8 @@ router.post('/changeAvatar', async function (ctx, next) {
   let writeResult = await writePromise
   if (writeResult) {
     console.log(username);
+    imgPath = 'http://localhost:3000' + imgPath.slice(1)
+    // console.log(imgPath);
     await userService.updateUserInfo('avatar', imgPath, username)
     ctx.body = {
       code: 200,
@@ -63,6 +65,7 @@ router.post('/changeBackground', async function (ctx, next) {
   let writeResult = await writePromise
   if (writeResult) {
     console.log(username);
+    imgPath = 'http://localhost:3000' + imgPath.slice(1)
     await userService.updateUserInfo('bg_url', imgPath, username)
     ctx.body = {
       code: 200,
@@ -114,6 +117,21 @@ router.post('/updateInfo', async function (ctx, next) {
       message: '修改成功'
     }
   }, (err) => {console.log(err);})
+})
+
+// 获取用户信息
+router.post('/getUserInfo', async function (ctx, next) {
+  let req = ctx.request.body
+  let username = req.username
+  await userService.getUserInfo(username).then((res) => {
+    let data = res[0]
+    ctx.body = {
+      code: 200,
+      data,
+      message: '获取用户信息成功'
+    }
+  })
+  
 })
 
 module.exports = router

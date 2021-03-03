@@ -11,3 +11,7 @@ export function changeBackground(params) {
 export function changeInfo(key, value) {
   return axios.post('/userInfo/updateInfo', {[key] : value })
 }
+
+export function getUserInfo() {
+  return axios.post('/userInfo/getUserInfo')
+}

@@ -60,12 +60,17 @@ let updateUserInfo = function(key, value, username) {
   return allServices.query(_sql)
 }
 
-
+// 获取用户信息
+let getUserInfo = function(username) {
+  let _sql = `select * from user_info where user_id="${username}";`
+  return allServices.query(_sql)
+}
 
 module.exports = {
   userLogin,
   findUser,
   insertUser,
   insertUserInfo,
-  updateUserInfo
+  updateUserInfo,
+  getUserInfo
 }
