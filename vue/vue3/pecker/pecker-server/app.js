@@ -13,6 +13,8 @@ const imgMiddleWare = require('./middlewares/imgMiddleWare')
 const index = require('./routes/index')
 const users = require('./routes/users')
 const userInfo = require('./routes/userInfo')
+const topic = require('./routes/topic')
+const article = require('./routes/article')
 
 // error handler
 onerror(app)
@@ -50,9 +52,11 @@ app.use(imgMiddleWare)
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(topic.routes(), topic.allowedMethods())
 
 app.use(tokenMiddlWare)
 app.use(userInfo.routes(), userInfo.allowedMethods())
+app.use(article.routes(), article.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

@@ -66,11 +66,18 @@ let getUserInfo = function(username) {
   return allServices.query(_sql)
 }
 
+// 获取话题
+let getTopicList = function () {
+  let _sql = `select * from topic;`
+  return allServices.query(_sql)
+}
+
 module.exports = {
   userLogin,
   findUser,
   insertUser,
   insertUserInfo,
   updateUserInfo,
-  getUserInfo
+  getUserInfo,
+  getTopicList
 }

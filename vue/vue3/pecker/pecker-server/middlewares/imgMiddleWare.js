@@ -16,7 +16,7 @@ let imgMiddleWare = async (ctx, next) => {
         file = fs.readFileSync(filePath); //读取文件
     } catch (error) {
       //如果服务器不存在请求的图片，返回默认图片
-        filePath = path.join(defaultImgPath, '../img/homeimg.png'); //默认图片地址
+        filePath = path.join(defaultImgPath, './img/homeimg.png'); //默认图片地址
         file = fs.readFileSync(filePath); //读取文件	    
     }
 

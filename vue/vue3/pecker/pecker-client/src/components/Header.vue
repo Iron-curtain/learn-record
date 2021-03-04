@@ -8,15 +8,18 @@
       <span class="iconfont icon-fangdajing"></span>
       <span class="search-title">加班碎碎念</span>
     </div>
-    <span class="publish iconfont icon-add-fill"></span>
+    <span class="publish iconfont icon-add-fill" @click="toPublish"></span>
   </div>
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   name: 'header',
   setup () {
+    const router = useRouter()
+
     const state = reactive({
       isLogin: false,
       userInfo: null
@@ -29,8 +32,14 @@ export default {
       state.isLogin = true
       state.userInfo = userInfo
     }
+
+    const toPublish = () => {
+      router.push('/publish')
+    }
+
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      toPublish
     }
   }
 }

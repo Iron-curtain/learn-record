@@ -37,6 +37,10 @@ const routes = [
   {
     path: '/changebackground',
     component: () => import('@/views/BackgroundChange.vue')
+  },
+  {
+    path: '/publish',
+    component: () => import('@/views/Publish.vue')
   }
 ]
 
