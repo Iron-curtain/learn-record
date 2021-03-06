@@ -35,6 +35,7 @@ import { reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { getTopicList } from '../service/topic'
 import { publishArticle } from '../service/article'
+import { Toast } from 'vant';
 export default {
   name: 'publish',
   setup() {
@@ -104,7 +105,15 @@ export default {
       })
       let data = {topicId, content, imgList}
       console.log(data);
-      await publishArticle(data)
+      let res = await publishArticle(data)
+      Toast({
+        type: 'success',
+        duration: 500,
+        message: res.message,
+        onClose: () => {
+          router.push('/home')
+        }
+      })
     }
 
     return {

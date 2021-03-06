@@ -18,6 +18,8 @@
 import Header from '@/components/Header.vue'
 import NavBar from '../components/NavBar.vue'
 import Card from '../components/Card.vue'
+import { useRouter } from 'vue-router'
+import { reactive } from 'vue'
 export default {
   name: 'home',
   components: {
@@ -26,7 +28,13 @@ export default {
     Card
   },
   setup() {
+    const router = useRouter
 
+    const state = reactive({
+      articleList: []
+    })
+
+    
   }
 }
 </script>
