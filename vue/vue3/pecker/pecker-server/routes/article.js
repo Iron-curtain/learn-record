@@ -36,6 +36,14 @@ router.post('/publisharticle', async (ctx, next) => {
   let content = req.content
   let imgUrl = await storageImg(imgList)
   console.log(imgUrl, content, topicId, username);
+  await userService.publishArticle([topicId, content, JSON.stringify(imgUrl), username]).then(() => {
+    ctx.body = {
+      code: 200,
+      message: '发布成功'
+    }
+  }, (err) => {
+    console.log(err);
+  })
 })
 
 module.exports = router

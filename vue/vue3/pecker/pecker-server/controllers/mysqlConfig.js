@@ -72,6 +72,12 @@ let getTopicList = function () {
   return allServices.query(_sql)
 }
 
+// 发布主题帖
+let publishArticle = function (params) {
+  let _sql = `insert into article set topic_id=?,content=?,img_url=?,user_id=?,create_time=now();`
+  return allServices.query(_sql, params)
+}
+
 module.exports = {
   userLogin,
   findUser,
@@ -79,5 +85,6 @@ module.exports = {
   insertUserInfo,
   updateUserInfo,
   getUserInfo,
-  getTopicList
+  getTopicList,
+  publishArticle
 }
