@@ -5,5 +5,5 @@ export function publishArticle(params) {
 }
 
 export function getArticleList() {
-  
+  return axios.post('/article/getarticlelist')
 }

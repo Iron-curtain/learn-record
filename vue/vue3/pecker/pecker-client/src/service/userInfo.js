@@ -15,3 +15,7 @@ export function changeInfo(key, value) {
 export function getUserInfo() {
   return axios.post('/userInfo/getUserInfo')
 }
+
+export function getOtherUserInfo(params) {
+  return axios.post('/users/getUserInfo', params)
+}

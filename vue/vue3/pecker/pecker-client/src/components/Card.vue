@@ -1,22 +1,19 @@
 <template>
   <div class="card">
     <div class="publish-info">
-      <div class="avatar">
-      </div>
+      <img :src="avatar" alt="">
       <div class="info">
-        <div class="nickname">Somerice</div>
-        <div class="publish-time">1小时前</div>
+        <div class="nickname">{{nickName}}</div>
+        <div class="publish-time">{{article.createTime}}</div>
       </div>
       <div class="menu iconfont icon-xiala1"></div>
     </div>
     <div class="content">
-      <span class="topic-name">#我在这里看春天#</span>
-      {{content}}
+      {{article.content}}
       <span class="more">查看更多</span>
     </div>
     <div class="picture">
-      <img class="pic-pre" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3055708143,1547617921&fm=26&gp=0.jpg" alt="">
-      <img class="pic-pre" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3071491099,318794994&fm=26&gp=0.jpg" alt="">
+      <img class="pic-pre" v-for="(img, index) in article.imgUrls" :key="index" v-lazyLoad="img" alt="" :style="imgStyle">
     </div>
     <div class="about">
       <div class="like">
@@ -36,11 +33,85 @@
 </template>
 
 <script>
+import { reactive, toRefs } from 'vue'
+import { getOtherUserInfo } from '../service/userInfo'
 export default {
-  setup() {
-    const content = "盈一抹领悟，收藏点点滴滴的快乐，经年流转，透过指尖的温度，期许岁月静好，这一路走来，你会发现，生活于我们，温暖，一直是一种牵引，不是吗？于生活的海洋中踏浪，云帆尽头，轻回眸，处处是别有洞天，云淡风轻。有一种经年叫历尽沧桑，有一种远眺叫含泪微笑，有一种追求叫浅行静思，有一种美丽叫淡到极致。"
+  props: {
+    article: {
+      type: Object,
+      default: {}
+    }
+  },
+  directives: {
+    lazyLoad: {
+      mounted (el, binding) {
+        let lazyImageObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry, index) => {
+            let lazyImage = entry.target;
+            // 相交率，默认是相对于浏览器视窗
+            if (entry.intersectionRatio > 0) {
+              lazyImage.src = binding.value;
+              // 当前图片加载完之后需要去掉监听
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          })
+        })
+        lazyImageObserver.observe(el)
+      }
+    }
+  },
+  setup (props) {
+    const state = reactive({
+      avatar: '',
+      nickName: '',
+      imgStyle: {
+        width: 0,
+        height: 0
+      }
+    })
+    let getUserInfoPromise = new Promise((resolve, reject) => {
+      let userId = props.article.userId
+      let userInfo = getOtherUserInfo({username: userId})
+      resolve(userInfo)
+    })
+    getUserInfoPromise.then((res) => {
+      let userInfo = res.data
+      state.avatar = userInfo.avatar
+      state.nickName = userInfo.nickname
+    });
+    
+    (function() {
+      let imgUrls = props.article
+      if (imgUrls.imgUrls == undefined) return
+      let imgNum = Array.from(props.article.imgUrls).length
+      let width = state.imgStyle.width
+      let height = state.imgStyle.height
+      if (imgNum == 1) {
+        width = '100%'
+        height = '200px'
+      } else if(imgNum == 2){
+        width = '49%'
+        height = '150px'
+      } else if (imgNum == 3) {
+        width = '32%'
+        height = '120px'
+      } else if (imgNum == 4) {
+        width = '49%'
+        height = '100px'
+      } else if (imgNum == 6) {
+        width = '32%'
+        height = '100px'
+      } else if (imgNum == 9) {
+        width = '32%'
+        height = '100px'
+      }
+      state.imgStyle.width = width
+      state.imgStyle.height = height
+    }())
+
+
     return {
-      content
+      ...toRefs(state)
     }
   }
 }
@@ -54,10 +125,9 @@ export default {
   padding: 8px 16px;
   .publish-info {
     height: 50px;
-    .avatar {
+    img {
       display: inline-block;
       .wh(45px, 45px);
-      .bis("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3520910162,3063201140&fm=26&gp=0.jpg");
       .borderRadius(50%);
     }
     .info {
@@ -94,9 +164,11 @@ export default {
   }
   .picture {
     .fj();
+    margin: 10px 0;
     width: 100%;
+    flex-wrap: wrap;
     .pic-pre {
-      width: 49%;
+      object-fit: cover;
     }
   }
   .about {

@@ -35,6 +35,7 @@ export default {
   background: #fff;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  border-top: 1px solid @bc1;
   .nav-list {
     width: 100%;
     .fj();

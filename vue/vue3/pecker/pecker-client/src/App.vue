@@ -18,10 +18,10 @@ export default {
     const state = reactive({
       transitionName: 'slide-left'
     })
-    onBeforeMount(() => {
-      console.log(router);
-      console.log(route);
-    }) 
+    // onBeforeMount(() => {
+    //   console.log(router);
+    //   console.log(route);
+    // }) 
     return {
       ...toRefs(state)
     }
