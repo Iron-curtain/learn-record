@@ -78,6 +78,11 @@ let publishArticle = function (params) {
   return allServices.query(_sql, params)
 }
 
+let getArticleList = function () {
+  let _sql = `select * from article order by create_time desc;`
+  return allServices.query(_sql)
+}
+
 module.exports = {
   userLogin,
   findUser,
@@ -86,5 +91,6 @@ module.exports = {
   updateUserInfo,
   getUserInfo,
   getTopicList,
-  publishArticle
+  publishArticle,
+  getArticleList
 }

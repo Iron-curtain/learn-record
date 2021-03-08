@@ -1,5 +1,6 @@
 const router = require('koa-router')()
 const userService = require('../controllers/mysqlConfig')
+const formatDate = require('../utils/formatDate')
 const fs = require('fs');
 
 router.prefix('/article')
@@ -43,7 +44,41 @@ router.post('/publisharticle', async (ctx, next) => {
     }
   }, (err) => {
     console.log(err);
+    ctx.body = {
+      code: 10007,
+      message: '发布失败'
+    }
   })
 })
 
+router.post('/getarticlelist', async (ctx, next) => {
+  await userService.getArticleList().then((res) => {
+    let data = res.map((item) => {
+      let { id, topic_id: topicId, content, img_url, user_id: userId, create_time, share_num: shareNum } = item
+      let imgUrls = JSON.parse(img_url)
+      let createTime = formatDate(create_time)
+      let article = {
+        id,
+        topicId,
+        content,
+        imgUrls,
+        userId,
+        createTime,
+        shareNum
+      }
+      return article
+    })
+    ctx.body = {
+      code: 200,
+      data,
+      message: '获取成功'
+    }
+  }, (err) => {
+    console.log(err);
+    ctx.body = {
+      code: 10008,
+      message: '获取数据失败'
+    }
+  })
+})
 module.exports = router

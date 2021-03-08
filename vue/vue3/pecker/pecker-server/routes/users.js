@@ -88,4 +88,18 @@ router.post('/login', async function (ctx, next) {
 })
 
 
+// 获取用户信息
+router.post('/getUserInfo', async function (ctx, next) {
+  let req = ctx.request.body
+  let username = req.username
+  await userService.getUserInfo(username).then((res) => {
+    let data = res[0]
+    ctx.body = {
+      code: 200,
+      data,
+      message: '获取用户信息成功'
+    }
+  })
+})
+
 module.exports = router
