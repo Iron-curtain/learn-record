@@ -7,7 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+    userInfo: {},
+    wrongCount: 0,
+    unfinished: 0,
+    rate: 0
   },
 
 
@@ -42,6 +45,17 @@ Page({
         practiceInfo.questionStar = JSON.parse(practiceInfo.questionStar)
         // console.log(practiceInfo);
         app.globalData.practiceInfo = practiceInfo
+
+        let { totalCount, questionWrong } = practiceInfo
+        let wrongCount = questionWrong.length
+        let unfinished = totalCount - wrongCount
+        let rate = (totalCount - wrongCount) / totalCount * 100
+        console.log(rate);
+        this.setData({
+          wrongCount,
+          unfinished,
+          rate: rate.toFixed(2)
+        })
         
       },
       fail: (err) => {

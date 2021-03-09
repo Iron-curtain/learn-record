@@ -5,7 +5,6 @@ import router from '../router'
 axios.defaults.baseURL = 'http://localhost:3000/'
 // axios.defaults.headers['token'] = localStorage.getItem('token') || ''
 axios.defaults.headers.post['Content-Type'] = 'application/json'
-console.log('axios model execute!');
 
 axios.interceptors.request.use(config => {
   config.headers.token = localStorage.getItem('token') || ''

@@ -1,7 +1,7 @@
 <template>
-  <div class="card">
+  <div class="card" @click="toArticleDetail">
     <div class="publish-info">
-      <img :src="avatar" alt="">
+      <img :src="avatar" alt="" @click.stop="showPageHome">
       <div class="info">
         <div class="nickname">{{nickName}}</div>
         <div class="publish-time">{{article.createTime}}</div>
@@ -35,6 +35,7 @@
 <script>
 import { reactive, toRefs } from 'vue'
 import { getOtherUserInfo } from '../service/userInfo'
+import { useRouter } from 'vue-router'
 export default {
   props: {
     article: {
@@ -61,9 +62,12 @@ export default {
     }
   },
   setup (props) {
+    console.log(props.article);
+    const router = useRouter()
     const state = reactive({
       avatar: '',
       nickName: '',
+      userId: '',
       imgStyle: {
         width: 0,
         height: 0
@@ -71,13 +75,14 @@ export default {
     })
     let getUserInfoPromise = new Promise((resolve, reject) => {
       let userId = props.article.userId
-      let userInfo = getOtherUserInfo({username: userId})
+      let userInfo = getOtherUserInfo({userId: userId})
       resolve(userInfo)
     })
     getUserInfoPromise.then((res) => {
       let userInfo = res.data
       state.avatar = userInfo.avatar
       state.nickName = userInfo.nickname
+      state.userId = userInfo.user_id
     });
     
     (function() {
@@ -109,9 +114,18 @@ export default {
       state.imgStyle.height = height
     }())
 
+    const showPageHome = () => {
+      router.push(`/homepage/${state.userId}`)
+    }
+
+    const toArticleDetail = () => {
+      router.push(`/article/${props.article.id}`)
+    }
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      showPageHome,
+      toArticleDetail
     }
   }
 }

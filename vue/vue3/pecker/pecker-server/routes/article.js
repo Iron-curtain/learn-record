@@ -81,4 +81,57 @@ router.post('/getarticlelist', async (ctx, next) => {
     }
   })
 })
+
+router.post('/getuserarticlelist', async (ctx, next) => {
+  let userId = ctx.request.body.userId
+  console.log(13847871482374);
+  console.log(111111111111111, userId);
+  await userService.getUserArticleList(userId).then((res) => {
+    console.log(666666666666, res);
+    let data = res.map((item) => {
+      let { id, topic_id: topicId, content, img_url, user_id: userId, create_time, share_num: shareNum } = item
+      let imgUrls = JSON.parse(img_url)
+      let createTime = formatDate(create_time)
+      let article = {
+        id,
+        topicId,
+        content,
+        imgUrls,
+        userId,
+        createTime,
+        shareNum
+      }
+      return article
+    })
+    ctx.body = {
+      code: 200,
+      data,
+      message: '获取成功'
+    }
+  }, (err) => {
+    console.log(err);
+    ctx.body = {
+      code: 10008,
+      message: '获取数据失败'
+    }
+  })
+})
+
+router.post('/getarticledetail', async (ctx, next) => {
+  const req = ctx.request.body
+  const articleId = req.articleId
+  console.log(articleId);
+  await userService.getArticleDetail(articleId).then((res) => {
+    console.log(res);
+    let data = res[0]
+    ctx.body = {
+      code: 200,
+      data,
+      message: '获取成功'
+    }
+  }, (err) => {
+    console.log(err);
+  })
+})
+
 module.exports = router

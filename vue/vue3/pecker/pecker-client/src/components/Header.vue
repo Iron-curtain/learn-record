@@ -1,7 +1,7 @@
 <template>
   <div class="header-wrap">
     <router-link class="avatar iconfont icon-admin-user" tag="span" to="./login" v-if="!isLogin"></router-link>
-    <router-link class="avatar" tag="span" to="./homepage" v-else>
+    <router-link class="avatar" tag="span" :to="`/homepage/${userInfo.user_id}`" v-else>
       <img :src="userInfo.avatar" alt="">
     </router-link>
     <div class="header-search">
@@ -19,13 +19,11 @@ export default {
   name: 'header',
   setup () {
     const router = useRouter()
-
     const state = reactive({
       isLogin: false,
       userInfo: null
     })
     let userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    console.log(userInfo);
     if (!userInfo) {
       state.isLogin = false
     } else {

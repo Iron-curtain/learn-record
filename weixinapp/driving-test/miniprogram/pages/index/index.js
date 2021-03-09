@@ -38,6 +38,12 @@ Page({
     })
   },
 
+  randPractice () {
+    wx.navigateTo({
+      url: '../randPractice/randPractice'
+    })
+  },
+
 
 
 

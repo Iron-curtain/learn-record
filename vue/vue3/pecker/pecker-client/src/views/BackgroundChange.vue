@@ -1,7 +1,7 @@
 <template>
   <simple-header :name="'修改主页背景'"></simple-header>
   <div class="change-background-wrap">
-    <img class="my-background" src="../assets/homeimg.jpeg" alt="">
+    <img class="my-background" :src="backgroundUrl" alt="">
     
     <van-uploader :after-read="onRead" :max-size="5 * 1024 * 1024" @oversize="onOversize" :before-read="beforeRead">
       <div class="submit-btn">选择图片</div>
@@ -15,10 +15,19 @@ import { Toast } from 'vant';
 import { changeBackground } from '../service/userInfo'
 import { useRouter } from 'vue-router'
 import updateLocalUserInfo from '../utils/localUserInfo'
+import { toRefs, reactive } from 'vue';
 export default {
   components: { SimpleHeader },
   setup() {
     const router = new useRouter()
+
+
+    const state = reactive({
+      backgroundUrl: ''
+    })
+
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    state.backgroundUrl = userInfo.bg_url
 
     const onOversize = (file) => {
       console.log(file);
@@ -41,7 +50,7 @@ export default {
       let res = await changeBackground(img)
       let imgName = img.imgName
       let imgUrl = `http://localhost:3000/img/${imgName}.png`
-      updateLocalUserInfo('avatar', imgUrl)
+      updateLocalUserInfo('bg_url', imgUrl)
       Toast({
         type: 'success',
         duration: 500,
@@ -52,6 +61,7 @@ export default {
       })
     }
     return {
+      ...toRefs(state),
       onOversize,
       beforeRead,
       onRead

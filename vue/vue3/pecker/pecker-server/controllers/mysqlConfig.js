@@ -66,6 +66,7 @@ let getUserInfo = function(username) {
   return allServices.query(_sql)
 }
 
+
 // 获取话题
 let getTopicList = function () {
   let _sql = `select * from topic;`
@@ -83,6 +84,16 @@ let getArticleList = function () {
   return allServices.query(_sql)
 }
 
+let getUserArticleList = function (userId) {
+  let _sql = `select * from article where user_id=${userId} order by create_time desc;`
+  return allServices.query(_sql)
+}
+
+let getArticleDetail = function (articleId) {
+  let _sql = `select * from article where id=${articleId};`
+  return allServices.query(_sql)
+}
+
 module.exports = {
   userLogin,
   findUser,
@@ -92,5 +103,7 @@ module.exports = {
   getUserInfo,
   getTopicList,
   publishArticle,
-  getArticleList
+  getArticleList,
+  getUserArticleList,
+  getArticleDetail
 }

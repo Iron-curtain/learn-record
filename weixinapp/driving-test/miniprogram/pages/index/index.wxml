@@ -3,7 +3,7 @@
   <van-tab title="科目一" name="1">
     <text>科目一</text>
     <view class="menu" bindtap="orderPractice">顺序练习</view>
-    <view class="menu">随机练习</view>
+    <view class="menu" bindtap="randPractice">随机练习</view>
     <view class="menu">收藏</view>
     <view class="menu">错题本</view>
   </van-tab>

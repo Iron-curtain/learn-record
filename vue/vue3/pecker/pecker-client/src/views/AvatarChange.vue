@@ -1,7 +1,7 @@
 <template>
   <simple-header :name="'修改头像'"></simple-header>
   <div class="change-avatar-wrap">
-    <img class="my-avatar" src="../assets/avator.jpg" alt="">
+    <img class="my-avatar" :src="avatarUrl" alt="">
     
     <van-uploader :after-read="onRead" :max-size="5 * 1024 * 1024" @oversize="onOversize" :before-read="beforeRead">
       <div class="submit-btn">选择图片</div>
@@ -15,10 +15,17 @@ import { Toast } from 'vant';
 import { changeAvatar } from '../service/userInfo'
 import { useRouter } from 'vue-router'
 import updateLocalUserInfo from '../utils/localUserInfo'
+import { reactive, toRefs } from 'vue';
 export default {
   components: { SimpleHeader },
   setup() {
     const router = new useRouter()
+    const state = reactive({
+      avatarUrl: ''
+    })
+
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    state.avatarUrl = userInfo.avatar
 
     const onOversize = (file) => {
       console.log(file);
@@ -55,6 +62,7 @@ export default {
       })
     }
     return {
+      ...toRefs(state),
       onOversize,
       beforeRead,
       onRead

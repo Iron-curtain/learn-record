@@ -5,7 +5,8 @@
     "pages/login/login",
     "pages/select/select",
     "pages/orderPractice/orderPractice",
-    "pages/practice/practice"
+    "pages/practice/practice",
+    "pages/randPractice/randPractice"
   ],
   "window": {
     "backgroundColor": "#F4F4F4",

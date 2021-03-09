@@ -2,7 +2,7 @@
   "miniprogramRoot": "miniprogram/",
   "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -21,12 +21,14 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
     "enableEngineNative": false,
+    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
@@ -38,9 +40,7 @@
         "miniprogramNpmDistDir": "./miniprogram/"
       }
     ],
-    "minifyWXSS": true,
-    "bundle": false,
-    "useApiHostProcess": false
+    "minifyWXSS": true
   },
   "appid": "wx051784d32c65e381",
   "projectname": "%E9%A9%BE%E8%80%83%E9%A2%98%E5%BA%93",

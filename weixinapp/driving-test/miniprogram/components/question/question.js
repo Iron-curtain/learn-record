@@ -58,32 +58,59 @@ Component({
   methods: {
     // 监听题目的变化，并且更新数据
     updateQuestion(newVal) {
-      // console.log(newVal);
+      console.log(newVal);
       // this.initData()
+      if (newVal == null) return
       this.getQuestionType(newVal)
       // console.log(this.data);
+      if (this.properties.isShowAnswer) {
+        let questionType = this.data.questionType
+        let answerNum = this.data.question.answer
+        let trueAnswer = result[answerNum]
+        this.render(questionType, trueAnswer)
+        this.setData({
+          explainShow: true
+        })
+        return
+      }
+      if (newVal.flag) {
+        let questionType = this.data.questionType
+        let answerNum = this.data.question.answer
+        let trueAnswer = result[answerNum]
+        let wrongAnswer = newVal.wrongAnswer
+        this.render(questionType, trueAnswer, wrongAnswer)
+        this.setData({
+          explainShow: true
+        })
+      }
+      
     },
 
-    // 初始化数据
-    initData() {
+    render(questionType, trueAnswer, wrongAnswer = undefined) {
+      let style = {}
+      if (questionType == 1) {
+        if (wrongAnswer) {
+          for (let option of wrongAnswer) {
+            style[option] = 'color: white; background: red'
+          }
+        }
+        for (let option of trueAnswer) {
+          style[option] = 'color: white; background: #2a82e4'
+        }
+      } else {
+        if (wrongAnswer) 
+          style[wrongAnswer] = 'color: white; background: red'
+        style[trueAnswer] = 'color: white; background: #2a82e4' 
+      }
       this.setData({
-        question: {},
-        questionType: 0,
-        questionTypeName: '',
-        singleAnswer: '',
-        mulAnswer: {A: false, B: false, C: false, D: false},
-        style: {
-          A: '',
-          B: '',
-          C: '',
-          D: ''
-        },
-        explainShow: false
+        style
       })
     },
 
+
     // 获取题目类型并且初始化数据
     getQuestionType(question) {
+      console.log('start', this.data);
       if (question.answer <= 4) {
         this.setData({
           question,
@@ -99,6 +126,10 @@ Component({
           },
           explainShow: false
         })
+        this.setData({
+          style: {}
+        })
+        console.log(11111111111111111, this.data);
       } else if (question.answer > 4) {
         this.setData({
           question,
@@ -131,6 +162,7 @@ Component({
     },
     // 选择答案
     select(e) {
+      if (this.data.question.flag)  return
       let optionId = e.currentTarget.dataset.option
       if (this.data.questionType === 1) {
         let style = this.data.style
@@ -143,10 +175,11 @@ Component({
         this.setData({
           style
         })
+        
       } else {
         let answerNum = this.data.question.answer
         let answer = result[answerNum]
-        let style = {}
+        let style = this.data.style
         style[answer] = 'color: white; background: #2a82e4'
         if (optionId === answer) {
           this.triggerEvent('choose', {istrue: true})

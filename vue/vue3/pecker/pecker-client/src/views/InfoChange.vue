@@ -5,34 +5,34 @@
       <div class="info-item" @click="changeAvatar">
         <div class="des">头像</div>
         <div class="content">
-          <img class="avatar" src="../assets/avator.jpg" alt="">
+          <img class="avatar" :src="userInfo.avatar" alt="">
         </div>
       </div>
       <div class="info-item" @click="changeBackground">
         <div class="des">个人主页背景</div>
         <div class="content">
-          <img class="bg" src="../assets/homeimg.jpeg" alt="">
+          <img class="bg" :src="userInfo.bg_url" alt="">
         </div>
       </div>
       <div class="info-item" @click="showChangeNickname">
         <div class="des">用户名</div>
-        <div class="content">梦乘着风去远航</div>
+        <div class="content">{{userInfo.nickname}}</div>
       </div>
       <div class="info-item" @click="showSexSelect = true">
         <div class="des">性别</div>
-        <div class="content">男</div>
+        <div class="content">{{userInfo.sex || '未知'}}</div>
       </div>
       <div class="info-item" @click="showBirSelect = true">
         <div class="des">生日</div>
-        <div class="content">1999-12-5</div>
+        <div class="content">{{userInfo.birthday}}</div>
       </div>
       <div class="info-item" @click="showCitySelect = true">
         <div class="des">城市</div>
-        <div class="content">江西 赣州</div>
+        <div class="content">{{userInfo.city}}</div>
       </div>
       <div class="info-item" @click="showSignChange">
         <div class="des">签名</div>
-        <div class="content">玉树临风胜潘安</div>
+        <div class="content">{{userInfo.sign}}</div>
       </div>
     </div>
   </div>
@@ -49,6 +49,7 @@
       :columns="sexColumn"
       @cancel="showSexSelect = false"
       @confirm="sexSelect"
+      :default-index="userInfo.sex == '女' ? 1 : 0"
     />
   </van-popup>
 
@@ -83,6 +84,7 @@ import SimpleHeader from '../components/SimpleHeader.vue'
 import { useRouter } from 'vue-router'
 import { reactive, toRefs, ref } from 'vue'
 import { changeInfo } from '../service/userInfo'
+import updateLocalUserInfo from '../utils/localUserInfo'
 import area from '../utils/area'
 export default {
   components: { SimpleHeader },
@@ -101,8 +103,15 @@ export default {
       showBirSelect: false,
       showCitySelect: false,
       nickName: '',
-      sign: ''
+      sign: '',
+      userInfo: {}
     })
+
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    state.userInfo = userInfo
+    state.nickName = userInfo.nickname
+    state.sign = userInfo.sign
+    
 
     // 跳转至修改头像页面
     const changeAvatar = () => {
@@ -125,6 +134,9 @@ export default {
       if (nickName.length === 0) return
       try {
         await changeInfo('nickName', nickName)
+        state.userInfo.nickname = nickName
+        updateLocalUserInfo('nickname', nickName)
+        console.log(JSON.parse(localStorage.getItem('userInfo')));
       } catch (err) {
         console.log(err);
       }
@@ -141,6 +153,8 @@ export default {
       if (sign.length === 0) return
       try {
         await changeInfo('sign', sign)
+        state.userInfo.sign = sign
+        updateLocalUserInfo('sign', sign)
       } catch (err) {
         console.log(err);
       }
@@ -151,6 +165,8 @@ export default {
       console.log(res);
       try {
         await changeInfo('sex', res)
+        updateLocalUserInfo('sex', res)
+        state.userInfo.sex = res
       } catch (err) {
         console.log(err);
       }
@@ -166,6 +182,8 @@ export default {
       // console.log(birthday);
       try {
         await changeInfo('birthday', birthday)
+        updateLocalUserInfo('birthday', birthday)
+        state.userInfo.birthday = birthday
       } catch (err) {
         console.log(err);
       }
@@ -177,10 +195,12 @@ export default {
       let city = val[0].name + ' ' + val[1].name
       try {
         await changeInfo('city', city)
+        updateLocalUserInfo('city', city)
+        state.userInfo.city = city
       } catch (err) {
         console.log(err);
       }
-      this.showCitySelect = false
+      state.showCitySelect = false
     }
 
     return {

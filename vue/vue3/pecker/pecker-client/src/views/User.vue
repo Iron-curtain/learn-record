@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <span class="setting iconfont icon-setting"></span>
-    <span class="publish iconfont icon-add-fill"></span>
+    <span class="publish iconfont icon-add-fill" @click="toPublish"></span>
   </div>
   <div class="infomation">
     <div class="user-info" @click.stop="toHomePage()">
@@ -60,10 +60,16 @@ export default {
     }
 
     const toHomePage = () => {
-      router.push('/homepage')
+      router.push(`/homepage/${userInfo.user_id}`)
     }
+
+    const toPublish = () => {
+      router.push('/publish')
+    }
+
     return {
       toHomePage,
+      toPublish,
       ...toRefs(state)
     }
   }
