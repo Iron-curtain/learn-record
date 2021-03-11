@@ -58,8 +58,9 @@ Component({
   methods: {
     // 监听题目的变化，并且更新数据
     updateQuestion(newVal) {
-      console.log(newVal);
+      // console.log(newVal);
       // this.initData()
+      console.log(3, this.data);
       if (newVal == null) return
       this.getQuestionType(newVal)
       // console.log(this.data);
@@ -110,7 +111,6 @@ Component({
 
     // 获取题目类型并且初始化数据
     getQuestionType(question) {
-      console.log('start', this.data);
       if (question.answer <= 4) {
         this.setData({
           question,
@@ -126,10 +126,7 @@ Component({
           },
           explainShow: false
         })
-        this.setData({
-          style: {}
-        })
-        console.log(11111111111111111, this.data);
+        console.log(4, this.data);
       } else if (question.answer > 4) {
         this.setData({
           question,
@@ -162,6 +159,7 @@ Component({
     },
     // 选择答案
     select(e) {
+      console.log(0, this.data);
       if (this.data.question.flag)  return
       let optionId = e.currentTarget.dataset.option
       if (this.data.questionType === 1) {
@@ -181,6 +179,7 @@ Component({
         let answer = result[answerNum]
         let style = this.data.style
         style[answer] = 'color: white; background: #2a82e4'
+        console.log(1, this.data);
         if (optionId === answer) {
           this.triggerEvent('choose', {istrue: true})
         } else {
@@ -196,6 +195,7 @@ Component({
         this.setData({
           style
         })
+        
       }
     },
 
