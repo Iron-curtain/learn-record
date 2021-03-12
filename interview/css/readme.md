@@ -1,11 +1,14 @@
 # css 盒模型
-标准盒模型：width
+w3c标准盒模型：width
 IE盒模型宽度：width + padding + border
+box-sizing: content-box | border-box
+
 
 # 画 0.5px 的线
 1. transform: scale(0.5)
 2. border-image
 3. linear-gradient
+
 
 # link标签import标签的区别
 @import
@@ -14,13 +17,18 @@ link会在页面加载的时候同时加载，@import引入的css会在页面加
 link没有兼容性，@import必须IE5以上才能识别
 link的权重比@import高
 
+
+
 # transition 和 animation区别
-transition需要触发一个事件, animation不需要
-transition是2帧2帧的运行，from...to animation是1帧1帧的运行
+1、animation 其实也叫关键帧，通过和 keyframe 结合可以设置中间帧的一个状态；transition 是过渡，是样式值的变化的过程，只有开始和结束；
+2、animation配合 @keyframe 可以不触发事件就触发这个过程，而 transition 需要通过 hover 或者 js 事件来配合触发；
+3、animation 可以设置很多的属性，比如循环次数，动画结束的状态等等，transition 只能触发一次；
+4、animation 可以结合 keyframe 设置每一帧，但是 transition 只有两帧；
+
 
 # flex 布局
 传统布局 = 依赖display + position + float，这种在特殊布局中非常不方便，比如垂直居中
-flex-direction: row  |  column 决定主轴的仿项
+flex-direction: row  |  column 决定主轴的方向
 flex-wrap: nowrap | wrap  决定换行规则
 
 
