@@ -41,20 +41,16 @@ Page({
       let current = this.data.current
       let trueCount = this.data.trueCount
       let questionList = this.data.questionList
-      this.setData({
-        current: current + 1,
-        trueCount: trueCount + 1
-      })
       let question = questionList[current]
       question.flag = true
       questionList[current] = question
-      let nextQuestion = questionList[current + 1]
-      console.log(2);
+      // let nextQuestion = questionList[current + 1]
       this.setData({
+        current: current + 1,
+        trueCount: trueCount + 1,
         questionList,
-        question: nextQuestion
+        // question: nextQuestion
       })
-      
     } else { // 选择错误
       let wrongCount = this.data.wrongCount
       let current = this.data.current

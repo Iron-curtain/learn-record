@@ -14,7 +14,7 @@ box-sizing: content-box | border-box
 @import
 link标签是html标签，@import是css提供
 link会在页面加载的时候同时加载，@import引入的css会在页面加载完成后再加载
-link没有兼容性，@import必须IE5以上才能识别
+link没有兼容性问题，@import必须IE5以上才能识别
 link的权重比@import高
 
 
@@ -53,11 +53,11 @@ table-cells (父)    vertical-align: middle (子容器)
 
 
 # js动画和css动画有什么差异
-渲染进程分为 main thread 和 compositor  thread
+渲染进程分为 main thread 和 compositor thread
 如果css动画只改变transform和opacity, 这时css动画得以在compositor thread完成
 而js动画一定会在main thread执行
 区别：
-  js 比 css 大
+  功能涵盖面，js 比 css 大
   css 比 js 更简单，性能会更好
   对帧表现不好的低版本浏览器，css3可以做到自然降级
   css动画有天然的事件支持
@@ -70,7 +70,7 @@ table-cells (父)    vertical-align: middle (子容器)
 # 多行文本的省略号
 display: -webkit-box;
 -webkit-line-clamp: 3;
--webkit-box-roient：vertical;
+-webkit-box-orient：vertical;
 overflow: hidden;
 text-overflow: elipsis;
 
@@ -94,6 +94,7 @@ id 选择器， class 选择器， 标签选择器， 伪元素选择器， 伪�
   none
 
 # 三栏布局的实现
+https://www.jianshu.com/p/81ef7e7094e8
 圣杯，双飞燕
 三列布局：
 1. flex
