@@ -17,18 +17,22 @@ Page({
 
   preQuestion() {
     let current = this.data.current - 1
+    let question = this.data.questionList[current]
     if (current < 0) current = 0
     this.setData({
+      question,
       current
     })
   },
 
   nextQuestion() {
     let current = this.data.current + 1
+    let question = this.data.questionList[current]
     if (current >= 50) {
       current = 49
     }
     this.setData({
+      question,
       current
     })
   },
@@ -44,14 +48,12 @@ Page({
       let question = questionList[current]
       question.flag = true
       questionList[current] = question
-      // let nextQuestion = questionList[current + 1]
       this.setData({
-        current: current + 1,
         trueCount: trueCount + 1,
         questionList,
-        // question: nextQuestion
       })
     } else { // 选择错误
+      let questionList = this.data.questionList
       let wrongCount = this.data.wrongCount
       let current = this.data.current
       let questionWrong = this.data.questionWrong
