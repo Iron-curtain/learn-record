@@ -44,7 +44,7 @@ class Store {
   }
 
 
-
+  // 获取state
   get state () {
     return this.vm.state
   }
