@@ -64,9 +64,9 @@ Page({
         wrongCount: wrongCount + 1
       })
 
-      let questionList = this.data.questionList
-      questionList[current].flag = true
-      questionList[current].wrongAnswer = event.detail.myAnswer
+      // let questionList = this.data.questionList
+      // questionList[current].flag = true
+      // questionList[current].wrongAnswer = event.detail.myAnswer
 
       this.updataPracticeInfo({ questionWrong })
     }

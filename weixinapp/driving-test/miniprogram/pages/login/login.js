@@ -10,6 +10,58 @@ Page({
     canIuse: wx.canIUse('button.open-type.getUserInfo'),
   },
 
+  getUserProfile(e) {
+    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        app.globalData.userInfo = res.userInfo
+        
+        new Promise((resolve, reject) => {
+          this.getUserChoice(resolve)
+        }).then(() => {
+          console.log(app.globalData);
+          wx.switchTab({
+            url: '../personal/personal'
+          })
+        })
+      }
+    })
+  },
+
+  getUserChoice(cb) {
+    const that = app
+    wx.cloud.callFunction({
+      name: 'getChoice',
+      success: res => {
+        let result = res.result.choice.data[0]
+        if (result.length === 0) {
+          wx.cloud.callFunction({
+            name: 'choose',
+            data: {
+              model: 1,
+              subject: 1
+            },
+            success: message => {
+              console.log("insert success!");
+              that.globalData.choice = {
+                model: 1,
+                subject: 1
+              }
+            }
+          })
+        } else {
+          that.globalData.choice = {
+            model: result.model,
+            subject: result.subject
+          }
+        }
+        cb()
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

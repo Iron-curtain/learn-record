@@ -5,11 +5,11 @@
 }
 .headImageView {
   display: block;
-  margin-left: 25px;
-  margin-top: 25px;
-  margin-right: 25px;
-  margin-bottom: 0px;
+  margin: 25px auto;
+  margin-left: 50%;
+  transform: translate(-50%);
   height: 50px;
+  text-align: center;
 }
 .headImage {
   display: flex;
@@ -38,4 +38,6 @@
   margin-right: 25px;
   height: 45px;
   font-size: 17.5px;
+  color: #fff;
+  background-color: #2a82e4;
 }

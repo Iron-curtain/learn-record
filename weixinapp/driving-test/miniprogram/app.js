@@ -8,7 +8,7 @@ App({
     wx.getUserInfo({    //获取用户信息
       success(infoRes){
         that.globalData.userInfo = infoRes.userInfo
-        // console.log(that.globalData.userInfo);
+        console.log(that.globalData.userInfo);
         if (that.userInfoReadyCallback) {
           that.userInfoReadyCallback(that.globalData)
         }
@@ -92,8 +92,12 @@ App({
           that.getUserInfo()
         }
         else{
+          // wx.redirectTo({
+          //   // url: `./pages/login/login?back=${options.path.split('/')[1]}`
+          //   url: `./pages/index/index`
+          // })
           wx.redirectTo({
-            url: `pages/login/login?back=${options.path.split('/')[1]}`
+            url: '../login/login'
           })
         } 
       }
