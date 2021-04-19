@@ -1,0 +1,48 @@
+/* pages/practice/practice.wxss */
+@import '../../style/iconfont.wxss';
+van-tabs {
+  margin-top: 20rpx;
+}
+.switch {
+  display: flex;
+  justify-content: space-between;
+  margin: 20rpx 50rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.switch .pre {
+  width: 140rpx;
+  height: 60rpx;
+  background-color: #2a82e4;
+  color: white;
+  border: 1prx solid #2a82e4;
+  border-radius: 10rpx;
+}
+.switch .next {  
+  width: 140rpx;
+  height: 60rpx;
+  background-color: #2a82e4;
+  color: white;
+  border: 1prx solid #2a82e4;
+  border-radius: 10rpx;
+}
+.menu {
+  width: 100%;
+  height: 70rpx;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  line-height: 70rpx;
+  text-align: center;
+}
+.menu .star {
+  width: 80rpx;
+  font-size: 38rpx;
+}
+.menu .all {
+  width: 80rpx;
+  font-size: 40rpx;
+}
+
+

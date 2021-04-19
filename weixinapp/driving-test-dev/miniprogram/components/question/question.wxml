@@ -1,0 +1,31 @@
+<!--components/question/question.wxml-->
+<view class="question-card">
+  <view class="question">
+    <view class="icon">{{questionTypeName}}</view>
+    <text class="desc">{{question.question}}</text>
+  </view>
+  <image class="image" mode="aspectFit" src="{{question.url}}" />
+  <view class="options">
+    <view class="option" bindtap="select" data-option="A">
+      <view class="option-icon" style="{{style.A}}">A</view>
+      <text class="option-content">{{question.item1 || '正确'}}</text>
+    </view>
+    <view class="option" bindtap="select" data-option="B">
+      <view class="option-icon" style="{{style.B}}">B</view>
+      <text class="option-content">{{question.item2 || '错误'}}</text>
+    </view>
+    <view class="option" wx:if="{{question.item3}}" bindtap="select" data-option="C">
+      <view class="option-icon" style="{{style.C}}">C</view>
+      <text class="option-content">{{question.item3}}</text>
+    </view>
+    <view class="option" wx:if="{{question.item4}}" bindtap="select" data-option="D">
+      <view class="option-icon" style="{{style.D}}">D</view>
+      <text class="option-content">{{question.item4}}</text>
+    </view>
+  </view>
+  <view class="submit" wx:if="{{questionType === 1}}" bindtap="submit">确定</view>
+  <view class="explain" wx:if="{{explainShow}}">
+    <text class="title">题解：</text>
+    <text class="explain-content">{{question.explains}}</text>
+  </view>
+</view>

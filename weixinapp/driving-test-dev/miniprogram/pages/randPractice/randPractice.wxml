@@ -1,0 +1,8 @@
+<question-card class="question"  question="{{question}}" bindchoose="result" />
+<view class="switch">
+  <view class="pre" bind:tap="preQuestion">上一题</view>
+  <view class="next" bind:tap="nextQuestion">下一题</view>
+</view>
+<view class="menu">
+  <text class="star iconfont {{starStyle}}" bind:tap="star"></text>
+</view>

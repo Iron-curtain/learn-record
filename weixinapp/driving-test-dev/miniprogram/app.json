@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/personal/personal",
+    "pages/index/index",
+    "pages/login/login",
+    "pages/select/select",
+    "pages/orderPractice/orderPractice",
+    "pages/practice/practice",
+    "pages/randPractice/randPractice"
+  ],
+  "window": {
+    "backgroundColor": "#F4F4F4",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#2a82e4",
+    "navigationBarTitleText": "驾考题库",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "selectedColor": "#2a82e4",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "考试",
+        "iconPath": "./images/index.png",
+        "selectedIconPath": "./images/index-selected.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "我的",
+        "iconPath": "./images/personal.png",
+        "selectedIconPath": "./images/personal-selected.png"
+      }
+    ]
+  }
+}

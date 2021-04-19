@@ -1,0 +1,27 @@
+<!--pages/practice/practice.wxml-->
+<van-tabs type="card"  color="#2a82e4">
+  <van-tab title="答题">
+    <question-card class="question"  question="{{question}}" bindchoose="result" />
+    <view class="switch">
+      <view class="pre" bind:tap="preQuestion">上一题</view>
+      <view class="next" bind:tap="nextQuestion">下一题</view>
+    </view>
+    <view class="menu">
+      <text class="star iconfont {{starStyle}}" bind:tap="star"></text>
+      <text class="location">当前{{stateIndex + 1}} 总共{{totalCount}}</text>
+      <text class="all iconfont icon-Pic"></text>
+    </view>
+  </van-tab>
+  <van-tab title="背题">
+    <question-card class="question"  question="{{question}}" bindchoose="result" isShowAnswer="true" />
+    <view class="switch">
+      <view class="pre" bind:tap="preQuestion">上一题</view>
+      <view class="next" bind:tap="nextQuestion">下一题</view>
+    </view>
+    <view class="menu">
+      <text class="star iconfont {{starStyle}}" bind:tap="star"></text>
+      <text class="location">当前{{stateIndex + 1}} 总共{{totalCount}}</text>
+      <text class="all iconfont icon-Pic"></text>
+    </view>
+  </van-tab>
+</van-tabs>

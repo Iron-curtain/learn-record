@@ -1,0 +1,35 @@
+/* pages/orderPractice/orderPractice.wxss */
+.user-info {
+  margin: 40rpx auto;
+  text-align: center;
+}
+.user-info .avatar {
+  width: 120rpx;
+  height: 120rpx;
+}
+.user-info .nickName {
+  font-size: 40rpx
+}
+.practiceInfo {
+  display: flex;
+  margin: 30rpx 50rpx;
+  justify-content: space-between;
+}
+.practiceInfo .count {
+  font-weight: bold;
+  font-size: 40rpx;
+}
+.practiceInfo .desc {
+  font-size: 28rpx;
+}
+.toPractice {
+  margin: 20rpx 70rpx;
+  margin-top: 100rpx;
+  width: 610rpx;
+  height: 80rpx;
+  background-color: #2a82e4;
+  text-align: center;
+  line-height: 80rpx;
+  color: white;
+  border-radius: 20rpx;
+}

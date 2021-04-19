@@ -1,0 +1,20 @@
+<!--pages/orderPractice/orderPractice.wxml-->
+<view class="user-info">
+  <image class="avatar" src="{{userInfo.avatarUrl}}" />
+  <view class="nickName">{{userInfo.nickName}}</view>
+</view>
+<view class="practiceInfo">
+  <view class="incomplete">
+    <view class="count">{{unfinished}}</view>
+    <view class="desc">未做题</view>
+  </view>
+  <view class="wrong">
+    <view class="count">{{wrongCount}}</view>
+    <view class="desc">错题</view>
+  </view>
+  <view class="accuracy">
+    <view class="count">{{rate}}%</view>
+    <view class="desc">正确率</view>
+  </view>
+</view>
+<view class="toPractice" bindtap="toPractice">继续练习</view>
