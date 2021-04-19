@@ -38,7 +38,7 @@ BFC区域不会与float box重叠
 BFC是页面上的一个独立容器，子元素不会影响外面
 
 
-怎么生成BFC:
+# 怎么生成BFC:
 flaot不为none
 position为flex和absolute
 display为inline-block, flex, table-cell
