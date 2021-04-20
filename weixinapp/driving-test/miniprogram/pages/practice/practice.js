@@ -188,8 +188,10 @@ Page({
           let questionWrongList = that.data.questionWrong
           let questionWrong = questionWrongList.find(question => question.id == stateIndex)
           let wrongAnswer = questionWrong && questionWrong.myAnswer
-          question.flag = true
-          question.wrongAnswer = wrongAnswer
+          if (wrongAnswer != undefined) {
+            question.flag = true
+            question.wrongAnswer = wrongAnswer
+          }
         }
         if (this.data.questionStar.indexOf(question.id - 1) != -1) {
           this.setData({

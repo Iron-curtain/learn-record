@@ -1,5 +1,6 @@
 // pages/randPractice.js
 const app = getApp()
+const getQuestionType = require('../../util/getQuestionType')
 Page({
 
   /**
@@ -27,10 +28,15 @@ Page({
 
   nextQuestion() {
     let current = this.data.current + 1
-    let question = this.data.questionList[current]
-    if (current >= 50) {
-      current = 49
+    if (current >= 5) {
+      current = 5
+      let trueCount = this.data.trueCount
+      wx.redirectTo({
+        url: `../finish/finish?trueCount=${trueCount}`
+      })
     }
+    let question = this.data.questionList[current]
+    
     this.setData({
       question,
       current
@@ -57,25 +63,30 @@ Page({
       let wrongCount = this.data.wrongCount
       let current = this.data.current
       let questionWrong = this.data.questionWrong
-      let wrongQuestion = {id: questionList[current].id, myAnswer: event.detail.myAnswer}
-      questionWrong.push(wrongQuestion)
+      let wrongQuestion = {id: questionList[current].id}
+        
       this.setData({
         questionWrong,
         wrongCount: wrongCount + 1
       })
 
-      // let questionList = this.data.questionList
-      // questionList[current].flag = true
-      // questionList[current].wrongAnswer = event.detail.myAnswer
+      questionList[current].flag = true
+      questionList[current].wrongAnswer = event.detail.myAnswer
 
-      this.updataPracticeInfo({ questionWrong })
+      let hasWrong = questionWrong.find(item => item.id == wrongQuestion.id)
+      if (hasWrong == undefined) {
+        questionWrong.push(wrongQuestion)
+        this.updatePracticeInfo({ questionWrong })
+      } 
+      
     }
   },
 
 
 
-  updataPracticeInfo(params) {
+  updatePracticeInfo(params) {
     let questionType = this.data.questionType
+    console.log(questionType);
     let questionWrong = params.questionWrong || this.data.questionWrong
     wx.cloud.callFunction({
       name: 'practiceInfo',
@@ -104,7 +115,7 @@ Page({
       header: {'content-type': 'json'},
       success: (res) => {
         let questionList = res.data.result
-        questionList = questionList.slice(0, 50)
+        questionList = questionList.slice(0, 5)
         // console.log(questionList);
         this.setData({
           questionList,
@@ -127,7 +138,6 @@ Page({
           // console.log(res);
           let practiceInfo = res.result.practiceInfo.data[0]
           practiceInfo.questionWrong = JSON.parse(practiceInfo.questionWrong)
-          // console.log(practiceInfo);
           let { questionWrong } = practiceInfo
           that.setData({
             questionWrong
@@ -146,7 +156,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let questionType = ''
+    // let questionType = ''
     let model = app.globalData.choice.model
     if (model == 1) {
       model = 'c1'
@@ -156,8 +166,10 @@ Page({
       model = 'b1'
     }
     let subject = app.globalData.choice.subject
-    if (subject === 4) questionType = 'm-4'
-    else questionType = `m${model}-1`
+    // if (subject === 4) questionType = 'm-4'
+    // else questionType = `m${model}-1`
+    let questionType = getQuestionType()
+    this.getPracticeInfo()
     this.setData({ questionType })
     let params = {
       subject,

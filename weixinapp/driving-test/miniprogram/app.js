@@ -88,18 +88,21 @@ App({
     const that = this
     wx.getSetting({
       success(settingRes){
-        if(settingRes.authSetting['scope.userInfo']){
-          that.getUserInfo()
-        }
-        else{
-          // wx.redirectTo({
-          //   // url: `./pages/login/login?back=${options.path.split('/')[1]}`
-          //   url: `./pages/index/index`
-          // })
-          wx.redirectTo({
-            url: '../login/login'
-          })
-        } 
+        // if(settingRes.authSetting['scope.userInfo']){
+        //   that.getUserInfo()
+        // }
+        // else{
+        //   // wx.redirectTo({
+        //   //   // url: `./pages/login/login?back=${options.path.split('/')[1]}`
+        //   //   url: `./pages/index/index`
+        //   // })
+        //   wx.redirectTo({
+        //     url: '../login/login'
+        //   })
+        // } 
+        wx.redirectTo({
+          url: '../login/login'
+        })
       }
     })
 

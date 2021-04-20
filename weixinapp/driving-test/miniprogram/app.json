@@ -6,7 +6,9 @@
     "pages/select/select",
     "pages/orderPractice/orderPractice",
     "pages/practice/practice",
-    "pages/randPractice/randPractice"
+    "pages/randPractice/randPractice",
+    "pages/finish/finish",
+    "pages/starPractice/starPractice"
   ],
   "window": {
     "backgroundColor": "#F4F4F4",

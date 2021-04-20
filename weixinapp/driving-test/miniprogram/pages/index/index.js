@@ -44,7 +44,11 @@ Page({
     })
   },
 
-
+  starPractice () {
+    wx.navigateTo({
+      url: '../starPractice/starPractice'
+    })
+  },
 
 
   // 初始化用户科目选择
