@@ -4,5 +4,5 @@
   <view class="next" bind:tap="nextQuestion">下一题</view>
 </view>
 <view class="menu">
-  <text class="location">当前{{current + 1}} 总共5</text>
+  <text class="location">当前{{starIndex + 1}} 总共{{totalCount}}</text>
 </view>

@@ -178,17 +178,15 @@ Component({
         } else {
           style[optionId] = 'color: white; background: red'
           this.triggerEvent('choose', {istrue: false, myAnswer: optionId})
-          this.setData({
-            explainShow: true
-          })
         }
+        let question = this.data.question
+        question.flag = true
         this.setData({
-          singleAnswer: optionId
+          singleAnswer: optionId,
+          style,
+          question,
+          explainShow: true
         })
-        this.setData({
-          style
-        })
-        
       }
     },
 

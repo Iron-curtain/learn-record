@@ -6,9 +6,69 @@ Page({
    * 页面的初始数据
    */
   data: {
+    totalCount: 0,
     questionType: '',
     questionStar: [],
-    starIndex: 0
+    starIndex: 0,
+    question: {}
+  },
+
+  preQuestion() {
+    let starIndex = this.data.starIndex
+  },
+
+  nextQuestion() {
+    let starIndex = this.data.starIndex
+  },
+
+  result(event) {
+    let starIndex = this.data.starIndex
+    let questionStar = this.data.questionStar
+    let star = questionStar[starIndex]
+    let starInfo = {id: star, myAnswer: event.detail.myAnswer}
+    questionStar[starIndex] = starInfo
+
+    let isTrue = event.detail.istrue
+    if (isTrue) { // 选择正确
+      let totalCount = this.data.totalCount
+      let question = this.data.question
+      if (starIndex >= totalCount - 1) {
+        starIndex = totalCount - 1
+      } else {
+        starIndex++
+      }
+      starInfo.myAnswer = question.answer
+    } 
+    this.setData({
+      questionStar,
+      starIndex
+    })
+    console.log(questionStar);
+    let questionType = this.data.questionType
+    let params = { questionType, questionStar, starIndex }
+    this.updatePracticeInfo(params)
+  },
+
+  updatePracticeInfo(params) {
+    console.log(params);
+    let questionType = this.data.questionType
+    let questionStar = params.questionStar || this.data.questionStar
+    let starIndex = params.starIndex || this.data.starIndex
+    wx.cloud.callFunction({
+      name: 'practiceInfo',
+      data: {
+        questionType,
+        questionStar,
+        starIndex,
+        isUpdate: true
+      },
+      success: (res) => {
+        console.log(res);
+      },
+      fail: (err) => {
+        console.log(err);
+      }
+    })
   },
 
   getPracticeInfo (questionType) {
@@ -24,9 +84,11 @@ Page({
           let practiceInfo = res.result.practiceInfo.data[0]
           practiceInfo.questionStar = JSON.parse(practiceInfo.questionStar)
           let { questionStar, starIndex } = practiceInfo
+          let totalCount = questionStar.length
           that.setData({
             questionStar,
-            starIndex
+            starIndex,
+            totalCount
           })
           resovle()
         },
@@ -38,27 +100,22 @@ Page({
     })
   },
 
-  getQuestion(questionType, stateIndex) {
+  getQuestion(questionType, id, myAnswer = undefined) {
     const that = this
-    let questionState = this.data.practiceState[stateIndex]
     wx.cloud.callFunction({
       name: 'getQuestion',
       data: {
         questionType,
-        id: stateIndex + 1
+        id: id
       },
       success: (res) => {
-        // console.log(res);
         let question = res.result.question.data[0]
-        if (questionState === 1) {
+        
+        let answer = question.answer
+        if (myAnswer !== undefined) {
           question.flag = true
-        } else if (questionState === 2) {
-          let questionWrongList = that.data.questionWrong
-          let questionWrong = questionWrongList.find(question => question.id == stateIndex)
-          let wrongAnswer = questionWrong && questionWrong.myAnswer
-          if (wrongAnswer != undefined) {
-            question.flag = true
-            question.wrongAnswer = wrongAnswer
+          if (myAnswer !== answer) {
+            question.wrongAnswer = myAnswer
           }
         }
         if (this.data.questionStar.indexOf(question.id - 1) != -1) {
@@ -75,7 +132,6 @@ Page({
         this.setData({
           question
         })
-        // console.log(this.data.question);
       },
       fail: (err) => {
         console.log(err);
@@ -87,10 +143,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const that = this
     let questionType = getQuestionType()
     this.setData({ questionType })
-    this.getPracticeInfo()
-
+    this.getPracticeInfo().then(() => {
+      let starIndex = this.data.starIndex
+      let star = that.data.questionStar[starIndex]
+      console.log(questionType, star);
+      if (typeof star == 'object') {
+        that.getQuestion(questionType, star.id, star.myAnswer)
+      } else {
+        that.getQuestion(questionType, star)
+      }
+    })
   },
 
   /**
