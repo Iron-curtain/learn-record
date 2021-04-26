@@ -15,8 +15,19 @@ Page({
     questionWrong: [],
     stateIndex: 0,
     starStyle: 'icon-shoucang',
-    isStar: false
+    isStar: false,
+    show: false
   },
+
+  showLocation() {
+    this.setData({ show: true })
+  },
+
+  onClose() {
+    this.setData({ show: false })
+  },
+
+
 
   // 收藏题目
   star () {

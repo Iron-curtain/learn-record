@@ -2,6 +2,7 @@
   "usingComponents": {
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
-    "question-card": "/components/question/question"
+    "question-card": "/components/question/question",
+    "van-popup": "@vant/weapp/popup/index"
   }
 }

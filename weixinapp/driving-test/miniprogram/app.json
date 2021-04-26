@@ -8,7 +8,8 @@
     "pages/practice/practice",
     "pages/randPractice/randPractice",
     "pages/finish/finish",
-    "pages/starPractice/starPractice"
+    "pages/starPractice/starPractice",
+    "pages/wrongBook/wrongBook"
   ],
   "window": {
     "backgroundColor": "#F4F4F4",

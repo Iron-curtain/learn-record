@@ -1,4 +1,4 @@
-// pages/starPractice/starPractice.js
+// pages/wrongBook/wrongBook.js
 const getQuestionType = require('../../util/getQuestionType')
 Page({
 
@@ -6,105 +6,90 @@ Page({
    * 页面的初始数据
    */
   data: {
-    totalCount: 0,
     questionType: '',
-    questionStar: [],
-    starIndex: 0,
+    questionWrong: [],
+    wrongIndex: 0,
+    totalCount: 0,
     question: {}
   },
 
   preQuestion() {
-    let starIndex = this.data.starIndex
-    if (starIndex <= 0) {
-      starIndex = 0
+    let wrongIndex = this.data.wrongIndex
+    if (wrongIndex <= 0) {
+      wrongIndex = 0
     } else {
-      starIndex--
+      wrongIndex--
     }
-    this.setData({ starIndex })
+    this.setData({
+      wrongIndex
+    })
 
+    let questionWrong = this.data.questionWrong
     let questionType = this.data.questionType
-    let star = this.data.questionStar[starIndex]
-    if (typeof star == 'object') {
-      this.getQuestion(questionType, star.id, star.myAnswer)
-    } else {
-      this.getQuestion(questionType, star)
-    }
-
-    let questionStar = this.data.questionStar
-    let params = {
-      questionType,
-      questionStar,
-      starIndex
-    }
-    this.updatePracticeInfo(params)
+    let wrong = questionWrong[wrongIndex]
+    this.getQuestion(questionType, wrong.id, wrong.wAnswer)
+    
+    this.updatePracticeInfo({ questionType, questionWrong, wrongIndex })
   },
 
   nextQuestion() {
-    let starIndex = this.data.starIndex
+    let wrongIndex = this.data.wrongIndex
     let totalCount = this.data.totalCount
-    if (starIndex >= totalCount - 1) {
-      starIndex = totalCount - 1
+    if (wrongIndex >= totalCount - 1) {
+      wrongIndex = totalCount - 1
     } else {
-      starIndex++
+      wrongIndex++
     }
-    this.setData({ starIndex })
+    this.setData({
+      wrongIndex
+    })
 
+    let questionWrong = this.data.questionWrong
     let questionType = this.data.questionType
-    let star = this.data.questionStar[starIndex]
-    if (typeof star == 'object') {
-      this.getQuestion(questionType, star.id, star.myAnswer)
-    } else {
-      this.getQuestion(questionType, star)
-    }
+    let wrong = questionWrong[wrongIndex]
+    this.getQuestion(questionType, wrong.id, wrong.wAnswer)
 
-    let questionStar = this.data.questionStar
-    let params = {
-      questionType,
-      questionStar,
-      starIndex
-    }
-    this.updatePracticeInfo(params)
+    this.updatePracticeInfo({ questionType, questionWrong, wrongIndex })
   },
 
   result(event) {
-    let starIndex = this.data.starIndex
-    let questionStar = this.data.questionStar
-    let star = questionStar[starIndex]
-    let starInfo = {id: star, myAnswer: event.detail.myAnswer}
-    questionStar[starIndex] = starInfo
+    let wrongIndex = this.data.wrongIndex
+    let questionWrong = this.data.questionWrong
+    let wrong = questionWrong[wrongIndex]
+    wrong.wAnswer = event.detail.myAnswer
+    questionWrong[wrongIndex] = wrong
 
     let isTrue = event.detail.istrue
     if (isTrue) { // 选择正确
       let totalCount = this.data.totalCount
       let question = this.data.question
-      if (starIndex >= totalCount - 1) {
-        starIndex = totalCount - 1
+      if (wrongIndex >= totalCount - 1) {
+        wrongIndex = totalCount - 1
       } else {
-        starIndex++
+        wrongIndex++
       }
-      starInfo.myAnswer = question.answer
+      wrong.wAnswer = question.answer
     } 
     this.setData({
-      questionStar,
-      starIndex
+      questionWrong,
+      wrongIndex
     })
-    console.log(questionStar);
+    console.log(questionWrong);
     let questionType = this.data.questionType
-    let params = { questionType, questionStar, starIndex }
+    let params = { questionType, questionWrong, wrongIndex }
     this.updatePracticeInfo(params)
   },
 
   updatePracticeInfo(params) {
-    // console.log(params);
     let questionType = this.data.questionType
-    let questionStar = params.questionStar || this.data.questionStar
-    let starIndex = params.starIndex || this.data.starIndex
+    let questionWrong = params.questionWrong || this.data.questionWrong
+    let wrongIndex = params.wrongIndex || this.data.wrongIndex
     wx.cloud.callFunction({
       name: 'practiceInfo',
       data: {
         questionType,
-        questionStar,
-        starIndex,
+        questionWrong,
+        wrongIndex,
         isUpdate: true
       },
       success: (res) => {
@@ -115,6 +100,7 @@ Page({
       }
     })
   },
+
 
   getPracticeInfo (questionType) {
     let that = this
@@ -127,12 +113,12 @@ Page({
         success: (res) => {
           // console.log(res);
           let practiceInfo = res.result.practiceInfo.data[0]
-          practiceInfo.questionStar = JSON.parse(practiceInfo.questionStar)
-          let { questionStar, starIndex } = practiceInfo
-          let totalCount = questionStar.length
+          practiceInfo.questionWrong = JSON.parse(practiceInfo.questionWrong)
+          let { questionWrong, wrongIndex } = practiceInfo
+          let totalCount = questionWrong.length
           that.setData({
-            questionStar,
-            starIndex,
+            questionWrong,
+            wrongIndex,
             totalCount
           })
           resovle()
@@ -145,7 +131,7 @@ Page({
     })
   },
 
-  getQuestion(questionType, id, myAnswer = undefined) {
+  getQuestion(questionType, id, wAnswer = undefined) {
     const that = this
     wx.cloud.callFunction({
       name: 'getQuestion',
@@ -155,12 +141,11 @@ Page({
       },
       success: (res) => {
         let question = res.result.question.data[0]
-        
         let answer = question.answer
-        if (myAnswer !== undefined) {
+        if (wAnswer !== undefined) {
           question.flag = true
-          if (myAnswer !== answer) {
-            question.wrongAnswer = myAnswer
+          if (wAnswer !== answer) {
+            question.wrongAnswer = wAnswer
           }
         }
         // if (this.data.questionStar.indexOf(question.id - 1) != -1) {
@@ -192,14 +177,9 @@ Page({
     let questionType = getQuestionType()
     this.setData({ questionType })
     this.getPracticeInfo().then(() => {
-      let starIndex = this.data.starIndex
-      let star = that.data.questionStar[starIndex]
-      console.log(questionType, star);
-      if (typeof star == 'object') {
-        that.getQuestion(questionType, star.id, star.myAnswer)
-      } else {
-        that.getQuestion(questionType, star)
-      }
+      let { questionType, questionWrong, wrongIndex } = this.data
+      let wrong = questionWrong[wrongIndex]
+      that.getQuestion(questionType, wrong.id, wrong.wAnswer)
     })
   },
 

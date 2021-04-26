@@ -1,0 +1,9 @@
+<!--pages/wrongBook/wrongBook.wxml-->
+<question-card class="question"  question="{{question}}" bindchoose="result" />
+<view class="switch">
+  <view class="pre" bind:tap="preQuestion">上一题</view>
+  <view class="next" bind:tap="nextQuestion">下一题</view>
+</view>
+<view class="menu">
+  <text class="location">当前{{wrongIndex + 1}} 总共{{totalCount}}</text>
+</view>

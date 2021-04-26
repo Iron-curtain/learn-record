@@ -50,6 +50,12 @@ Page({
     })
   },
 
+  wrongBook () {
+    wx.navigateTo({
+      url: '../wrongBook/wrongBook'
+    })
+  },
+
 
   // 初始化用户科目选择
   initSubjectSelect(choice) {

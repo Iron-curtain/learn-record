@@ -1,8 +1,4 @@
-/* pages/practice/practice.wxss */
 @import '../../style/iconfont.wxss';
-van-tabs {
-  margin-top: 20rpx;
-}
 .switch {
   display: flex;
   justify-content: space-between;
@@ -26,43 +22,14 @@ van-tabs {
   border: 1prx solid #2a82e4;
   border-radius: 10rpx;
 }
+
 .menu {
   width: 100%;
   height: 70rpx;
   position: fixed;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   bottom: 0;
   line-height: 70rpx;
   text-align: center;
 }
-.menu .star {
-  width: 80rpx;
-  font-size: 38rpx;
-}
-.menu .all {
-  width: 80rpx;
-  font-size: 40rpx;
-}
-.container {
-  height: 600rpx;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-.questionSeq {
-  flex: 0 0 calc(12% - 2px);
-  margin: 6px 1%;
-  line-height: 0;
-  height: 0;
-  padding: calc(6% - 1px) 0;
-
-  color: #999999;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 14px;
-  border: 1px #999999 solid;
-}
-
-
