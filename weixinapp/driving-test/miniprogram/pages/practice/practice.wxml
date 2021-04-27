@@ -26,7 +26,10 @@
   </van-tab>
 </van-tabs>
 <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
-  <view class="container">
-    <view class="questionSeq" wx:for="{{totalCount}}" wx:key="index">{{index + 1}}</view>
+  <view class="container" catch:tap="locationTo">
+    <view class="questionSeq" wx:for="{{totalCount}}" wx:key="index" data-id="{{index}}" 
+      style="background-color: {{practiceState[index] == 1 ? '#2a82e4' : (practiceState[index] == 2 && 'red')}}; border: 2px {{index == stateIndex && '#2a82e4'}} solid;">
+      {{index + 1}}
+    </view>
   </view>
 </van-popup>

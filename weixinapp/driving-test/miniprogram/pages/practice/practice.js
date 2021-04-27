@@ -27,6 +27,14 @@ Page({
     this.setData({ show: false })
   },
 
+  locationTo(event) {
+    let index = event.target.dataset.id
+    this.setData({ stateIndex: index, show: false })
+    let questionType = this.data.questionType
+    this.getQuestion(questionType, index)
+    this.updataPracticeInfo({})
+  },
+
 
 
   // 收藏题目

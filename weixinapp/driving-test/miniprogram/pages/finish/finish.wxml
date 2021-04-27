@@ -2,7 +2,7 @@
 <view class="score">
   <view class="your_scores_container">
     <view class="your_scores">
-      <span class="score_num">{{score}}</span>
+      <span class="score_num">你的得分是{{score}}</span>
       <span class="fenshu">分！</span>
     </view>
   </view>

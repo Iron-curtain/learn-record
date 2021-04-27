@@ -4,7 +4,7 @@
     <view class="icon">{{questionTypeName}}</view>
     <text class="desc">{{question.question}}</text>
   </view>
-  <image class="image" mode="aspectFit" src="{{question.url}}" />
+  <image wx:if="{{question.url}}" class="image" mode="aspectFit" src="{{question.url}}" />
   <view class="options">
     <view class="option" bindtap="select" data-option="A">
       <view class="option-icon" style="{{style.A}}">A</view>

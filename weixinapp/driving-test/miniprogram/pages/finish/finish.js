@@ -1,4 +1,5 @@
 // pages/finish/finish.js
+const getQuestionType = require('../../util/getQuestionType')
 Page({
 
   /**
@@ -6,6 +7,23 @@ Page({
    */
   data: {
     score: 0
+  },
+
+  uploadScore(score) {
+    let questionType = getQuestionType()
+    wx.cloud.callFunction({
+      name: 'addScore',
+      data: {
+        questionType,
+        score
+      },
+      success: () => {
+        console.log("upload success!");
+      },
+      fail: (err) => {
+        console.log(err);
+      }
+    })
   },
 
   /**
@@ -17,13 +35,16 @@ Page({
     this.setData({
       score
     })
+    
+    // 上传成绩
+    this.uploadScore(score)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**

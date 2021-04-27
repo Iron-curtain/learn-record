@@ -9,7 +9,8 @@
     "pages/randPractice/randPractice",
     "pages/finish/finish",
     "pages/starPractice/starPractice",
-    "pages/wrongBook/wrongBook"
+    "pages/wrongBook/wrongBook",
+    "pages/historyScore/historyScore"
   ],
   "window": {
     "backgroundColor": "#F4F4F4",

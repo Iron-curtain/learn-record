@@ -33,7 +33,7 @@
     </view>
   </view>
   <view class="menu">
-    <view class="menu-item">
+    <view class="menu-item" bind:tap="toHistoryScore">
       <view class="icon">
         <image src="../../images/history.png" />
       </view>

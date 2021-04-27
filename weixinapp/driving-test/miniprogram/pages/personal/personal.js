@@ -15,6 +15,11 @@ Page({
     subjectStyle4: ''
   },
 
+  toHistoryScore() {
+    wx.navigateTo({
+      url: '../historyScore/historyScore'
+    })
+  },
 
   // 跳转到驾照类型选择页面
   toSelect() {

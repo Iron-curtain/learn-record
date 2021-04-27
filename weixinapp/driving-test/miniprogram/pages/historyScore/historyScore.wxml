@@ -1,0 +1,11 @@
+<!-- pages/historyScore/historyScore.wxml -->
+<view class="container">
+  <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+</view>
+<view class="container">
+  <view class="score-item" wx:for="{{ scoreList }}" wx:key="index">
+    <view class="time">{{ item.time }}</view>
+    <view class="score">{{ item.score }}</view>
+  </view>
+</view>
+  
