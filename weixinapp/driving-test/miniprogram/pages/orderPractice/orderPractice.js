@@ -42,15 +42,23 @@ Page({
         let practiceInfo = res.result.practiceInfo.data[0]
         practiceInfo.practiceState = JSON.parse(practiceInfo.practiceState)
         practiceInfo.questionWrong = JSON.parse(practiceInfo.questionWrong)
-        practiceInfo.questionStar = JSON.parse(practiceInfo.questionStar)
-        // console.log(practiceInfo);
+
         app.globalData.practiceInfo = practiceInfo
 
-        let { totalCount, questionWrong } = practiceInfo
-        let wrongCount = questionWrong.length
-        let unfinished = totalCount - wrongCount
-        let rate = (totalCount - wrongCount) / totalCount * 100
-        console.log(rate);
+        let { totalCount, questionWrong, practiceState } = practiceInfo
+        
+        let wrongCount = 0
+        for (let item of questionWrong) {
+          if (item.myAnswer !== undefined) wrongCount++
+        }
+
+        let unfinished = 0
+        for (let state of practiceState) {
+          if (state == 0) unfinished++
+        }
+
+        let hasDone = totalCount - unfinished
+        let rate = (hasDone - wrongCount) / hasDone * 100
         this.setData({
           wrongCount,
           unfinished,

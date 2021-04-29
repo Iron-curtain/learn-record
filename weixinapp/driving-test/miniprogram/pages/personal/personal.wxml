@@ -22,14 +22,14 @@
   </view>
   <view class="record">
     <view class="record-num">
-      <view class="num">0</view>
+      <view class="num">{{ practiceCount }}</view>
       <view class="title">累计答题数</view>
-      <view class="count">正确率 <text class="score">0%</text></view>
+      <view class="count">正确率 <text class="score">{{ accuracy }}%</text></view>
     </view>
     <view class="record-socre">
-      <view class="num">0</view>
-      <view class="title">累计答题数</view>
-      <view class="count">正确率 <text class="score">0%</text></view>
+      <view class="num">{{ examCount }}</view>
+      <view class="title">随机练习次数</view>
+      <view class="count">平均分 <text class="score">{{ average }}分</text></view>
     </view>
   </view>
   <view class="menu">

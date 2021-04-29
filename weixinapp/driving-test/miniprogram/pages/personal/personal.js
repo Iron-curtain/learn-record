@@ -1,5 +1,6 @@
 // pages/personal/personal.js
 const app =  getApp();
+const getQuestionType = require('../../util/getQuestionType')
 Page({
 
   /**
@@ -12,7 +13,11 @@ Page({
     subject: 1,
     modelName: '',
     subjectStyle1: '',
-    subjectStyle4: ''
+    subjectStyle4: '',
+    examCount: 0,
+    average: 0,
+    accuracy: 0,
+    practiceCount: 0
   },
 
   toHistoryScore() {
@@ -127,7 +132,54 @@ Page({
     this.renderSexIcon()
   },
 
-  // 
+  // 获取随机练习次数和平均分
+  getHistoryScore() {
+    let questionType = getQuestionType()
+    wx.cloud.callFunction({
+      name: 'getScore',
+      data: {
+        questionType
+      }
+    }).then((res) => {
+      let data = res.result.score.data
+      let length = data.length
+      let sum = data.reduce((accumulator, current) => accumulator + current.score, 0)
+      let average = sum / length
+      this.setData({
+        examCount: length,
+        average
+      })
+    }).catch((err) => {
+      console.log(err);
+    })
+  },
+
+  // 获取练习的题目数和正确率
+  getPracticeInfo (questionType) {
+    let that = this
+    wx.cloud.callFunction({
+      name: 'practiceInfo',
+      data: {
+        questionType
+      }
+    }).then((res) => {
+      let practiceInfo = res.result.practiceInfo.data[0]
+      practiceInfo.practiceState = JSON.parse(practiceInfo.practiceState)
+      let { practiceState } = practiceInfo
+      let trueCount = 0
+      let wrongCount = 0
+      for (let item of practiceState) {
+        if (item == 1) trueCount++
+        else if (item == 2) wrongCount++
+      }
+      let practiceCount = trueCount + wrongCount
+      let accuracy = (trueCount / practiceCount) * 100
+      that.setData({
+        practiceCount,
+        accuracy: accuracy.toFixed(2)
+      })
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -178,6 +230,8 @@ Page({
       this.getModelName()
       this.renderSubjectChoice()
     }
+    this.getHistoryScore()
+    this.getPracticeInfo()
   },
 
   /**

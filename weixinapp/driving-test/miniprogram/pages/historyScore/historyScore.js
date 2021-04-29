@@ -31,27 +31,6 @@ function initChart(canvas, width, height, dpr) {
     devicePixelRatio: dpr // new
   });
   canvas.setChart(chart);
-
-  var option = {
-    color: ["#37A2DA"],
-    title: {
-      text: '最近五次成绩',
-      left: 'center'
-    },
-    xAxis: {
-      type: 'category',
-      data: [1, 2, 3, 4, 5]
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [{
-      data: [70, 80, 90, 85, 100],
-      type: 'line'
-    }]
-  };
-
-  chart.setOption(option);
   return chart;
 }
 

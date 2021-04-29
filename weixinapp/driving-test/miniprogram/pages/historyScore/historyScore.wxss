@@ -3,3 +3,23 @@ ec-canvas {
   width: 700rpx;
   height: 400rpx;
 }
+
+.history-container {
+  position: absolute;
+  top: 500rpx;
+  width: 750rpx;
+}
+.score-item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px #2a82e4 solid;
+  padding: 10rpx 20rpx;
+  margin: 10rpx 40rpx;
+  border-radius: 12rpx;
+}
+.time {
+  color: #333333;
+}
+.score {
+  color: #2a82e4;
+}
