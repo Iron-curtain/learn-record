@@ -26,6 +26,12 @@ Page({
     })
   },
 
+  toRank() {
+    wx.navigateTo({
+      url: '../rank/rank'
+    })
+  },
+
   // 跳转到驾照类型选择页面
   toSelect() {
     wx.navigateTo({

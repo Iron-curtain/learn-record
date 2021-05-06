@@ -3,8 +3,7 @@ const axios = require('axios')
 
 let params = { 
     key: '44f01556583d3bdfda9152f5d7d1e46a',
-    subject: 1,
-    model: 'c1',
+    subject: 4,
     testType: 'order'
 }
 
@@ -16,7 +15,7 @@ axios.get(`http://v.juhe.cn/jztk/query?subject=${params.subject}&model=${params.
         data.forEach(item => {
             questionBank += JSON.stringify(item)
         })
-        fs.writeFile('./miniprogram/assets/c11.json', questionBank, (err) => {
+        fs.writeFile('./m-4.json', questionBank, (err) => {
             if(!err){
                 console.log('文件写入完成！')
             } else {

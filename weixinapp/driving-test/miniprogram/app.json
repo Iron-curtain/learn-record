@@ -10,7 +10,8 @@
     "pages/finish/finish",
     "pages/starPractice/starPractice",
     "pages/wrongBook/wrongBook",
-    "pages/historyScore/historyScore"
+    "pages/historyScore/historyScore",
+    "pages/rank/rank"
   ],
   "window": {
     "backgroundColor": "#F4F4F4",

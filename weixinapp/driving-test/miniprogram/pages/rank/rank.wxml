@@ -1,0 +1,10 @@
+<!--pages/rank/rank.wxml-->
+<text class="title">成绩排行</text>
+<view class="score-container">
+  <view class="score-item" wx:for="{{ rankList }}" wx:key="index">
+    <view class="ranking">{{ index + 1 }}</view>
+    <view class="avatar"><image src="{{item.avatar}}"></image></view>
+    <view class="nickname">{{ item.nickName }}</view>
+    <view class="score">{{ item.score }}</view>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+/* pages/rank/rank.wxss */
+.title {
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  font-size: 40rpx;
+  text-align: center;
+  color: #2a82e4;
+}
+.score-container {
+  position: absolute;
+  top: 100rpx;
+  width: 750rpx;
+}
+.score-item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px #2a82e4 solid;
+  padding: 10rpx 20rpx;
+  margin: 10rpx 40rpx;
+  border-radius: 12rpx;
+  line-height: 80rpx;
+}
+.ranking {
+  color: #2a82e4;
+}
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+}
+.avatar image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.score {
+  color: #2a82e4;
+}

@@ -1,4 +1,5 @@
 // pages/finish/finish.js
+const app = getApp();
 const getQuestionType = require('../../util/getQuestionType')
 Page({
 
@@ -11,9 +12,14 @@ Page({
 
   uploadScore(score) {
     let questionType = getQuestionType()
+    let userInfo = app.globalData.userInfo
+    let avatar = userInfo.avatarUrl
+    let nickName = userInfo.nickName
     wx.cloud.callFunction({
       name: 'addScore',
       data: {
+        avatar,
+        nickName,
         questionType,
         score
       },

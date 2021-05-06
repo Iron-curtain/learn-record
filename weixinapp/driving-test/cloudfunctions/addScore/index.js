@@ -22,12 +22,16 @@ exports.main = async (event, context) => {
   // 获取所有的参数
   const openId = wxContext.OPENID
   const questionType = event.questionType
+  const avatar = event.avatar
+  const nickName = event.avatar
   const score = event.score
   const time = getCurrentTime()
 
   insertResult = await db.collection('score').add({
     data: { 
       openId,
+      avatar,
+      nickName,
       questionType,
       score,
       time

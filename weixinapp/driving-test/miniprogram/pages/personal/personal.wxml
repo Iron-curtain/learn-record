@@ -39,7 +39,7 @@
       </view>
       <view class="desc">历史成绩</view>
     </view>
-    <view class="menu-item">
+    <view class="menu-item" bind:tap="toRank">
       <view class="icon">
         <image src="../../images/rank.png" />
       </view>
