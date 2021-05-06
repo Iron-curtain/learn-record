@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">click</button>
+  <script>
+    console.log('本轮任务');
+    new Promise((resolve, reject) => {
+      resolve(3)
+    }).then(() => {
+      console.log('本轮微任务');
+    })
+    document.getElementById('btn').addEventListener('click', () => { console.log('click'); })
+    document.getElementById('btn').click()
+  </script>
+</body>
+
+</html>
