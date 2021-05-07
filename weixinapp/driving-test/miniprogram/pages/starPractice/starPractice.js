@@ -127,6 +127,7 @@ Page({
         success: (res) => {
           // console.log(res);
           let practiceInfo = res.result.practiceInfo.data[0]
+          console.log(practiceInfo);
           practiceInfo.questionStar = JSON.parse(practiceInfo.questionStar)
           let { questionStar, starIndex } = practiceInfo
           let totalCount = questionStar.length
@@ -191,7 +192,7 @@ Page({
     const that = this
     let questionType = getQuestionType()
     this.setData({ questionType })
-    this.getPracticeInfo().then(() => {
+    this.getPracticeInfo(questionType).then(() => {
       let starIndex = this.data.starIndex
       let star = that.data.questionStar[starIndex]
       console.log(questionType, star);

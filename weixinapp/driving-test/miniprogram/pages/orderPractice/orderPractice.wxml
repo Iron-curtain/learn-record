@@ -13,7 +13,7 @@
     <view class="desc">错题</view>
   </view>
   <view class="accuracy">
-    <view class="count">{{rate}}%</view>
+    <view class="count">{{rate == "NaN" ? 0 : rate}}%</view>
     <view class="desc">正确率</view>
   </view>
 </view>

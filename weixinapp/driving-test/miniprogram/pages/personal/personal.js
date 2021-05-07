@@ -54,6 +54,7 @@ Page({
       },
       success: () => {
         console.log("update success!");
+        this.onShow()
       },
       fail: (err) => {
         console.log(err);
@@ -77,6 +78,7 @@ Page({
       },
       success: () => {
         console.log("update success!");
+        this.onShow()
       }
     })
   },
@@ -162,6 +164,7 @@ Page({
 
   // 获取练习的题目数和正确率
   getPracticeInfo (questionType) {
+    questionType = getQuestionType()
     let that = this
     wx.cloud.callFunction({
       name: 'practiceInfo',
@@ -169,6 +172,7 @@ Page({
         questionType
       }
     }).then((res) => {
+      console.log(res);
       let practiceInfo = res.result.practiceInfo.data[0]
       practiceInfo.practiceState = JSON.parse(practiceInfo.practiceState)
       let { practiceState } = practiceInfo

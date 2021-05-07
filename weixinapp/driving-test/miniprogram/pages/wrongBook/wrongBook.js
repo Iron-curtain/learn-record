@@ -113,6 +113,7 @@ Page({
         success: (res) => {
           // console.log(res);
           let practiceInfo = res.result.practiceInfo.data[0]
+          console.log(practiceInfo);
           practiceInfo.questionWrong = JSON.parse(practiceInfo.questionWrong)
           let { questionWrong, wrongIndex } = practiceInfo
           let totalCount = questionWrong.length
@@ -148,17 +149,6 @@ Page({
             question.wrongAnswer = wAnswer
           }
         }
-        // if (this.data.questionStar.indexOf(question.id - 1) != -1) {
-        //   this.setData({
-        //     isStar: true,
-        //     starStyle: "icon-shoucang1"
-        //   })
-        // } else {
-        //   this.setData({
-        //     isStar: false,
-        //     starStyle: "icon-shoucang"
-        //   })
-        // }
         this.setData({
           question
         })
@@ -176,7 +166,7 @@ Page({
     const that = this
     let questionType = getQuestionType()
     this.setData({ questionType })
-    this.getPracticeInfo().then(() => {
+    this.getPracticeInfo(questionType).then(() => {
       let { questionType, questionWrong, wrongIndex } = this.data
       let wrong = questionWrong[wrongIndex]
       that.getQuestion(questionType, wrong.id, wrong.wAnswer)

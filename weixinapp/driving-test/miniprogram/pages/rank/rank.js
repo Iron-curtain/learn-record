@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    rankList: [{nickName: "aaa", score: 90}]
+    rankList: []
   },
 
 
