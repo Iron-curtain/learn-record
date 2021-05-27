@@ -208,7 +208,6 @@ Page({
     } else {
       this.setData({
         userInfo: app.globalData.userInfo,
-        
       })
       this.loadInfo()
     }

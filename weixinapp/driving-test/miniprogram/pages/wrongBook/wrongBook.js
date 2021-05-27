@@ -168,7 +168,10 @@ Page({
     this.setData({ questionType })
     this.getPracticeInfo(questionType).then(() => {
       let { questionType, questionWrong, wrongIndex } = this.data
+      
       let wrong = questionWrong[wrongIndex]
+      console.log(wrong);
+      console.log(questionType, wrong.id, wrong.wAnswer);
       that.getQuestion(questionType, wrong.id, wrong.wAnswer)
     })
   },

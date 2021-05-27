@@ -64,7 +64,9 @@
   margin-top: 30rpx;
   justify-content: space-around;
   text-align: center;
-  border: 1px solid #2a82e4;
+  border: 4rpx solid #2a82e4;
+  padding: 20rpx 0;
+  border-radius: 20rpx;
 }
 .record .num {
   font-size: 36rpx;
@@ -85,7 +87,9 @@
   display: flex;
   margin-top: 80rpx;
   justify-content: space-around;
-  border: 1px solid #2a82e4;
+  border: 4rpx solid #2a82e4;
+  padding: 20rpx 0;
+  border-radius: 20rpx;
 }
 .menu .menu-item {
   width: 80rpx;

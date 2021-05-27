@@ -9,7 +9,8 @@ Page({
     model: 1,
     subject: 1,
     subjectStyle1: '',
-    subjectStyle2: ''
+    subjectStyle2: '',
+    modelName: '小车'
   },
 
   selectSubject1() {
@@ -28,17 +29,20 @@ Page({
   },
   selectModel1() {
     this.setData({
-      model: 1
+      model: 1,
+      modelName: '小车'
     })
   },
   selectModel2() {
     this.setData({
-      model: 2
+      model: 2,
+      modelName: '货车'
     })
   },
   selectModel3() {
     this.setData({
-      model: 3
+      model: 3,
+      modelName: '客车'
     })
   },
 

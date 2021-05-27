@@ -11,18 +11,17 @@ Page({
   },
 
   getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
-    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
-      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      desc: '用于完善用户资料', // 声明获取用户个人信息后的用途
       success: (res) => {
-        app.globalData.userInfo = res.userInfo
-        console.log(res.userInfo);
+        // 将用户信息保存到小程序全局变量globalData中
+        app.globalData.userInfo = res.userInfo  
         new Promise((resolve, reject) => {
-          this.getUserChoice(resolve)
+          // 触发getUserChoice函数，获取用户的题库选择
+          this.getUserChoice(resolve) 
         }).then(() => {
-          console.log(app.globalData);
-          wx.switchTab({
+          // 获取成功后跳转到用户页personal中
+          wx.switchTab({ 
             url: '../personal/personal'
           })
         })

@@ -62,9 +62,9 @@ Page({
       })
     }
     this.updataPracticeInfo(questionStar)
-    this.setData(
+    this.setData({
       questionStar
-    )
+    })
   },
 
   // 下一题按钮的响应事件
@@ -109,7 +109,7 @@ Page({
       let practiceState = this.data.practiceState
       let stateIndex = this.data.stateIndex
       let questionWrong = this.data.questionWrong
-      let wrongQuestion = {id: stateIndex, myAnswer: event.detail.myAnswer}
+      let wrongQuestion = {id: stateIndex + 1, myAnswer: event.detail.myAnswer}
       questionWrong.push(wrongQuestion)
       practiceState[stateIndex] = 2
       this.setData({

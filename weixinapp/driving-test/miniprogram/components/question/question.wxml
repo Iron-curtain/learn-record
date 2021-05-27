@@ -26,6 +26,6 @@
   <view class="submit" wx:if="{{questionType === 1}}" bindtap="submit">确定</view>
   <view class="explain" wx:if="{{explainShow}}">
     <text class="title">题解：</text>
-    <text class="explain-content">{{question.explains}}</text>
+    <rich-text class="explain-content">{{question.explains}}</rich-text>
   </view>
 </view>

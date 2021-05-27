@@ -10,7 +10,7 @@
 <view class="select-type">
   <view class="type-title">
     <text>驾驶证</text>
-    <text>当前类型：客车</text>
+    <text>当前类型：{{modelName}}</text>
   </view>
   <view class="vehicle-types">
     <view class="type-item" style="{{model === 1 && 'background-color: #5d9be0'}}" bindtap="selectModel1">

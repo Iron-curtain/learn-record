@@ -82,8 +82,6 @@ Page({
     }
   },
 
-
-
   updatePracticeInfo(params) {
     let questionType = this.data.questionType
     console.log(questionType);
@@ -103,10 +101,6 @@ Page({
       }
     })
   },
-
-
-
-
 
   getQuestionList (params) {
     wx.request({
@@ -169,7 +163,7 @@ Page({
     // if (subject === 4) questionType = 'm-4'
     // else questionType = `m${model}-1`
     let questionType = getQuestionType()
-    this.getPracticeInfo()
+    this.getPracticeInfo(questionType)
     this.setData({ questionType })
     let params = {
       subject,

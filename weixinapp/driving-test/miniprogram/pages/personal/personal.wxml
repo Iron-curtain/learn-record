@@ -28,7 +28,7 @@
     </view>
     <view class="record-socre">
       <view class="num">{{ examCount }}</view>
-      <view class="title">随机练习次数</view>
+      <view class="title">模拟考试次数</view>
       <view class="count">平均分 <text class="score">{{ average || 0 }}分</text></view>
     </view>
   </view>

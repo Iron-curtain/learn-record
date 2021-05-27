@@ -55,7 +55,7 @@ Page({
       let scoreList = data.map((item) => {
         return {time: item.time, score: item.score}
       })
-      let recentlyScore = scoreList.slice(0, 5).map((item) => item.score)
+      let recentlyScore = scoreList.slice(0, 5).map((item) => item.score).sort((a, b) => a - b)
       this.setData({
         scoreList,
       })

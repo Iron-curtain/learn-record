@@ -21,7 +21,7 @@
     <view class="menu">
       <text class="star iconfont {{starStyle}}" bind:tap="star"></text>
       <text class="location">当前{{stateIndex + 1}} 总共{{totalCount}}</text>
-      <text class="all iconfont icon-Pic"></text>
+      <text class="all iconfont icon-Pic" bind:tap="showLocation"></text>
     </view>
   </van-tab>
 </van-tabs>
